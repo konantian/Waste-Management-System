@@ -7,7 +7,7 @@ class User(AbstractUser):
     class Meta:
         db_table = "users"
 
-    user_id = models.ForeignKey(Personnel, on_delete=models.CASCADE, related_name="users")
+    user_id = models.OneToOneField(Personnel, primary_key=True, on_delete=models.CASCADE, related_name="users")
     role = models.CharField(max_length = 20)
     login = models.CharField(max_length=10,unique=True)
     password = models.CharField(max_length = 50)

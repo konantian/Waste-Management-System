@@ -38,7 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'personnel.apps.PersonnelConfig',
-    'user.apps.UserConfig'
+    'user.apps.UserConfig',
+    'account_manager.apps.AccountManagerConfig',
+    'truck.apps.TruckConfig',
+    'driver.apps.DriverConfig',
+    'account.apps.AccountConfig'
 ]
 
 MIDDLEWARE = [
@@ -107,7 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
