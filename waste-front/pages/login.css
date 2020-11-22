@@ -1,0 +1,21 @@
+.formContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top : 15%;
+}
+
+.loginButton{
+    width: 100px;
+}
+
+.signButton{
+    width: 150px;
+}
+
+.buttons{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
+}
