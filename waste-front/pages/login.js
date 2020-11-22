@@ -4,11 +4,14 @@ import axios from 'axios';
 import Link from 'next/link'
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router'
-import {useSelector, useDispatch} from 'react-redux'; 
+import {useDispatch} from 'react-redux'; 
+import {login, setUserId, setRole, setUsername} from '../actions';
 
 const Login = () => {
 
     const router = useRouter();
+
+    const dispatch = useDispatch();
 
     const onFinish = values => {
         axios.post('http://localhost:5000/api/login/',
@@ -17,6 +20,10 @@ const Login = () => {
                 "password" : values.password
             }).then((res) => {
                 message.success(res.data['success']);
+                dispatch(login());
+                dispatch(setUserId(res.data['userId']));
+                dispatch(setRole(res.data['role']));
+                dispatch(setUsername(values.username));
                 let role = res.data['role'];
                 router.push(`/${role}`);
             }).catch((err) => {
