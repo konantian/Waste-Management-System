@@ -6,7 +6,7 @@ app = Flask(__name__)
 CORS(app)
 
 
-@app.route("/signup/", methods=["POST"])
+@app.route("/api/signup/", methods=["POST"])
 def signup():
 
     validator = Validator()
@@ -44,7 +44,7 @@ def signup():
     return make_response(jsonify({"success": "You are ready to log in"}), 201)
 
 
-@app.route("/login/", methods=["POST"])
+@app.route("/api/login/", methods=["POST"])
 def login():
 
     validator = Validator()
@@ -73,7 +73,7 @@ def login():
     return make_response(
         jsonify(
             {
-                "success": "You are ready to enter the system",
+                "success": "Welcome to the waste management system!",
                 "role": role,
                 "userId": userId,
             }

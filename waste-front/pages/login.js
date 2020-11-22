@@ -2,14 +2,16 @@ import React from 'react';
 import { Form, Input, Button,message } from 'antd';
 import axios from 'axios';
 import Link from 'next/link'
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router'
+import {useSelector, useDispatch} from 'react-redux'; 
 
 const Login = () => {
 
     const router = useRouter();
 
     const onFinish = values => {
-        axios.post('http://localhost:5000/login/',
+        axios.post('http://localhost:5000/api/login/',
             {
                 "username" : values.username,
                 "password" : values.password
@@ -31,14 +33,14 @@ const Login = () => {
                     name="username"
                     rules={[{required: true,message: 'Please input your username!',}]}
                 >
-                    <Input placeholder="Enter your username"/>
+                    <Input prefix={<UserOutlined className="site-form-item-icon" />} />
                 </Form.Item>
                 <Form.Item
                     label="Password"
                     name="password"
                     rules={[{required: true,message: 'Please input your password!',}]}
                 >
-                    <Input.Password placeholder="Enter your password"/>
+                    <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} />
                 </Form.Item>
                 <div className="buttons">
                     <Form.Item >

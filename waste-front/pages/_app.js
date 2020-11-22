@@ -1,8 +1,10 @@
+import React from 'react';
 import './login.css';
 import 'antd/dist/antd.css';
+import {wrapper} from '../components/store';
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
-}
+const MyApp = ({Component, pageProps}) => (
+    <Component {...pageProps} />
+);
 
-export default MyApp
+export default wrapper.withRedux(MyApp);
