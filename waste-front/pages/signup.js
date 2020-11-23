@@ -1,13 +1,22 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Form, Input, Button,message, Select } from 'antd';
 import axios from 'axios';
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import {useSelector, useDispatch} from 'react-redux'; 
+import {useSelector} from 'react-redux'; 
 
 const SignUp = () =>{
 
     const router = useRouter();
+    const isLogged = useSelector(state => state.isLogged);
+    const role = useSelector(state => state.role);
+
+    useEffect(() => {
+        if(isLogged) {
+            message.success("Welcome come back!");
+            router.push(`/${role}`);
+        }
+    },[])
 
     const onFinish = values => {
         axios.post('http://localhost:5000/api/signup/',

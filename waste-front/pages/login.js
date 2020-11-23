@@ -1,15 +1,25 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Form, Input, Button,message } from 'antd';
 import axios from 'axios';
 import Link from 'next/link'
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router'
 import {useDispatch} from 'react-redux'; 
-import {login, setUserId, setRole, setUsername} from '../actions';
+import {login, setUserId, setRole, setUsername} from '../components/redux/actions';
+import {useSelector} from 'react-redux'; 
 
 const Login = () => {
 
     const router = useRouter();
+    const isLogged = useSelector(state => state.isLogged);
+    const role = useSelector(state => state.role);
+
+    useEffect(() => {
+        if(isLogged) {
+            message.success("Welcome come back!");
+            router.push(`/${role}`);
+        }
+    },[])
 
     const dispatch = useDispatch();
 
@@ -20,17 +30,25 @@ const Login = () => {
                 "password" : values.password
             }).then((res) => {
                 message.success(res.data['success']);
-                dispatch(login());
-                dispatch(setUserId(res.data['userId']));
-                dispatch(setRole(res.data['role']));
-                dispatch(setUsername(values.username));
                 let role = res.data['role'];
+                let userId = res.data['userId'];
+                dispatch(login());
+                dispatch(setUserId(userId));
+                dispatch(setRole(role));
+                dispatch(setUsername(values.username));
                 router.push(`/${role}`);
             }).catch((err) => {
                 let msg = JSON.parse(err.response.request.response);
                 message.error(msg['error']);
             })
       };
+
+    const dispatchAuth = (userId, role, username) => {
+        dispatch(login());
+        dispatch(setUserId(userId));
+        dispatch(setRole(role));
+        dispatch(setUsername(username));
+    }
 
     return (
         <div className="formContainer">
