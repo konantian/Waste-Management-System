@@ -1,5 +1,5 @@
 from flask import request, jsonify, make_response
-from validator import Validator
+from authValidator import Validator
 from . import routes
 
 @routes.route("/api/login/", methods=["POST"])
