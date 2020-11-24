@@ -1,11 +1,11 @@
 from flask import request, jsonify, make_response
-from authValidator import Validator
+from validators import AuthValidator
 from . import routes
 
 @routes.route("/api/signup/", methods=["POST"])
 def signup():
 
-    validator = Validator()
+    validator = AuthValidator()
     data = request.json
     userId = data.get("userId")
 

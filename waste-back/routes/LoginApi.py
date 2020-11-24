@@ -1,11 +1,11 @@
 from flask import request, jsonify, make_response
-from authValidator import Validator
+from validators import AuthValidator
 from . import routes
 
 @routes.route("/api/login/", methods=["POST"])
 def login():
 
-    validator = Validator()
+    validator = AuthValidator()
     data = request.json
     username = data.get("username")
     if not validator.check_username(username):

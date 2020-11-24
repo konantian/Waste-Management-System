@@ -2,7 +2,7 @@ import sqlite3
 import re
 
 
-class Validator:
+class ManagerValidator:
     def __init__(self):
         self.connect_db()
 

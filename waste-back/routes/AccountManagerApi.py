@@ -1,12 +1,12 @@
 from flask import request, jsonify, make_response
-from managerValidator import Validator
+from validators import ManagerValidator
 from . import routes
 
 
 @routes.route("/api/accountManager/listInformation/", methods=["GET"])
 def list_information():
 
-    validator = Validator()
+    validator = ManagerValidator()
     pid = request.args.get('pid')
     account = request.args.get('account')
     if not validator.check_account(account, pid):
