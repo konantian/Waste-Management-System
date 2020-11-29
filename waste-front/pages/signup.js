@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import { Form, Input, Button,message, Select } from 'antd';
 import axios from 'axios';
+import Head from 'next/head';
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import {useSelector} from 'react-redux'; 
@@ -36,6 +37,10 @@ const SignUp = () =>{
 
     return (
         <div className="formContainer">
+            <Head>
+                <title>Sign Up</title>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </Head>
             <Form className="form" onFinish={onFinish}>
                 <Form.Item
                     label="User Id"

@@ -39,7 +39,7 @@ const ListInformationForm = () => {
                     name="account"
                     rules={[{required: true,message: 'Enter the master account',}]}
                 >
-                <Input />
+                <Input type="number" />
                 </Form.Item>
                 <Button className="submitButton" type="primary" shape="round" size="large" htmlType="submit">Submit</Button>
             </Form>

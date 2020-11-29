@@ -118,3 +118,31 @@ class ManagerValidator:
             "total_amount": result[7],
             "service_agreements": service_data,
         }
+
+    def create_account(
+        self,
+        account_no,
+        pid,
+        customer_name,
+        contact_info,
+        customer_type,
+        start_date,
+        end_date,
+        total_amount,
+    ):
+
+        insert_account = "INSERT INTO accounts VALUES(:account_no,:account_mgr,:customer_name,:contact_info,:customer_type,:start_date,:end_date,:total_amount)"
+        self.cursor.execute(
+            insert_account,
+            {
+                "account_no": account_no,
+                "account_mgr": pid,
+                "customer_name": customer_name,
+                "contact_info": contact_info,
+                "customer_type": customer_type.lower(),
+                "start_date": start_date,
+                "end_date": end_date,
+                "total_amount": total_amount,
+            },
+        )
+        self.connection.commit()

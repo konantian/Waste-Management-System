@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import { Form, Input, Button,message } from 'antd';
 import axios from 'axios';
+import Head from 'next/head';
 import Link from 'next/link'
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router'
@@ -52,6 +53,10 @@ const Login = () => {
 
     return (
         <div className="formContainer">
+            <Head>
+                <title>Login</title>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </Head>
             <Form className="form" onFinish={onFinish}>
                 <Form.Item
                     label="Username"
