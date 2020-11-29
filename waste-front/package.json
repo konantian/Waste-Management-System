@@ -2,6 +2,11 @@
   "name": "waste-front",
   "version": "0.1.0",
   "private": true,
+  "repository": "https://github.com/konantian/Waste-Management-System",
+  "person" : {
+    "name" : "Yuan Wang",
+    "email" : "wang17@ualberta.ca"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

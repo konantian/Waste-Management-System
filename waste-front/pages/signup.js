@@ -2,8 +2,8 @@ import React, {useEffect} from 'react';
 import { Form, Input, Button,message, Select } from 'antd';
 import axios from 'axios';
 import Head from 'next/head';
-import Link from 'next/link'
-import { useRouter } from 'next/router'
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import {useSelector} from 'react-redux'; 
 
 const SignUp = () =>{

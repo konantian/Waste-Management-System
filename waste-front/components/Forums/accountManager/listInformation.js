@@ -8,9 +8,14 @@ const ListInformationForm = () => {
     const userId = useSelector(state => state.userId);
     const [dataSource, setDataSource] = useState([]);
     const columns = [
-        {title: 'Account No.','dataIndex': 'account_no'},{title: 'Account Mgr','dataIndex': 'account_mgr'},{title: 'Customr Name','dataIndex': 'customer_name'},
-        {title: 'Contact Info','dataIndex': 'contact_info'},{title: 'Customer Type','dataIndex': 'customer_type'},{title: 'Start Date','dataIndex': 'start_date'},
-        {title: 'End Date','dataIndex': 'end_date'},{title: 'Total Amount','dataIndex': 'total_amount'},
+        {title: 'Account No.','dataIndex': 'account_no'},
+        {title: 'Account Mgr','dataIndex': 'account_mgr'},
+        {title: 'Customr Name','dataIndex': 'customer_name'},
+        {title: 'Contact Info','dataIndex': 'contact_info'},
+        {title: 'Customer Type','dataIndex': 'customer_type'},
+        {title: 'Start Date','dataIndex': 'start_date'},
+        {title: 'End Date','dataIndex': 'end_date'},
+        {title: 'Total Amount','dataIndex': 'total_amount'},
     ]
 
     const onFinish = values => {
