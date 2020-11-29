@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router'
 import {useDispatch} from 'react-redux'; 
-import {login, setUserId, setRole, setUsername} from '../components/redux/actions';
+import {login, setUserId, setRole, setUsername, setName} from '../components/redux/actions';
 import {useSelector} from 'react-redux'; 
 
 const Login = () => {
@@ -13,10 +13,11 @@ const Login = () => {
     const router = useRouter();
     const isLogged = useSelector(state => state.isLogged);
     const role = useSelector(state => state.role);
+    const name = useSelector(state => state.name);
 
     useEffect(() => {
         if(isLogged) {
-            message.success("Welcome come back!");
+            message.success(`Welcome come back ${name}!`);
             router.push(`/${role}`);
         }
     },[])
@@ -32,10 +33,8 @@ const Login = () => {
                 message.success(res.data['success']);
                 let role = res.data['role'];
                 let userId = res.data['userId'];
-                dispatch(login());
-                dispatch(setUserId(userId));
-                dispatch(setRole(role));
-                dispatch(setUsername(values.username));
+                let name = res.data['name'];
+                dispatchAuth(userId, role, username, name);
                 router.push(`/${role}`);
             }).catch((err) => {
                 let msg = JSON.parse(err.response.request.response);
@@ -43,11 +42,12 @@ const Login = () => {
             })
       };
 
-    const dispatchAuth = (userId, role, username) => {
+    const dispatchAuth = (userId, role, username,name) => {
         dispatch(login());
         dispatch(setUserId(userId));
         dispatch(setRole(role));
         dispatch(setUsername(username));
+        dispatch(setName(name));
     }
 
     return (

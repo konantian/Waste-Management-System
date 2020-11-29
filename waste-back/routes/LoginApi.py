@@ -28,12 +28,14 @@ def login():
     role = validator.getRole(username)
     role = "accountManager" if role == "account manager" else role
     userId = validator.getUserId(username)
+    name = validator.getName(userId);
     return make_response(
         jsonify(
             {
                 "success": "Welcome to the waste management system!",
                 "role": role,
                 "userId": userId,
+                "name" : name,
             }
         ),
         200,

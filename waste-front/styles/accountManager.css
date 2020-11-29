@@ -1,0 +1,29 @@
+.accountForm{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    margin-top : 5%;
+}
+
+.function{
+    width : 400px;
+}
+
+.button{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.submitButton{
+    display: flex;
+    width: 150px;
+    margin-left : 45%
+}
+
+.informationTable{
+    margin-top: 40px;
+    width : 1000px;
+}

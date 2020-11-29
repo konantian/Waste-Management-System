@@ -25,6 +25,13 @@ export const setUsername = (username) => {
     }
 }
 
+export const setName = (name) => {
+    return {
+        type : "NAME",
+        payload: name
+    }
+}
+
 export const logout = () => {
     return {
         type : "LOGOUT"

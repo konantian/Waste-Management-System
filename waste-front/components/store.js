@@ -6,7 +6,7 @@ import storage from 'redux-persist/lib/storage'; // defaults to localStorage for
 
 const persistConfig = {
       key: "nextjs",
-      whitelist: ["isLogged", "userId","role","username"], 
+      whitelist: ["isLogged", "userId","role","username","name"], 
       storage, // if needed, use a safer storage
 };
 
@@ -14,7 +14,8 @@ const initialState = {
       isLogged: false,
       userId: null,
       role : null,
-      username : null
+      username : null,
+      name : null
   };
 
 const authReducer = (state = initialState, action) => {
@@ -27,6 +28,8 @@ const authReducer = (state = initialState, action) => {
                   return {...state, role: action.payload};
             case 'USERNAME':
                   return {...state, username: action.payload};
+            case 'NAME' :
+                  return {...state, name:action.payload};
             case 'LOGOUT':
                   return initialState;
             default:
