@@ -56,3 +56,33 @@ def create_master_account():
     )
 
     return make_response(jsonify({"success": "New master account has been created"}), 201)
+
+@routes.route("/api/accountManager/summaryReport/", methods=["GET"])
+def summary_report():
+
+    validator = ManagerValidator()
+    pid = request.args.get("pid")
+    account = request.args.get("account")
+    if validator.check_new_account(account):
+        return make_response(
+            jsonify(
+                {
+                    "error": "This master account does not exist, please enter again"
+                }
+            ),
+            401,
+        )
+    if not validator.check_account(account, pid):
+        return make_response(
+            jsonify(
+                {
+                    "error": "This account does not managed by you, please select another account"
+                }
+            ),
+            401,
+        )
+    summary = validator.get_summary(account)
+    return make_response(jsonify(summary), 200)
+        
+
+

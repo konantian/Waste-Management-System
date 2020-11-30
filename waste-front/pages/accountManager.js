@@ -4,7 +4,8 @@ import { useRouter } from 'next/router'
 import Head from 'next/head';
 import { message, Tabs} from 'antd';
 import ListInformationForm from '../components/Forums/accountManager/listInformation';
-import MasterAccountForm from '../components/Forums/accountManager/masterAccountForm';
+import MasterAccountForm from '../components/Forums/accountManager/createMasterAccount';
+import SummaryReport from '../components/Forums/accountManager/summaryReport';
 
 const { TabPane } = Tabs;
 
@@ -34,10 +35,10 @@ const AccountManager = () => {
                     <MasterAccountForm />
                 </TabPane>
                 <TabPane tab="Add new service agreement" key="3">
-                    Content of card tab 3
+                    Content of Card Tap 3
                 </TabPane>
                 <TabPane tab="Create Summary Report" key="4">
-                    Content of card tab 3
+                    <SummaryReport />
                 </TabPane>
             </Tabs>
         </div>

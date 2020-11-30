@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import axios from 'axios';
 import {useSelector} from 'react-redux'; 
-import { Form, Input, Select,DatePicker, Button, Table, message} from 'antd';
+import { Form, Input, Select,DatePicker, Button, Table, Divider, message} from 'antd';
 const { RangePicker } = DatePicker;
 
 const MasterAccountForm = () => {
@@ -98,6 +98,7 @@ const MasterAccountForm = () => {
                 </Form.Item>
                 <Button className="submitButton" type="primary" shape="round" size="large" htmlType="submit">Submit</Button>
             </Form>
+            <Divider />
             {dataSource.length > 0 ? <Table className="informationTable" columns={columns} dataSource={dataSource} pagination={false}/> : null}
         </div>
     )

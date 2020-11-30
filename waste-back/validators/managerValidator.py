@@ -146,3 +146,25 @@ class ManagerValidator:
             },
         )
         self.connection.commit()
+
+    def get_summary(self, master_account):
+
+        self.cursor.execute("select count(*) from service_agreements where master_account=:master_account",{"master_account":master_account})
+        count = self.cursor.fetchone()[0]
+
+        self.cursor.execute("select sum(internal_cost) from service_agreements where master_account=:master_account",{"master_account":master_account})
+        cost_sum = self.cursor.fetchone()[0]
+
+        self.cursor.execute("select sum(price) from service_agreements where master_account=:master_account",{"master_account":master_account})
+        price_sum = self.cursor.fetchone()[0]
+
+        self.cursor.execute("select count(distinct waste_type) from service_agreements where master_account=:master_account",{"master_account":master_account})
+        type_count = self.cursor.fetchone()[0]
+        
+        return {
+            "count" : count,
+            "cost_sum" : cost_sum,
+            "price_sum" : price_sum,
+            "type_count" : type_count
+        }
+
