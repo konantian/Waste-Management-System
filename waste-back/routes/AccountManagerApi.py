@@ -92,13 +92,16 @@ def create_service_agreement():
     price = data.get("price")
 
     validator.update_amount(account_no, price)
-    validator.create_agreement(service_no,account_no,
+    validator.create_agreement(
+        service_no,
+        account_no,
         location,
         waste_type,
         pick_up_schedule,
         local_contact,
         internal_cost,
-        price)
+        price,
+    )
 
     return make_response(
         jsonify({"success": "New serivce agreement has been created"}), 201

@@ -102,7 +102,7 @@ class ManagerValidator:
                 "pick_up_schedule": service[4],
                 "local_contact": service[5],
                 "internal_cost": service[6],
-                "price": round(service[7],2),
+                "price": round(service[7], 2),
             }
             for service in service_agreements
         ]
@@ -115,7 +115,7 @@ class ManagerValidator:
             "customer_type": result[4],
             "start_date": result[5],
             "end_date": result[6],
-            "total_amount": round(result[7],2),
+            "total_amount": round(result[7], 2),
             "service_agreements": service_data,
         }
 
@@ -175,8 +175,8 @@ class ManagerValidator:
 
         return {
             "count": count,
-            "cost_sum": round(cost_sum,2),
-            "price_sum": round(price_sum,2),
+            "cost_sum": round(cost_sum, 2),
+            "price_sum": round(price_sum, 2),
             "type_count": type_count,
         }
 

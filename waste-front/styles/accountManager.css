@@ -1,9 +1,8 @@
 .accountForm{
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-direction: row;
-    margin-top : 5%;
+    flex-direction: column;
+    margin-top : 3%;
 }
 
 .submitButton{
@@ -19,4 +18,15 @@
 
 .report{
     width : 400px;
+}
+
+.logoutContainer{
+    display : flex;
+    justify-content: flex-end;
+    margin-top: 1%;
+    margin-right: 2%;
+}
+
+.logoutButton{
+    width : 100px
 }
