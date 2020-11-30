@@ -102,7 +102,7 @@ class ManagerValidator:
                 "pick_up_schedule": service[4],
                 "local_contact": service[5],
                 "internal_cost": service[6],
-                "price": service[7],
+                "price": round(service[7],2),
             }
             for service in service_agreements
         ]
@@ -115,7 +115,7 @@ class ManagerValidator:
             "customer_type": result[4],
             "start_date": result[5],
             "end_date": result[6],
-            "total_amount": result[7],
+            "total_amount": round(result[7],2),
             "service_agreements": service_data,
         }
 
@@ -149,22 +149,61 @@ class ManagerValidator:
 
     def get_summary(self, master_account):
 
-        self.cursor.execute("select count(*) from service_agreements where master_account=:master_account",{"master_account":master_account})
+        self.cursor.execute(
+            "select count(*) from service_agreements where master_account=:master_account",
+            {"master_account": master_account},
+        )
         count = self.cursor.fetchone()[0]
 
-        self.cursor.execute("select sum(internal_cost) from service_agreements where master_account=:master_account",{"master_account":master_account})
+        self.cursor.execute(
+            "select sum(internal_cost) from service_agreements where master_account=:master_account",
+            {"master_account": master_account},
+        )
         cost_sum = self.cursor.fetchone()[0]
 
-        self.cursor.execute("select sum(price) from service_agreements where master_account=:master_account",{"master_account":master_account})
+        self.cursor.execute(
+            "select sum(price) from service_agreements where master_account=:master_account",
+            {"master_account": master_account},
+        )
         price_sum = self.cursor.fetchone()[0]
 
-        self.cursor.execute("select count(distinct waste_type) from service_agreements where master_account=:master_account",{"master_account":master_account})
+        self.cursor.execute(
+            "select count(distinct waste_type) from service_agreements where master_account=:master_account",
+            {"master_account": master_account},
+        )
         type_count = self.cursor.fetchone()[0]
-        
+
         return {
-            "count" : count,
-            "cost_sum" : cost_sum,
-            "price_sum" : price_sum,
-            "type_count" : type_count
+            "count": count,
+            "cost_sum": round(cost_sum,2),
+            "price_sum": round(price_sum,2),
+            "type_count": type_count,
         }
 
+    def create_agreement(
+        self,
+        service_no,
+        master_account,
+        location,
+        waste_type,
+        pick_up_schedule,
+        local_contact,
+        internal_cost,
+        price,
+    ):
+
+        insert_agreement = "INSERT INTO service_agreements VALUES(:service_no,:master_account,:location,:waste_type,:pick_up_schedule,:local_contact,:internal_cost,:price)"
+        self.cursor.execute(
+            insert_agreement,
+            {
+                "service_no": service_no,
+                "master_account": master_account,
+                "location": location,
+                "waste_type": waste_type,
+                "pick_up_schedule": pick_up_schedule,
+                "local_contact": local_contact,
+                "internal_cost": internal_cost,
+                "price": price,
+            },
+        )
+        self.connection.commit()

@@ -6,6 +6,7 @@ import { message, Tabs} from 'antd';
 import ListInformationForm from '../components/Forums/accountManager/listInformation';
 import MasterAccountForm from '../components/Forums/accountManager/createMasterAccount';
 import SummaryReport from '../components/Forums/accountManager/summaryReport';
+import ServiceAgreement from '../components/Forums/accountManager/serviceAgreement';
 
 const { TabPane } = Tabs;
 
@@ -35,7 +36,7 @@ const AccountManager = () => {
                     <MasterAccountForm />
                 </TabPane>
                 <TabPane tab="Add new service agreement" key="3">
-                    Content of Card Tap 3
+                    <ServiceAgreement />
                 </TabPane>
                 <TabPane tab="Create Summary Report" key="4">
                     <SummaryReport />

@@ -55,7 +55,55 @@ def create_master_account():
         total_amount,
     )
 
-    return make_response(jsonify({"success": "New master account has been created"}), 201)
+    return make_response(
+        jsonify({"success": "New master account has been created"}), 201
+    )
+
+
+@routes.route("/api/accountManager/createAgreement/", methods=["POST"])
+def create_service_agreement():
+
+    validator = ManagerValidator()
+    data = request.json
+    service_no = validator.calculate_service_no()
+    pid = data.get("pid")
+    account_no = data.get("account_no")
+    if validator.check_new_account(account_no):
+        return make_response(
+            jsonify(
+                {"error": "This master account does not exist, please enter again"}
+            ),
+            401,
+        )
+    if not validator.check_account(account_no, pid):
+        return make_response(
+            jsonify(
+                {
+                    "error": "This account does not managed by you, please select another account"
+                }
+            ),
+            401,
+        )
+    location = data.get("location")
+    waste_type = data.get("waste_type")
+    pick_up_schedule = data.get("pick_up_schedule")
+    local_contact = data.get("local_contact")
+    internal_cost = data.get("internal_cost")
+    price = data.get("price")
+
+    validator.update_amount(account_no, price)
+    validator.create_agreement(service_no,account_no,
+        location,
+        waste_type,
+        pick_up_schedule,
+        local_contact,
+        internal_cost,
+        price)
+
+    return make_response(
+        jsonify({"success": "New serivce agreement has been created"}), 201
+    )
+
 
 @routes.route("/api/accountManager/summaryReport/", methods=["GET"])
 def summary_report():
@@ -66,9 +114,7 @@ def summary_report():
     if validator.check_new_account(account):
         return make_response(
             jsonify(
-                {
-                    "error": "This master account does not exist, please enter again"
-                }
+                {"error": "This master account does not exist, please enter again"}
             ),
             401,
         )
@@ -83,6 +129,3 @@ def summary_report():
         )
     summary = validator.get_summary(account)
     return make_response(jsonify(summary), 200)
-        
-
-
