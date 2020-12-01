@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
-import {useSelector} from 'react-redux'; 
-import { useRouter } from 'next/router'
 import { message,Tabs } from 'antd';
+import {useSelector} from 'react-redux'; 
 import Head from 'next/head';
+import { useRouter } from 'next/router'
 import Logout from '../components/logout';
 import ListTourForm from '../components/Forums/driver/listTour';
 
@@ -34,10 +34,10 @@ const Driver = () => {
                 <div>
                     <Logout /> 
                     <div className="driverForm">
-                    <Tabs defaultActiveKey="1" type="card" size='default'>
-                        <TabPane tab="List Tour Information" key="1">
-                            <ListTourForm /> 
-                        </TabPane>
+                        <Tabs defaultActiveKey="1" type="card" size='default'>
+                            <TabPane tab="List Tour Information" key="1">
+                                <ListTourForm /> 
+                            </TabPane>
                         </Tabs>
                     </div>
                 </div>

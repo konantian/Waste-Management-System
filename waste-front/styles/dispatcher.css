@@ -1,0 +1,16 @@
+.dispatcherForm{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top : 3%;
+}
+
+.dispatcherButton{
+    display: flex;
+    width: 150px;
+    margin-left : 35%
+}
+
+.datePicker{
+    width : 250px;
+}

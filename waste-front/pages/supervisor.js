@@ -9,7 +9,6 @@ const Supervisor = () => {
 
     const router = useRouter();
     const isLogged = useSelector(state => state.isLogged);
-    const userId = useSelector(state => state.userId);
     const role = useSelector(state => state.role);
 
     useEffect(() => {

@@ -1,23 +1,17 @@
-import React,{useState} from 'react';
+import React,{useState, useRef} from 'react';
 import {useSelector} from 'react-redux'; 
 import axios from 'axios';
 import { Form, Button,Divider,DatePicker,Table, message } from 'antd';
 import {LIST_TOUR_API} from '../../../constants/api';
+import {tourColumns} from '../../../constants/columns';
 
 const { RangePicker } = DatePicker;
 
 const ListTourForm = () => {
 
+    const formRef = useRef(null);
     const userId = useSelector(state => state.userId);
     const [tour,setTour] = useState(null);
-
-    const tourColumns = [
-        {title: 'Location','dataIndex': 'location'},
-        {title: 'Waste Type','dataIndex': 'waste_type'},
-        {title: 'Local Contact','dataIndex': 'local_contact'},
-        {title: 'Container Pick Up','dataIndex': 'cid_pick_up'},
-        {title: 'Container Drop Off','dataIndex': 'cid_drop_off'},
-    ]
 
     const rangeConfig = {
         rules: [
@@ -43,6 +37,7 @@ const ListTourForm = () => {
                 end_date : endDate
             }}).then((res) => {
                 setTour(res.data);
+                formRef.current.resetFields();
             }).catch((err) => {
                 let msg = JSON.parse(err.response.request.response);
                 message.error(msg['error']);
@@ -51,7 +46,7 @@ const ListTourForm = () => {
 
     return(
         <div>
-            <Form className="form" onFinish={onFinish}>
+            <Form className="form" onFinish={onFinish} ref={formRef}>
                 <Form.Item name="range-picker" label="Start Date - End Date" {...rangeConfig}>
                     <RangePicker />
                 </Form.Item>

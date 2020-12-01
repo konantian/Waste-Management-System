@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState, useRef} from 'react';
 import axios from 'axios';
 import {useSelector} from 'react-redux'; 
 import { Form, Input, Select,DatePicker, Button, Table, Divider, message} from 'antd';
@@ -7,6 +7,7 @@ const { RangePicker } = DatePicker;
 
 const MasterAccountForm = () => {
 
+    const formRef = useRef(null);
     const userId = useSelector(state => state.userId);
     const [dataSource, setDataSource] = useState(null);
     const columns = [
@@ -51,6 +52,7 @@ const MasterAccountForm = () => {
                 let temp = [];
                 temp.push(res.data);
                 setDataSource(temp);
+                formRef.current.resetFields();
             })
         }).catch((err) => {
             let msg = JSON.parse(err.response.request.response);
@@ -60,7 +62,7 @@ const MasterAccountForm = () => {
 
     return(
         <div>
-            <Form className="form" onFinish={onFinish}>
+            <Form className="form" onFinish={onFinish} ref={formRef}>
                 <Form.Item
                     label="Master Account"
                     name="account_no"

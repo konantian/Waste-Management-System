@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import { Form, Input, Button,message } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import Head from 'next/head';
 import Link from 'next/link';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router';
 import {useSelector, useDispatch} from 'react-redux'; 
 import {login, setUserId, setRole, setUsername, setName} from '../components/redux/actions';
@@ -57,6 +57,7 @@ const Login = () => {
                 <title>Login</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
+            {!isLogged ?
             <Form className="form" onFinish={onFinish}>
                 <Form.Item
                     label="Username"
@@ -82,7 +83,7 @@ const Login = () => {
                         </Link>
                     </Form.Item>
                 </div>
-            </Form>
+            </Form> : null}
         </div>
         
     )

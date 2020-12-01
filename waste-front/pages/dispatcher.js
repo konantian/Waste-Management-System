@@ -1,15 +1,17 @@
 import React, {useEffect} from 'react';
+import { message,Tabs } from 'antd';
 import {useSelector} from 'react-redux'; 
-import { useRouter } from 'next/router'
-import { message } from 'antd';
 import Head from 'next/head';
+import { useRouter } from 'next/router'
 import Logout from '../components/logout';
+import CreateEntryForm from '../components/Forums/dispatcher/createEntry';
+
+const { TabPane } = Tabs;
 
 const Dispatcher = () => {
 
     const router = useRouter();
     const isLogged = useSelector(state => state.isLogged);
-    const userId = useSelector(state => state.userId);
     const role = useSelector(state => state.role);
 
     useEffect(() => {
@@ -28,7 +30,18 @@ const Dispatcher = () => {
                 <title>Dispatcher</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            {isLogged ? <Logout /> : null}
+            {isLogged ? 
+                <div>
+                    <Logout /> 
+                    <div className="dispatcherForm">
+                        <Tabs defaultActiveKey="1" type="card" size='default'>
+                            <TabPane tab="Create Entry" key="1">
+                                <CreateEntryForm /> 
+                            </TabPane>
+                        </Tabs>
+                    </div>
+                </div>
+            : null}
         </div>
     )
 }

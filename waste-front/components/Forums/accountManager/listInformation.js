@@ -1,34 +1,16 @@
-import React,{useState} from 'react';
+import React,{useState, useRef} from 'react';
 import {useSelector} from 'react-redux'; 
 import axios from 'axios';
 import { Form, Input,Button,Table, Divider,message } from 'antd';
 import {INFORMATION_API} from '../../../constants/api';
+import {accountColumns, serviceColumns} from '../../../constants/columns';
 
 const ListInformationForm = () => {
 
+    const formRef = useRef(null);
     const userId = useSelector(state => state.userId);
     const [accountData, setAccountData] = useState(null);
     const [serviceData, setServiceData] = useState(null);
-    const accountColumns = [
-        {title: 'Account No.','dataIndex': 'account_no'},
-        {title: 'Account Mgr','dataIndex': 'account_mgr'},
-        {title: 'Customr Name','dataIndex': 'customer_name'},
-        {title: 'Contact Info','dataIndex': 'contact_info'},
-        {title: 'Customer Type','dataIndex': 'customer_type'},
-        {title: 'Start Date','dataIndex': 'start_date'},
-        {title: 'End Date','dataIndex': 'end_date'},
-        {title: 'Total Amount','dataIndex': 'total_amount'},
-    ]
-    const serviceColumns = [
-        {title: 'Serivce No.','dataIndex': 'service_no'},
-        {title: 'Master Account','dataIndex': 'master_account'},
-        {title: 'Location','dataIndex': 'location'},
-        {title: 'Waste Type','dataIndex': 'waste_type'},
-        {title: 'Pick Up Schedule','dataIndex': 'pick_up_schedule'},
-        {title: 'Local Contact','dataIndex': 'local_contact'},
-        {title: 'Internal Cost','dataIndex': 'internal_cost'},
-        {title: 'Price','dataIndex': 'price'},
-    ]
 
     const onFinish = values => {
 
@@ -42,6 +24,7 @@ const ListInformationForm = () => {
                 temp.push(res.data);
                 setAccountData(temp);
                 setServiceData(res.data.service_agreements);
+                formRef.current.resetFields();
             }).catch((err) => {
                 let msg = JSON.parse(err.response.request.response);
                 setAccountData([]);
@@ -52,7 +35,7 @@ const ListInformationForm = () => {
 
     return(
         <div>
-            <Form className="form" onFinish={onFinish}>
+            <Form className="form" onFinish={onFinish} ref={formRef}>
                 <Form.Item
                     label="Master Account"
                     name="account"

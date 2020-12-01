@@ -16,7 +16,7 @@ def list_information():
                     "error": "The master account you inputed does not exist or you have no access right on that account "
                 }
             ),
-            401,
+            400,
         )
     custom_information = validator.custom_information(account)
     return make_response(jsonify(custom_information), 200)
@@ -36,7 +36,7 @@ def create_master_account():
                     "error": "The account number you entered is existed, please enter another account number"
                 }
             ),
-            401,
+            400,
         )
     customer_name = data.get("customer_name")
     contact_info = data.get("contact_info")
@@ -73,7 +73,7 @@ def create_service_agreement():
             jsonify(
                 {"error": "This master account does not exist, please enter again"}
             ),
-            401,
+            400,
         )
     if not validator.check_account(account_no, pid):
         return make_response(
@@ -119,7 +119,7 @@ def summary_report():
             jsonify(
                 {"error": "This master account does not exist, please enter again"}
             ),
-            401,
+            400,
         )
     if not validator.check_account(account, pid):
         return make_response(

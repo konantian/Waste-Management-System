@@ -1,23 +1,15 @@
-import React,{useState} from 'react';
+import React,{useState,useRef} from 'react';
 import {useSelector} from 'react-redux'; 
 import axios from 'axios';
 import { Form, Input,Button, Divider,Table,Select, message } from 'antd';
 import {INFORMATION_API,CREATE_AGREEMENT_API} from '../../../constants/api';
+import {serviceColumns} from '../../../constants/columns';
 
 const SerivceAgreement = () => {
 
+    const formRef = useRef(null);
     const userId = useSelector(state => state.userId);
     const [agreement, setAgreement] = useState([]);
-
-    const serviceColumns = [
-        {title: 'Serivce No.','dataIndex': 'service_no'},
-        {title: 'Master Account','dataIndex': 'master_account'},
-        {title: 'Location','dataIndex': 'location'},
-        {title: 'Waste Type','dataIndex': 'waste_type'},
-        {title: 'Pick Up Schedule','dataIndex': 'pick_up_schedule'},
-        {title: 'Local Contact','dataIndex': 'local_contact'},
-        {title: 'Internal Cost','dataIndex': 'internal_cost'},
-    ];
 
     const onFinish = values => {
 
@@ -33,6 +25,7 @@ const SerivceAgreement = () => {
             "price" : values.price
         }).then((res) => {
             message.success(res.data['success']);
+            formRef.current.resetFields();
             axios.get(INFORMATION_API,
             {
             params : {
@@ -49,7 +42,7 @@ const SerivceAgreement = () => {
 
     return (
         <div>
-            <Form className="form" onFinish={onFinish}>
+            <Form className="form" onFinish={onFinish} ref={formRef}>
                 <Form.Item
                     label="Master Account"
                     name="account_no"

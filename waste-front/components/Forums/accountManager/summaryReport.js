@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useRef} from 'react';
 import {useSelector} from 'react-redux'; 
 import axios from 'axios';
 import { Form, Input,Button,Card, Divider,message } from 'antd';
@@ -6,6 +6,7 @@ import {SUMMARY_REPORT_API} from '../../../constants/api';
 
 const SummaryReport = () => {
 
+    const formRef = useRef(null);
     const userId = useSelector(state => state.userId);
     const [report, setReport] = useState(null);
     const [account, setAccount] = useState(null);
@@ -20,6 +21,7 @@ const SummaryReport = () => {
             }}).then((res) => {
                 setReport(res.data);
                 setAccount(values.account);
+                formRef.current.resetFields();
             }).catch((err) => {
                 let msg = JSON.parse(err.response.request.response);
                 setReport(null);
@@ -30,7 +32,7 @@ const SummaryReport = () => {
 
     return(
         <div>
-            <Form className="form" onFinish={onFinish}>
+            <Form className="form" onFinish={onFinish} ref={formRef}>
                 <Form.Item
                     label="Master Account"
                     name="account"

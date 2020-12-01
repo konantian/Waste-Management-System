@@ -3,7 +3,7 @@ from validators import DriverValidator, DispatcherValidator
 from . import routes
 
 
-@routes.route("/api/driver/trucks/<int:driver_id>", methods=["GET"])
+@routes.route("/api/driver/trucks/<string:driver_id>", methods=["GET"])
 def get_truck_by_id(driver_id):
     validator = DispatcherValidator()
     truck_id = validator.check_own_truck(driver_id)

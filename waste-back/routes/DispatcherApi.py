@@ -3,10 +3,13 @@ from validators import DispatcherValidator
 from . import routes
 
 
-@routes.route("/api/dispathcer/container/<int:account_no>", methods=["GET"])
-def get_containers_by_account(account_no):
+@routes.route("/api/dispatcher/container/<string:service_no>", methods=["GET"])
+def get_containers_by_agreement(service_no):
 
     validator = DispatcherValidator()
+    account_no = validator.get_master_account(service_no)
+    if account_no is None:
+        return make_response(jsonify({"containers": []}), 200)
     container_list = validator.get_available_container(account_no)
     return make_response(jsonify({"containers": container_list}), 200)
 
@@ -24,7 +27,7 @@ def create_entry():
                     "error": "The service number entered does not exist,please enter again"
                 }
             ),
-            401,
+            400,
         )
     driver_id = data.get("driver_id")
     if not validator.check_driver(driver_id):
@@ -32,15 +35,16 @@ def create_entry():
             jsonify(
                 {"error": "The driver id entered does not exist,please enter again"}
             ),
-            401,
+            400,
         )
     truck_id = data.get("truck_id")
-    if not validator.check_truck(truck_id):
+    owned_truck = validator.check_own_truck(driver_id)
+    if owned_truck is None and not validator.check_truck(truck_id):
         return make_response(
             jsonify(
-                {"error": "The truck id entered are not available, please enter again"}
+                {"error": "The truck endtered owned by other drivers, please enter again"}
             ),
-            401,
+            400,
         )
 
     cid_drop_off = data.get("cid_drop_off")

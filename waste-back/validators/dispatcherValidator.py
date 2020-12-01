@@ -33,10 +33,13 @@ class DispatcherValidator:
         return driver in drivers_list
 
     # given a driver pid, check if he own a truck
-    def check_own_truck(self, driver):
+    def check_own_truck(self, driver_id):
+
+        if not self.check_driver(driver_id):
+            return None
 
         self.cursor.execute(
-            "select owned_truck_id from drivers where pid=:driver", {"driver": driver}
+            "select owned_truck_id from drivers where pid=:driver", {"driver": driver_id}
         )
         truck_id = self.cursor.fetchone()[0]
 
@@ -55,6 +58,9 @@ class DispatcherValidator:
 
     # given a service_no, get the master account
     def get_master_account(self, service_no):
+
+        if not self.check_service_no(service_no):
+            return None
 
         self.cursor.execute(
             "select master_account from service_agreements where service_no=:service_no",
