@@ -7,6 +7,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router';
 import {useSelector, useDispatch} from 'react-redux'; 
 import {login, setUserId, setRole, setUsername, setName} from '../components/redux/actions';
+import {LOGIN_API} from '../constants/api';
 
 const Login = () => {
 
@@ -25,7 +26,7 @@ const Login = () => {
     const dispatch = useDispatch();
 
     const onFinish = values => {
-        axios.post('http://localhost:5000/api/login/',
+        axios.post(LOGIN_API,
             {
                 "username" : values.username,
                 "password" : values.password

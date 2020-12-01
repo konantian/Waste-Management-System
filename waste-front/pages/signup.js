@@ -5,6 +5,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import {useSelector} from 'react-redux'; 
+import {SIGNUP_API} from '../constants/api';
 
 const SignUp = () =>{
 
@@ -20,7 +21,7 @@ const SignUp = () =>{
     },[])
 
     const onFinish = values => {
-        axios.post('http://localhost:5000/api/signup/',
+        axios.post(SIGNUP_API,
             {
                 "userId" : values.userId,
                 "role" : values.role,

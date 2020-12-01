@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import axios from 'axios';
 import {useSelector} from 'react-redux'; 
 import { Form, Input, Select,DatePicker, Button, Table, Divider, message} from 'antd';
+import {INFORMATION_API, CREATE_ACCOUNT_API} from '../../../constants/api';
 const { RangePicker } = DatePicker;
 
 const MasterAccountForm = () => {
@@ -30,7 +31,7 @@ const MasterAccountForm = () => {
         let startDate = rangePicker[0].format('YYYY-MM-DD');
         let endDate = rangePicker[1].format('YYYY-MM-DD');
 
-        axios.post("http://localhost:5000/api/accountManager/createAccount/",
+        axios.post(CREATE_ACCOUNT_API,
         {
             "pid" : userId,
             "account_no" : values.account_no,
@@ -41,7 +42,7 @@ const MasterAccountForm = () => {
             "end_date" : endDate
         }).then((res) => {
             message.success(res.data['success']);
-            axios.get('http://localhost:5000/api/accountManager/listInformation/',
+            axios.get(INFORMATION_API,
             {
             params : {
                 pid : userId,

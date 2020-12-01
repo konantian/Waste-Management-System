@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import {useSelector} from 'react-redux'; 
 import axios from 'axios';
 import { Form, Input,Button, Divider,Table,Select, message } from 'antd';
+import {INFORMATION_API,CREATE_AGREEMENT_API} from '../../../constants/api';
 
 const SerivceAgreement = () => {
 
@@ -20,7 +21,7 @@ const SerivceAgreement = () => {
 
     const onFinish = values => {
 
-        axios.post("http://localhost:5000/api/accountManager/createAgreement/",
+        axios.post(CREATE_AGREEMENT_API,
         {
             "pid" : userId,
             "account_no" : values.account_no,
@@ -32,7 +33,7 @@ const SerivceAgreement = () => {
             "price" : values.price
         }).then((res) => {
             message.success(res.data['success']);
-            axios.get('http://localhost:5000/api/accountManager/listInformation/',
+            axios.get(INFORMATION_API,
             {
             params : {
                 pid : userId,

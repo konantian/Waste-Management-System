@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import {useSelector} from 'react-redux'; 
 import axios from 'axios';
 import { Form, Input,Button,Card, Divider,message } from 'antd';
+import {SUMMARY_REPORT_API} from '../../../constants/api';
 
 const SummaryReport = () => {
 
@@ -11,7 +12,7 @@ const SummaryReport = () => {
 
     const onFinish = values => {
 
-        axios.get('http://localhost:5000/api/accountManager/summaryReport/',
+        axios.get(SUMMARY_REPORT_API,
             {
             params : {
                 pid : userId,

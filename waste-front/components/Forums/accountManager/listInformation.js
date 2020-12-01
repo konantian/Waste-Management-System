@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import {useSelector} from 'react-redux'; 
 import axios from 'axios';
 import { Form, Input,Button,Table, Divider,message } from 'antd';
+import {INFORMATION_API} from '../../../constants/api';
 
 const ListInformationForm = () => {
 
@@ -31,7 +32,7 @@ const ListInformationForm = () => {
 
     const onFinish = values => {
 
-        axios.get('http://localhost:5000/api/accountManager/listInformation/',
+        axios.get(INFORMATION_API,
             {
             params : {
                 pid : userId,
