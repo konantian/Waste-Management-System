@@ -40,7 +40,7 @@ class DispatcherValidator:
         )
         truck_id = self.cursor.fetchone()[0]
 
-        return truck_id != None
+        return truck_id
 
     # given an truck id, check if it is in trucks table:
     def check_truck(self, truck):
@@ -102,7 +102,7 @@ class DispatcherValidator:
         for wt in waste_type:
             self.cursor.execute(
                 "select container_id from container_waste_types where waste_type=:waste_type",
-                {"waste_type": i},
+                {"waste_type": wt},
             )
             cid_result = self.cursor.fetchall()
             for cid in cid_result:
@@ -115,13 +115,14 @@ class DispatcherValidator:
     def create_entry(
         self,
         date_time,
-        master_account,
         agreement,
         truck_id,
         driver_id,
         cid_drop_off,
-        cid_pick_up,
     ):
+
+        master_account = self.get_master_account(agreement)
+        cid_pick_up = self.get_pick_up(master_account)
 
         insert_fulfillments = "INSERT INTO service_fulfillments VALUES(:date_time,:master_account,:service_no,:truck_id,:driver_id,:cid_drop_off,:cid_pick_up)"
         self.cursor.execute(

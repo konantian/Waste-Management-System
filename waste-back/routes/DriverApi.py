@@ -1,6 +1,12 @@
 from flask import request, jsonify, make_response
-from validators import DriverValidator
+from validators import DriverValidator,DispatcherValidator
 from . import routes
+
+@routes.route("/api/driver/trucks/<int:driver_id>", methods=["GET"])
+def get_truck_by_id(driver_id):
+    validator = DispatcherValidator()
+    truck_id = validator.check_own_truck(driver_id)
+    return make_response(jsonify({"driver_id" : driver_id, "truck_id" : truck_id}),200)
 
 @routes.route("/api/driver/listTour/", methods=["GET"])
 def list_tour():

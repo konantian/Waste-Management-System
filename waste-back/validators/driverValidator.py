@@ -41,23 +41,23 @@ class DriverValidator:
             "select cid_pick_up,cid_drop_off from service_fulfillments where service_no=:service_no and driver_id=:driver_id",
             {"service_no": service_no, "driver_id": driver_id},
         )
-        cid = self.cursor.fetchone()[0]
+        cid_pick_up,cid_drop_off = self.cursor.fetchone()
 
-        return cid
+        return cid_pick_up,cid_drop_off 
 
     def get_tour(self, start_date, end_date, driver_id):
 
         tour = []
         service_no = self.get_service_no(start_date, end_date, driver_id)
         for service in service_no:
-            containers = self.get_container_id(service, driver_id)
+            cid_pick_up,cid_drop_off = self.get_container_id(service, driver_id)
             informations = self.get_information(service)
             data = {
                 "location": informations[0],
                 "waste_type": informations[1],
                 "local_contact": informations[2],
-                "cid_pick_up": containers[0],
-                "cid_drop_off": containers[1],
+                "cid_pick_up": cid_pick_up,
+                "cid_drop_off": cid_drop_off
             }
             tour.append(data)
         return tour
