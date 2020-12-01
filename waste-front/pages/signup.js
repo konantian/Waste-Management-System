@@ -42,6 +42,7 @@ const SignUp = () =>{
                 <title>Sign Up</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
+            {!isLogged ? 
             <Form className="form" onFinish={onFinish}>
                 <Form.Item
                     label="User Id"
@@ -86,7 +87,7 @@ const SignUp = () =>{
                         <Button className="signButton" type="primary" shape="round" size="large" htmlType="submit">Sign Up</Button>
                     </Form.Item>
                 </div>
-            </Form>
+            </Form> : null}
         </div>
         
     )

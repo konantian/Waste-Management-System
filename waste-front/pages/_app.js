@@ -4,7 +4,7 @@ import '../styles/accountManager.css';
 import '../styles/driver.css';
 import '../styles/dispatcher.css';
 import 'antd/dist/antd.css';
-import {wrapper} from '../components/store';
+import {wrapper} from '../redux/store';
 import {useStore} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 

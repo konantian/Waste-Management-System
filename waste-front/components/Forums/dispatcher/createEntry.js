@@ -12,16 +12,13 @@ const CreateEntryForm = () => {
 
     const onFinish = values => {
 
-        let datePicker = values['date_time'];
-        let dateTime = datePicker.format('YYYY-MM-DD');
-
         axios.post(CREATE_ENTRY_API,
             {
                 "agreement" : values.agreement,
                 "driver_id" : values.driver_id,
                 "truck_id" : values.truck_id,
                 "cid_drop_off" : values.cid_drop_off,
-                "date_time" : dateTime
+                "date_time" : values['date_time'].format('YYYY-MM-DD')
             }).then(res => {
                 message.success(res.data['success']);
                 formRef.current.resetFields();

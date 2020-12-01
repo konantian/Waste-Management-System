@@ -27,7 +27,7 @@ const Supervisor = () => {
                 <title>Supervisor</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            {isLogged ? <Logout /> : null}
+            {isLogged && role === 'supervisor' ? <Logout /> : null}
         </div>
     )
 }

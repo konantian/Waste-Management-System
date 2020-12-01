@@ -8,6 +8,7 @@ const Home = () => {
   const router = useRouter();
   const isLogged = useSelector(state => state.isLogged);
   const role = useSelector(state => state.role);
+  const name = useSelector(state => state.name);
 
   useEffect(() => {
     if(isLogged) {

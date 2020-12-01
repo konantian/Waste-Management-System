@@ -30,7 +30,7 @@ const Dispatcher = () => {
                 <title>Dispatcher</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            {isLogged ? 
+            {isLogged && role === 'dispatcher' ?
                 <div>
                     <Logout /> 
                     <div className="dispatcherForm">

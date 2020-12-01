@@ -6,7 +6,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import {useSelector, useDispatch} from 'react-redux'; 
-import {login, setUserId, setRole, setUsername, setName} from '../components/redux/actions';
+import {login, setUserId, setRole, setUsername, setName} from '../redux/actions';
 import {LOGIN_API} from '../constants/api';
 
 const Login = () => {
