@@ -16,16 +16,6 @@ const MasterAccountForm = () => {
         {title: 'End Date','dataIndex': 'end_date'},{title: 'Total Amount','dataIndex': 'total_amount'},
     ]
 
-    const rangeConfig = {
-        rules: [
-          {
-            type: 'array',
-            required: true,
-            message: 'Please select time!',
-          },
-        ],
-      };
-
     const onFinish = values => {
         
         let rangePicker = values['range-picker']; 
@@ -96,7 +86,11 @@ const MasterAccountForm = () => {
                         <Select.Option value="residential">Residential</Select.Option>
                     </Select>
                 </Form.Item>
-                <Form.Item name="range-picker" label="Start Date - End Date" {...rangeConfig}>
+                <Form.Item 
+                    name="range-picker" 
+                    label="Start Date - End Date" 
+                    rules={[{type: 'array',required: true,message: 'Please select time!',},]}
+                >
                     <RangePicker />
                 </Form.Item>
                 <Button className="submitButton" type="primary" shape="round" size="large" htmlType="submit">Submit</Button>

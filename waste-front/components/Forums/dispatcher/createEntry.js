@@ -8,16 +8,7 @@ const CreateEntryForm = () => {
     const formRef = useRef(null);
     const [ownTruck, setTruck] = useState(null);
     const [containers, setContainers] = useState([]);
-
-    const config = {
-        rules: [
-          {
-            type: 'object',
-            required: true,
-            message: 'Please select date time!',
-          },
-        ],
-      };
+    const [service, setService] = useState(null);
 
     const onFinish = values => {
 
@@ -42,25 +33,39 @@ const CreateEntryForm = () => {
             })
     }
 
-    const onFieldChange = ({agreement, driver_id}) => {
-
-        if(driver_id !== undefined && driver_id !== ''){
-            axios.get(TRUCK_API(driver_id)).then((res) => {
-                setTruck(res.data.truck_id);
-                formRef.current.setFieldsValue({truck_id : res.data.truck_id});
-            }).catch((err) => {
-                console.log(err);
-            })
-        }
-        if(agreement !== undefined && agreement !== ''){
-            axios.get(CONTAINER_API(agreement)).then((res) => {
-                setContainers(res.data.containers);
+    const agreementValidator = async (agreement) => {
+        if(!agreement) return Promise.reject();
+        try{
+            let response = await axios.get(CONTAINER_API(agreement));
+            if(agreement !== service){
                 formRef.current.setFieldsValue({cid_drop_off : null});
-            }).catch((err) => {
-                console.log(err);
-            })
+                setService(agreement);
+            }
+            setContainers(response.data.containers);
+            return Promise.resolve();
+        }catch(err){
+            setContainers([]);
+            formRef.current.setFieldsValue({cid_drop_off : null});
+            let msg = JSON.parse(err.response.request.response);
+            return Promise.reject(msg['error']);
         }
-        
+    }
+
+    const driverValidator = async (driver_id) => {
+        if(!driver_id) return Promise.reject();
+        try{
+            let response = await axios.get(TRUCK_API(driver_id));
+            setTruck(response.data.truck_id);
+            if(response.data.truck_id){
+                formRef.current.setFieldsValue({truck_id : response.data.truck_id});
+            }
+            return Promise.resolve();
+        }catch(err){
+            setTruck(null);
+            formRef.current.setFieldsValue({truck_id : null});
+            let msg = JSON.parse(err.response.request.response);
+            return Promise.reject(msg['error']);
+        }
     }
 
     return(
@@ -68,20 +73,26 @@ const CreateEntryForm = () => {
             <Form className="form" 
                   onFinish={onFinish} 
                   ref={formRef}
-                  onValuesChange={onFieldChange}
                 >
                 <Form.Item
                     label="Agreement Number"
                     name="agreement"
-                    rules={[{required: true,message: 'Enter the agreement number',}]}
-                    
+                    hasFeedback
+                    rules={[
+                        {required: true,message: 'Enter the agreement number',},
+                        () => ({validator(rule, value) {return agreementValidator(value);},}),
+                    ]}
                 >
                     <Input type="number" />
                 </Form.Item>
                 <Form.Item
                     label="Driver Id"
                     name="driver_id"
-                    rules={[{required: true,message: 'Enter the driver id',}]}
+                    hasFeedback
+                    rules={[
+                        {required: true,message: 'Enter the driver id',},
+                        () => ({validator(rule, value) {return driverValidator(value);},}),
+                    ]}
                 >
                     <Input type="number" />
                 </Form.Item>
@@ -92,15 +103,14 @@ const CreateEntryForm = () => {
                 >
                     <Input  disabled={ownTruck !== null} />
                 </Form.Item>
-
                 <Form.Item 
                     label="Drop Off CID" 
                     name="cid_drop_off"
                     rules={[{required: true,message: 'Select the container to drop off',},]}
                     >
                     <Select placeholder="Select container to drop off">
-                        {containers.map((cid) => 
-                            <Select.Option value={cid}>{cid}</Select.Option>
+                        {containers.map((cid,index) => 
+                            <Select.Option key={index} value={cid}>{cid}</Select.Option>
                         )}
                     </Select>
                 </Form.Item>
@@ -108,7 +118,7 @@ const CreateEntryForm = () => {
                     label="Date Time" 
                     name="date_time"
                     hidden={containers.length <= 0}
-                    {...config}
+                    rules={[{type: 'object',required: true,message: 'Please select date time!',},]}
                     >
                     <DatePicker className="datePicker" />
                 </Form.Item> 

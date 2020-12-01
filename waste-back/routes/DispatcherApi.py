@@ -9,8 +9,20 @@ def get_containers_by_agreement(service_no):
     validator = DispatcherValidator()
     account_no = validator.get_master_account(service_no)
     if account_no is None:
-        return make_response(jsonify({"containers": []}), 200)
+        return make_response(
+            jsonify(
+                {"error": "This agreement does not exist!"}
+            ),
+            400,
+        )
     container_list = validator.get_available_container(account_no)
+    if not container_list:
+        return make_response(
+            jsonify(
+                {"error": "There are no available containers for this agreement"}
+            ),
+            400,
+        )
     return make_response(jsonify({"containers": container_list}), 200)
 
 
@@ -20,29 +32,13 @@ def create_entry():
     validator = DispatcherValidator()
     data = request.json
     agreement = data.get("agreement")
-    if not validator.check_service_no(agreement):
-        return make_response(
-            jsonify(
-                {
-                    "error": "The service number entered does not exist,please enter again"
-                }
-            ),
-            400,
-        )
     driver_id = data.get("driver_id")
-    if not validator.check_driver(driver_id):
-        return make_response(
-            jsonify(
-                {"error": "The driver id entered does not exist,please enter again"}
-            ),
-            400,
-        )
     truck_id = data.get("truck_id")
     owned_truck = validator.check_own_truck(driver_id)
     if owned_truck is None and not validator.check_truck(truck_id):
         return make_response(
             jsonify(
-                {"error": "The truck endtered owned by other drivers, please enter again"}
+                {"error": "The truck entered is not available,please enter again"}
             ),
             400,
         )
