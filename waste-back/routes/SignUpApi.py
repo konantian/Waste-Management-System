@@ -2,6 +2,7 @@ from flask import request, jsonify, make_response
 from validators import AuthValidator
 from . import routes
 
+
 @routes.route("/api/signup/", methods=["POST"])
 def signup():
 

@@ -99,12 +99,9 @@ class AuthValidator:
 
     def getName(self, pid):
 
-        self.cursor.execute(
-            "select name from personnel where pid=:pid", {"pid": pid}
-        )
+        self.cursor.execute("select name from personnel where pid=:pid", {"pid": pid})
         name = self.cursor.fetchone()[0]
         return name
-
 
     def register(self, userId, role, login, password):
 
