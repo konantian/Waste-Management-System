@@ -8,7 +8,7 @@ const { RangePicker } = DatePicker;
 const MasterAccountForm = () => {
 
     const userId = useSelector(state => state.userId);
-    const [dataSource, setDataSource] = useState([]);
+    const [dataSource, setDataSource] = useState(null);
     const columns = [
         {title: 'Account No.','dataIndex': 'account_no'},{title: 'Account Mgr','dataIndex': 'account_mgr'},{title: 'Customr Name','dataIndex': 'customer_name'},
         {title: 'Contact Info','dataIndex': 'contact_info'},{title: 'Customer Type','dataIndex': 'customer_type'},{title: 'Start Date','dataIndex': 'start_date'},
@@ -100,7 +100,7 @@ const MasterAccountForm = () => {
                 <Button className="submitButton" type="primary" shape="round" size="large" htmlType="submit">Submit</Button>
             </Form>
             <Divider />
-            {dataSource.length > 0 ? <Table className="informationTable" columns={columns} dataSource={dataSource} pagination={false}/> : null}
+            {dataSource !== null ? <Table className="informationTable" columns={columns} dataSource={dataSource} pagination={false}/> : null}
         </div>
     )
 

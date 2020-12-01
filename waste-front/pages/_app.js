@@ -1,6 +1,7 @@
 import React from 'react';
 import '../styles/login.css';
 import '../styles/accountManager.css';
+import '../styles/driver.css';
 import 'antd/dist/antd.css';
 import {wrapper} from '../components/store';
 import {useStore} from 'react-redux';

@@ -1,17 +1,18 @@
 import React, {useEffect} from 'react';
 import {useSelector} from 'react-redux'; 
 import { useRouter } from 'next/router'
-import { message } from 'antd';
+import { message,Tabs } from 'antd';
 import Head from 'next/head';
 import Logout from '../components/logout';
+import ListTourForm from '../components/Forums/driver/listTour';
+
+const { TabPane } = Tabs;
 
 const Driver = () => {
 
     const router = useRouter();
     const isLogged = useSelector(state => state.isLogged);
-    const userId = useSelector(state => state.userId);
     const role = useSelector(state => state.role);
-    const username = useSelector(state => state.username);
 
     useEffect(() => {
         if(!isLogged){
@@ -29,7 +30,18 @@ const Driver = () => {
                 <title>Driver</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            {isLogged ? <Logout /> : null}
+            {isLogged ? 
+                <div>
+                    <Logout /> 
+                    <div className="driverForm">
+                    <Tabs defaultActiveKey="1" type="card" size='default'>
+                        <TabPane tab="List Tour Information" key="1">
+                            <ListTourForm /> 
+                        </TabPane>
+                        </Tabs>
+                    </div>
+                </div>
+            : null}
         </div>
     )
 }

@@ -11,7 +11,6 @@ const Supervisor = () => {
     const isLogged = useSelector(state => state.isLogged);
     const userId = useSelector(state => state.userId);
     const role = useSelector(state => state.role);
-    const username = useSelector(state => state.username);
 
     useEffect(() => {
         if(!isLogged){

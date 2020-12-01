@@ -7,8 +7,8 @@ import {INFORMATION_API} from '../../../constants/api';
 const ListInformationForm = () => {
 
     const userId = useSelector(state => state.userId);
-    const [accountData, setAccountData] = useState([]);
-    const [serviceData, setServiceData] = useState([]);
+    const [accountData, setAccountData] = useState(null);
+    const [serviceData, setServiceData] = useState(null);
     const accountColumns = [
         {title: 'Account No.','dataIndex': 'account_no'},
         {title: 'Account Mgr','dataIndex': 'account_mgr'},
@@ -63,8 +63,8 @@ const ListInformationForm = () => {
                 <Button className="submitButton" type="primary" shape="round" size="large" htmlType="submit">Submit</Button>
             </Form>
             <Divider />
-            {accountData.length > 0 ? <Table className="informationTable" columns={accountColumns} dataSource={accountData} pagination={false} /> : null}
-            {serviceData.length > 0 ? <Table className="informationTable" columns={serviceColumns} dataSource={serviceData} pagination={false} /> : null}
+            {accountData !== null? <Table className="informationTable" columns={accountColumns} dataSource={accountData} pagination={false} /> : null}
+            {serviceData !== null ? <Table className="informationTable" columns={serviceColumns} dataSource={serviceData} pagination={false} /> : null}
 
         </div>
     )
