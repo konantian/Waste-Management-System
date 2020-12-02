@@ -50,7 +50,9 @@ const ListTourForm = () => {
                 <Form.Item name="range-picker" label="Start Date - End Date" {...rangeConfig}>
                     <RangePicker />
                 </Form.Item>
-                <Button className="submitButton" type="primary" shape="round" size="large" htmlType="submit">Submit</Button>
+                <div className="submitContainer">
+                    <Button className="submitButton" type="primary" shape="round" size="large" htmlType="submit">List</Button>
+                </div>
             </Form>
             <Divider />
             {tour !== null ? <Table className="tourTable" columns={tourColumns} dataSource={tour} pagination={false} /> : null}

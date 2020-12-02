@@ -55,7 +55,7 @@ def customer_list():
 @routes.route("/api/supervisor/customerReport/", methods=["GET"])
 def customer_report():
     validator = SupervisorValidator()
-    master_account = request.args.get("master_account")
+    master_account = request.args.get("account")
     manager_name = validator.get_manager_name(master_account)
     service_count, price_sum, cost_sum, type_count = validator.get_customer_report(master_account)
     data = {
@@ -82,7 +82,7 @@ def manager_report():
         data.append({
             "manager_name" : manager_name,
             "master_count" : master_count,
-            "agreements_count" : agreements_count,
+            "service_count" : agreements_count,
             "price_sum" : round(price_sum,2),
             "cost_sum" : round(cost_sum,2)
         })

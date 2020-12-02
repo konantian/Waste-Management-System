@@ -40,7 +40,9 @@ const SummaryReport = () => {
                 >
                 <Input type="number" />
                 </Form.Item>
-                <Button className="submitButton" type="primary" shape="round" size="large" htmlType="submit">Submit</Button>
+                <div className="submitContainer">
+                    <Button className="submitButton" type="primary" shape="round" size="large" htmlType="submit">Submit</Button>
+                </div>
             </Form>
             <Divider />
             {report !== null ? 

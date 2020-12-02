@@ -39,7 +39,7 @@ const AccountManager = () => {
             {isLogged && role === 'accountManager' ? 
                 <div>
                     <Logout /> 
-                    <div className="managerForm">
+                    <div className="formContainer">
                         <Tabs defaultActiveKey="1" type="card" size='default'>
                             <TabPane tab="List Information" key="1">
                                 <ListInformationForm /> 

@@ -119,7 +119,9 @@ const CreateEntryForm = () => {
                     >
                     <DatePicker className="datePicker" />
                 </Form.Item> 
-                <Button className="dispatcherButton" type="primary" shape="round" size="large" htmlType="submit">Submit</Button>
+                <div className="submitContainer">
+                    <Button className="submitButton" type="primary" shape="round" size="large" htmlType="submit">Create</Button>
+                </div>
             </Form>
             <Divider />
         </div>

@@ -166,14 +166,17 @@ class SupervisorValidator:
         self.connection.commit()
 
     def get_customer_report(self, master_account):
+
         self.cursor.execute("select count(*) from service_agreements where master_account=:master_account",{"master_account":master_account})
         service_count = self.cursor.fetchone()[0]
 
         self.cursor.execute("select sum(internal_cost) from service_agreements where master_account=:master_account",{"master_account":master_account})
         cost_sum = self.cursor.fetchone()[0]
+        cost_sum = 0 if cost_sum == None else cost_sum
 
         self.cursor.execute("select sum(price) from service_agreements where master_account=:master_account",{"master_account":master_account})
         price_sum = self.cursor.fetchone()[0]
+        price_sum = 0 if price_sum == None else price_sum
 
         self.cursor.execute("select count(distinct waste_type) from service_agreements where master_account=:master_account",{"master_account":master_account})
         type_count = self.cursor.fetchone()[0]

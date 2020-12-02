@@ -14,3 +14,75 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.submitContainer{
+  display: flex;
+  justify-content: center;
+}
+
+.submitButton{
+  width : 150px;
+}
+
+.rangePicker{
+  width : 100%;
+}
+
+.datePicker{
+  width : 100%;
+}
+
+.formContainer{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.loginContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top : 15%;
+}
+
+.tourTable{
+  margin-top: 40px;
+  width : 800px;
+}
+
+.loginButton{
+  width: 100px;
+}
+
+.signButton{
+  width: 100px;
+}
+
+
+.report{
+  width : 400px;
+}
+
+.loginButtons{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+}
+
+.logoutButton{
+  width : 100px
+}
+
+.logoutContainer{
+  display : flex;
+  justify-content: flex-end;
+  margin-top: 1%;
+  margin-right: 2%;
+}
+
+.informationTable{
+  margin-top: 40px;
+  width : 1100px;
+}

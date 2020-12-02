@@ -37,7 +37,7 @@ const SignUp = () =>{
       };
 
     return (
-        <div className="formContainer">
+        <div className="loginContainer">
             <Head>
                 <title>Sign Up</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -77,7 +77,7 @@ const SignUp = () =>{
                 >
                     <Input.Password placeholder="Enter your password"/>
                 </Form.Item>
-                <div className="buttons">
+                <div className="loginButtons">
                     <Form.Item >
                         <Link href="/login">
                             <Button className="loginButton" type="primary" shape="round" size="large" >Log in</Button>

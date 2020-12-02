@@ -1,22 +1,36 @@
-import React,{useState,useRef} from 'react';
+import React,{useState} from 'react';
 import {useSelector} from 'react-redux'; 
 import axios from 'axios';
-import { Form, Input,Button,Card, Divider,message } from 'antd';
+import useSWR from 'swr';
+import { Table, message } from 'antd';
 import {MANAGER_REPORT_API} from '../../../constants/api';
+import {managerColumns} from '../../../constants/columns';
 
 const ManagerReportForm = () => {
 
-    const formRef = useRef(null);
     const userId = useSelector(state => state.userId);
     const [report, setReport] = useState(null);
 
-    const onFinish = values => {
-
+    const fetcher = (url) => {
+        
+        axios.get(url,
+            {
+            params : {
+                pid : userId
+            }}).then((res) => {
+                setReport(res.data);
+            }).catch((err) => {
+                let msg = JSON.parse(err.response.request.response);
+                setReport(null);
+                message.error(msg['error']);
+            })
     }
+
+    const {data,error} = useSWR(MANAGER_REPORT_API, fetcher);
 
     return (
         <div>
-            
+            <Table columns={managerColumns} dataSource={report} pagination={false} />
         </div>
     )
 }

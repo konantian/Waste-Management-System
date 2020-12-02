@@ -33,7 +33,7 @@ const Driver = () => {
             {isLogged && role === 'driver' ? 
                 <div>
                     <Logout /> 
-                    <div className="driverForm">
+                    <div className="formContainer">
                         <Tabs defaultActiveKey="1" type="card" size='default'>
                             <TabPane tab="List Tour Information" key="1">
                                 <ListTourForm /> 

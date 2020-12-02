@@ -33,7 +33,7 @@ const Dispatcher = () => {
             {isLogged && role === 'dispatcher' ?
                 <div>
                     <Logout /> 
-                    <div className="dispatcherForm">
+                    <div className="formContainer">
                         <Tabs defaultActiveKey="1" type="card" size='default'>
                             <TabPane tab="Create Entry" key="1">
                                 <CreateEntryForm /> 

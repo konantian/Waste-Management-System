@@ -97,7 +97,9 @@ const SerivceAgreement = () => {
                 >
                     <Input type="number" />
                 </Form.Item>
-                <Button className="submitButton" type="primary" shape="round" size="large" htmlType="submit">Submit</Button>
+                <div className="submitContainer">
+                    <Button className="submitButton" type="primary" shape="round" size="large" htmlType="submit">Add</Button>
+                </div>
             </Form>
             <Divider />
             {agreement.length > 0 ? <Table className="informationTable" columns={serviceColumns} dataSource={agreement} pagination={false} /> : null}

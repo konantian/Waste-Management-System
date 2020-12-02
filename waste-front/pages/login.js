@@ -52,7 +52,7 @@ const Login = () => {
     }
 
     return (
-        <div className="formContainer">
+        <div className="loginContainer">
             <Head>
                 <title>Login</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -73,7 +73,7 @@ const Login = () => {
                 >
                     <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} />
                 </Form.Item>
-                <div className="buttons">
+                <div className="loginButtons">
                     <Form.Item >
                         <Button className="loginButton" type="primary" shape="round" size="large" htmlType="submit">Log in</Button>
                     </Form.Item>

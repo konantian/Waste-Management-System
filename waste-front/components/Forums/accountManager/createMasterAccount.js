@@ -89,7 +89,9 @@ const MasterAccountForm = () => {
                 >
                     <RangePicker />
                 </Form.Item>
-                <Button className="submitButton" type="primary" shape="round" size="large" htmlType="submit">Submit</Button>
+                <div className="submitContainer">
+                    <Button className="submitButton" type="primary" shape="round" size="large" htmlType="submit">Create</Button>
+                </div>
             </Form>
             <Divider />
             {dataSource !== null ? <Table className="informationTable" columns={accountColumns} dataSource={dataSource} pagination={false}/> : null}

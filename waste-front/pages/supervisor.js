@@ -37,7 +37,7 @@ const Supervisor = () => {
             {isLogged && role === 'supervisor' ? 
                 <div>
                     <Logout /> 
-                    <div className="supervisorForm">
+                    <div className="formContainer">
                         <Tabs defaultActiveKey="1" type="card" size='default'>
                             <TabPane tab="Assign Account" key="1">
                                 <AssignAccountForm /> 

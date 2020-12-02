@@ -27,3 +27,11 @@ export const tourColumns = [
     {title: 'Container Pick Up','dataIndex': 'cid_pick_up'},
     {title: 'Container Drop Off','dataIndex': 'cid_drop_off'},
 ]
+
+export const managerColumns = [
+    {title: 'Manager name','dataIndex': 'manager_name'},
+    {title: 'Number of master agreement','dataIndex': 'master_count'},
+    {title: 'Number of service agreement','dataIndex': 'service_count'},
+    {title: 'Total internal cost','dataIndex': 'cost_sum'},
+    {title: 'Sum of price','dataIndex': 'price_sum'},
+]
