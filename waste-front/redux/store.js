@@ -1,13 +1,21 @@
 import {createStore, applyMiddleware, compose} from 'redux';
 import {createWrapper} from 'next-redux-wrapper';
 import thunk from 'redux-thunk';
-import { persistStore, persistReducer } from 'redux-persist';
+import { persistStore, persistReducer, createTransform } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+import {parse, stringify} from 'flatted';
+
+export const transformCircular = createTransform(
+      (inboundState, key) => stringify(inboundState),
+      (outboundState, key) => parse(outboundState),
+  )
+  
 
 const persistConfig = {
       key: "nextjs",
       whitelist: ["isLogged", "userId","role","username","name"], 
       storage, // if needed, use a safer storage
+      transforms: [transformCircular]
 };
 
 const initialState = {
