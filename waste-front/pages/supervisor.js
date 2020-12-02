@@ -1,9 +1,16 @@
 import React, {useEffect} from 'react';
 import {useSelector} from 'react-redux'; 
 import { useRouter } from 'next/router'
-import { message } from 'antd';
+import { message,Tabs } from 'antd';
 import Head from 'next/head';
 import Logout from '../components/logout';
+import {
+    AssignAccountForm,
+    CustomerReportForm,
+    ManagerReportForm
+} from '../components/Forums/supervisor/';
+
+const { TabPane } = Tabs;
 
 const Supervisor = () => {
 
@@ -27,7 +34,24 @@ const Supervisor = () => {
                 <title>Supervisor</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            {isLogged && role === 'supervisor' ? <Logout /> : null}
+            {isLogged && role === 'supervisor' ? 
+                <div>
+                    <Logout /> 
+                    <div className="supervisorForm">
+                        <Tabs defaultActiveKey="1" type="card" size='default'>
+                            <TabPane tab="Assign Account" key="1">
+                                <AssignAccountForm /> 
+                            </TabPane>
+                            <TabPane tab="Customer Report" key="2">
+                                <CustomerReportForm /> 
+                            </TabPane>
+                            <TabPane tab="Manager Report" key="3">
+                                <ManagerReportForm /> 
+                            </TabPane>
+                        </Tabs>
+                    </div>
+                    
+                </div> : null}
         </div>
     )
 }

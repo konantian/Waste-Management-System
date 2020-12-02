@@ -3,6 +3,7 @@ import '../styles/login.css';
 import '../styles/accountManager.css';
 import '../styles/driver.css';
 import '../styles/dispatcher.css';
+import '../styles/supervisor.css';
 import 'antd/dist/antd.css';
 import {wrapper} from '../redux/store';
 import {useStore} from 'react-redux';

@@ -3,6 +3,8 @@ import axios from 'axios';
 import {useSelector} from 'react-redux'; 
 import { Form, Input, Select,DatePicker, Button, Table, Divider, message} from 'antd';
 import {INFORMATION_API, CREATE_ACCOUNT_API} from '../../../constants/api';
+import {customer_types} from '../../../constants/customerTypes';
+import {accountColumns} from '../../../constants/columns';
 const { RangePicker } = DatePicker;
 
 const MasterAccountForm = () => {
@@ -10,11 +12,6 @@ const MasterAccountForm = () => {
     const formRef = useRef(null);
     const userId = useSelector(state => state.userId);
     const [dataSource, setDataSource] = useState(null);
-    const columns = [
-        {title: 'Account No.','dataIndex': 'account_no'},{title: 'Account Mgr','dataIndex': 'account_mgr'},{title: 'Customr Name','dataIndex': 'customer_name'},
-        {title: 'Contact Info','dataIndex': 'contact_info'},{title: 'Customer Type','dataIndex': 'customer_type'},{title: 'Start Date','dataIndex': 'start_date'},
-        {title: 'End Date','dataIndex': 'end_date'},{title: 'Total Amount','dataIndex': 'total_amount'},
-    ]
 
     const onFinish = values => {
         
@@ -80,10 +77,9 @@ const MasterAccountForm = () => {
                     rules={[{required: true,message: 'Select the customer type',},]}
                     >
                     <Select placeholder="Select customer type">
-                        <Select.Option value="municipal">Municipal</Select.Option>
-                        <Select.Option value="commercial">Commericial</Select.Option>
-                        <Select.Option value="industrial">Industrial</Select.Option>
-                        <Select.Option value="residential">Residential</Select.Option>
+                        {customer_types.map((type,index) => 
+                            <Select.Option key={index} value={type.toLowerCase()}>{type}</Select.Option>
+                        )}
                     </Select>
                 </Form.Item>
                 <Form.Item 
@@ -96,7 +92,7 @@ const MasterAccountForm = () => {
                 <Button className="submitButton" type="primary" shape="round" size="large" htmlType="submit">Submit</Button>
             </Form>
             <Divider />
-            {dataSource !== null ? <Table className="informationTable" columns={columns} dataSource={dataSource} pagination={false}/> : null}
+            {dataSource !== null ? <Table className="informationTable" columns={accountColumns} dataSource={dataSource} pagination={false}/> : null}
         </div>
     )
 

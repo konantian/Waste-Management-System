@@ -3,11 +3,14 @@ import {useSelector} from 'react-redux';
 import { useRouter } from 'next/router'
 import Head from 'next/head';
 import { message, Tabs} from 'antd';
-import ListInformationForm from '../components/Forums/accountManager/listInformation';
-import MasterAccountForm from '../components/Forums/accountManager/createMasterAccount';
-import SummaryReport from '../components/Forums/accountManager/summaryReport';
-import ServiceAgreement from '../components/Forums/accountManager/serviceAgreement';
 import Logout from '../components/logout';
+import {
+    ListInformationForm,
+    SummaryReport,
+    SerivceAgreement,
+    MasterAccountForm
+ } from '../components/Forums/accountManager/';
+
 
 const { TabPane } = Tabs;
 
@@ -45,7 +48,7 @@ const AccountManager = () => {
                                 <MasterAccountForm />
                             </TabPane>
                             <TabPane tab="Add new service agreement" key="3">
-                                <ServiceAgreement />
+                                <SerivceAgreement />
                             </TabPane>
                             <TabPane tab="Create Summary Report" key="4">
                                 <SummaryReport />

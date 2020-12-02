@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Form, Input,Button, Divider,Table,Select, message } from 'antd';
 import {INFORMATION_API,CREATE_AGREEMENT_API} from '../../../constants/api';
 import {serviceColumns} from '../../../constants/columns';
+import {waste_types} from '../../../constants/wasteTypes';
 
 const SerivceAgreement = () => {
 
@@ -70,13 +71,9 @@ const SerivceAgreement = () => {
                     rules={[{required: true,message: 'Select the waste type',},]}
                     >
                     <Select placeholder="Select waste type">
-                        <Select.Option value="hazardous waste">Hazardous Waste</Select.Option>
-                        <Select.Option value="plastic">Plastic</Select.Option>
-                        <Select.Option value="metal">Metal</Select.Option>
-                        <Select.Option value="paper">Paper</Select.Option>
-                        <Select.Option value="compost">Compost</Select.Option>
-                        <Select.Option value="construction waste">Construction Waste</Select.Option>
-                        <Select.Option value="mixed waste">Mixed Waste</Select.Option>
+                        {waste_types.map((type,index) => 
+                            <Select.Option key={index} value={type.toLowerCase()}>{type}</Select.Option>
+                        )}
                     </Select>
                 </Form.Item>
                 <Form.Item
