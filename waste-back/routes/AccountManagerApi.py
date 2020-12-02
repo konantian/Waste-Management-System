@@ -18,8 +18,8 @@ def list_information():
             ),
             400,
         )
-    custom_information = validator.custom_information(account)
-    return make_response(jsonify(custom_information), 200)
+    customer_data = validator.customer_information(account)
+    return make_response(jsonify(customer_data), 200)
 
 
 @routes.route("/api/accountManager/createAccount/", methods=["POST"])

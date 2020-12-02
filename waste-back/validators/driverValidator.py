@@ -49,7 +49,7 @@ class DriverValidator:
 
         tour = []
         service_no = self.get_service_no(start_date, end_date, driver_id)
-        for service in service_no:
+        for index, service in enumerate(service_no):
             cid_pick_up, cid_drop_off = self.get_container_id(service, driver_id)
             informations = self.get_information(service)
             data = {
@@ -58,6 +58,7 @@ class DriverValidator:
                 "local_contact": informations[2],
                 "cid_pick_up": cid_pick_up,
                 "cid_drop_off": cid_drop_off,
+                "key" : index
             }
             tour.append(data)
         return tour

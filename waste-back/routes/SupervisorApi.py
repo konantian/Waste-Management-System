@@ -74,7 +74,7 @@ def manager_report():
     managers = validator.get_managers(pid)
     sort_managers = validator.sort_report(managers)
     data = []
-    for mgr in sort_managers:
+    for index, mgr in enumerate(sort_managers):
         manager_name = validator.get_manager_name_by_id(mgr)
         master_count, agreements_count = validator.get_count(mgr)
         price_sum  = validator.get_price_sum(mgr)
@@ -84,7 +84,8 @@ def manager_report():
             "master_count" : master_count,
             "service_count" : agreements_count,
             "price_sum" : round(price_sum,2),
-            "cost_sum" : round(cost_sum,2)
+            "cost_sum" : round(cost_sum,2),
+            "key" : index
         })
     return make_response(jsonify(data), 200)
 

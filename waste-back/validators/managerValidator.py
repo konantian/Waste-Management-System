@@ -81,7 +81,7 @@ class ManagerValidator:
 
         self.connection.commit()
 
-    def custom_information(self, account):
+    def customer_information(self, account):
 
         self.cursor.execute(
             "select * from accounts where account_no=:account", {"account": account}
@@ -96,6 +96,7 @@ class ManagerValidator:
         service_data = [
             {
                 "service_no": service[0],
+                "key" : index,
                 "master_account": service[1],
                 "location": service[2],
                 "waste_type": service[3],
@@ -104,7 +105,7 @@ class ManagerValidator:
                 "internal_cost": service[6],
                 "price": round(service[7], 2),
             }
-            for service in service_agreements
+            for index,service in enumerate(service_agreements)
         ]
 
         return {
@@ -117,6 +118,7 @@ class ManagerValidator:
             "end_date": result[6],
             "total_amount": round(result[7], 2),
             "service_agreements": service_data,
+            "key" : "customer_imformation"
         }
 
     def create_account(
@@ -160,12 +162,14 @@ class ManagerValidator:
             {"master_account": master_account},
         )
         cost_sum = self.cursor.fetchone()[0]
+        cost_sum = 0 if cost_sum == None else cost_sum
 
         self.cursor.execute(
             "select sum(price) from service_agreements where master_account=:master_account",
             {"master_account": master_account},
         )
         price_sum = self.cursor.fetchone()[0]
+        price_sum = 0 if price_sum == None else price_sum
 
         self.cursor.execute(
             "select count(distinct waste_type) from service_agreements where master_account=:master_account",
