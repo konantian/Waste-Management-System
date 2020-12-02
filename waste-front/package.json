@@ -1,7 +1,8 @@
 {
   "name": "waste-front",
-  "version": "0.1.0",
+  "version": "1.5.0",
   "private": true,
+  "homepage": "https://waste-management-system-git-main.konantian.vercel.app",
   "repository": "https://github.com/konantian/Waste-Management-System",
   "person": {
     "name": "Yuan Wang",
@@ -25,6 +26,7 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
+    "sqlite": "^4.0.17",
     "swr": "^0.3.9"
   }
 }
