@@ -7,3 +7,4 @@ from .SignUpApi import *
 from .AccountManagerApi import *
 from .DriverApi import *
 from .DispatcherApi import *
+from .SupervisorApi import *
