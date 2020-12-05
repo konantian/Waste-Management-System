@@ -6,14 +6,15 @@ import {check_username, get_hash_password, get_user_info} from '../../utils/auth
 
 export default async function login(req : NextApiRequest, res : NextApiResponse){
 
-    const db = await sqlite.open({
-        filename: './waste.sqlite',
-        driver: sqlite3.Database
-    });
+    if(req.method !== 'POST'){
+        return res.status(405).json({error : "Method not allowed, please use POST"});
+    }
+
+    const db = await sqlite.open({filename: './waste.sqlite',driver: sqlite3.Database});
 
     const existUsername = await check_username(db, req.body.username)
     if(!existUsername){
-        return res.status(400).json({error : "This username does not exist"});   
+        return res.status(400).json({error : "The username entered does not exist, please input again"});   
     }
 
     const hash = await get_hash_password(db, req.body.username);

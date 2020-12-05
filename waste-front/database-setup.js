@@ -6,7 +6,7 @@ async function setup(){
         filename: './waste.sqlite',
         driver: sqlite3.Database
       })
-    await db.migrate({force : "last"});
+    await db.migrate();
 }
 
 setup();
