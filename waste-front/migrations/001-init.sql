@@ -1,4 +1,4 @@
---Up
+-- Up
 CREATE TABLE users (
   user_id TEXT, 
   role    TEXT,
@@ -395,7 +395,7 @@ INSERT INTO personnel VALUES('34484','Lovetta Ceniceros','xtang@yahoo.com','2 Ar
 INSERT INTO personnel VALUES('11653','Lina Mondragon','mgemmons@yahoo.ca','8 Addison St. ',NULL);
 INSERT INTO personnel VALUES('72447','Minerva Gulino','jigsaw@yahoo.ca','8159 Charles Ave. ',NULL);
 
-
+--information about account managers
 INSERT INTO account_managers VALUES('34725','small accounts manager','8th Street South');
 INSERT INTO account_managers VALUES('42134','major accounts manager','Main Street West');
 INSERT INTO account_managers VALUES('16830','medium accounts manager','Magnolia Court');
@@ -632,4 +632,18 @@ INSERT INTO service_fulfillments VALUES('2017-10-01','94037803','63','1G8AZ','41
 INSERT INTO service_fulfillments VALUES('2017-10-09','26752018','64','1G8AZ','23769','JH2PC3','1GKDT1');
 INSERT INTO service_fulfillments VALUES('2017-04-14','94037803','65','1G8AZ','88569','3GNGK2','0000');
 
---Down
+
+
+-- Down
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS service_fulfillments;
+DROP TABLE IF EXISTS service_agreements;
+DROP TABLE IF EXISTS accounts;
+DROP TABLE IF EXISTS drivers;
+DROP TABLE IF EXISTS account_managers;
+DROP TABLE IF EXISTS personnel;
+DROP TABLE IF EXISTS container_waste_types;
+DROP TABLE IF EXISTS waste_types;
+DROP TABLE IF EXISTS containers;
+DROP TABLE IF EXISTS maintenance_records;
+DROP TABLE IF EXISTS trucks;

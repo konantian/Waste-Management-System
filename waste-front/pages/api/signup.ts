@@ -13,27 +13,25 @@ export default async function signup(req : NextApiRequest, res : NextApiResponse
 
     const validUserId = await check_pid(db, req.body.userId);
     if(!validUserId){
-        res.status(400).json({error : "This userId is not valid"});
-        return;
+        return res.status(400).json({error : "This userId is not valid"});
     }
     const existUserId = await check_exist_pid(db, req.body.userId);
     if(existUserId){
-        res.status(400).json({error : "This userId is already exist"});
-        return;
+        return res.status(400).json({error : "This userId is already exist"});
     }
-    const validUsername = await check_username(db, req.body.userId)
-    if(!validUsername){
-        res.status(400).json({error : "This username is already exist"});
-        return;
+    const existUsername = await check_username(db, req.body.userId)
+    if(existUsername){
+        return res.status(400).json({error : "This username is already exist"});
     }
     const validRole = await check_role(db,req.body.userId,req.body.role);
     if(!validRole){
-        res.status(400).json({error : "This role is not matched with the record"});
-        return;
+        return res.status(400).json({error : "This role is not matched with the record"});
     }
-    bcrypt.hash(req.body.password, 12).then(async (hash) => {
-        const statement = await db.prepare("INSERT INTO users VALUES(:user_id,:role,:login,:password)");
-        const result = await statement.run(req.body.userId, req.body.role,req.body.login, hash);
-        res.status(201).json({success : "You are ready to log in"});
-    })
+
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(req.body.password, salt);
+
+    const statement = await db.prepare("INSERT INTO users VALUES(:user_id,:role,:login,:password)");
+    await statement.run(req.body.userId, req.body.role,req.body.login, hash);
+    return res.status(201).json({success : "You are ready to log in"});
 }

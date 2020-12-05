@@ -15,20 +15,39 @@ export const check_exist_pid = async (db, userId) => {
 
 export const check_username = async (db,username) => {
     const result = await db.get(SQL`SELECT login FROM users WHERE login=${username}`);
-    if(result) return false;
-    else return true;
+    if(result) return true;
+    else return false;
 }
 
 export const check_role = async (db, userId, role) => {
     let result;
     if(role === 'account manager'){
-        result = await db.get(SQL`SELECT pid from account_managers where pid = ${userId}`);
+        result = await db.get(SQL`SELECT pid FROM account_managers WHERE pid = ${userId}`);
     }else if(role === 'driver'){
-        result = await db.get(SQL`SELECT pid from drivers where pid = ${userId}`);
+        result = await db.get(SQL`SELECT pid FROM drivers WHERE pid = ${userId}`);
     }else if(role === 'supervisor'){
-        result = await db.get(SQL`SELECT supervisor_pid from personnel where supervisor_pid = ${userId}`);
+        result = await db.get(SQL`SELECT supervisor_pid FROM personnel WHERE supervisor_pid = ${userId}`);
     }
     if(!result) return false;
     else return true;
 
+}
+
+export const get_hash_password = async (db, username) => {
+
+    const hash = await db.get(SQL`SELECT password FROM users WHERE login=${username}`);
+
+    if(hash) return hash.password;
+
+}
+
+export const get_user_info = async (db, username ) => {
+
+    const info = await db.get(SQL`SELECT user_id,role FROM users where login=${username}`);
+    const name = await db.get(SQL`SELECT name from personnel where pid=${info.user_id}`);
+
+    if(info.role === 'account manager'){
+        info.role = 'accountManager';
+    }
+    return {"userId" : info.user_id, "role" : info.role, "name" : name.name};
 }
