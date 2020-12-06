@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux';
 import axios from 'axios';
 import { Form, Input,Button,Select, DatePicker, message } from 'antd';
 import {ASSIGN_ACCOUNT_API} from '../../../constants/api';
-import {customer_types} from '../../../constants/customerTypes';
+import {customer_types} from '../../../constants/types';
 const { RangePicker } = DatePicker;
 
 const AssignAccountForm = () => {

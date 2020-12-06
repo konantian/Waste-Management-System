@@ -13,6 +13,7 @@ const Login = () => {
 
     const formRef = useRef(null);
     const router = useRouter();
+    const dispatch = useDispatch();
     const isLogged = useSelector(state => state.isLogged);
     const role = useSelector(state => state.role);
     const name = useSelector(state => state.name);
@@ -29,8 +30,6 @@ const Login = () => {
             }
         }   
     },[])
-
-    const dispatch = useDispatch();
 
     const onFinish = values => {
         axios.post(LOGIN_API,

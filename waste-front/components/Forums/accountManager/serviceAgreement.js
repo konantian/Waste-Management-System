@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Form, Input,Button, Divider,Table,Select, message } from 'antd';
 import {INFORMATION_API,CREATE_AGREEMENT_API} from '../../../constants/api';
 import {serviceColumns} from '../../../constants/columns';
-import {waste_types} from '../../../constants/wasteTypes';
+import {waste_types} from '../../../constants/types';
 import AccountInput from './accountInput';
 
 const SerivceAgreement = () => {
