@@ -18,7 +18,7 @@ export default async function createAccount(req : NextApiRequest, res : NextApiR
 
     const statement = await db.prepare("INSERT INTO accounts VALUES(:account_no,:account_mgr,:customer_name, \
                                         :contact_info,:customer_type,:start_date,:end_date,:total_amount)");
-    await statement.run(req.body.account_no, req.body.account_mgr,req.body.customer_name, req.body.contact_info,
+    await statement.run(req.body.account_no, req.body.pid,req.body.customer_name, req.body.contact_info,
                         req.body.customer_type,req.body.start_date,req.body.end_date,totalAmount);
 
     return res.status(201).json({success : "New master account has been created"});

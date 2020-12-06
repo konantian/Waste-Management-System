@@ -22,12 +22,16 @@ export const get_service_no = async (db) => {
 
 export const update_amount = async (db, account, price) => {
 
-    const currentAmount = await db.get(SQL`SELECT total_amount FROM accounts WHERE account_no=${account}`);
-    const newAmount = currentAmount.total_amount + price;
+    price = parseFloat(price);
+    const current = await db.get(SQL`SELECT total_amount FROM accounts WHERE account_no=${account}`);
+    const currentAmount = parseFloat(current.total_amount);
+    const newAmount = currentAmount + price;
+
     const statement = await db.prepare("UPDATE accounts set total_amount=:amount WHERE account_no=:master_account");
     await statement.run(newAmount,account);
+    
     const result = await db.get(SQL`SELECT total_amount FROM accounts WHERE account_no=${account}`);
-    if(result.total_amount === currentAmount.total_amount + price) return true;
+    if(result.total_amount === currentAmount + price) return true;
     else return false;
 }
 
