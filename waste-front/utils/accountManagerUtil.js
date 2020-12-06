@@ -1,5 +1,12 @@
 import SQL from 'sql-template-strings';
 
+export const get_accounts = async (db, pid) => {
+
+    const result = await db.all(SQL`SELECT account_no FROM accounts WHERE account_mgr=${pid}`);
+    const accounts = result.map(account => account.account_no);
+    return accounts;
+}
+
 export const check_account = async (db, pid, account) => {
 
     const result = await db.get(SQL`SELECT account_no FROM accounts WHERE account_mgr=${pid} AND account_no=${account}`);
