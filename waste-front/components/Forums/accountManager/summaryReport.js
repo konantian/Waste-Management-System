@@ -1,8 +1,9 @@
 import React,{useState,useRef} from 'react';
 import {useSelector} from 'react-redux'; 
 import axios from 'axios';
-import { Form, Input,Button,Card, Divider,message } from 'antd';
+import { Form,Button,Card, Divider,message } from 'antd';
 import {SUMMARY_REPORT_API} from '../../../constants/api';
+import AccountInput from './accountInput';
 
 const SummaryReport = () => {
 
@@ -17,10 +18,10 @@ const SummaryReport = () => {
             {
             params : {
                 pid : userId,
-                account : values.account
+                account : values.account_no
             }}).then((res) => {
                 setReport(res.data);
-                setAccount(values.account);
+                setAccount(values.account_no);
                 formRef.current.resetFields();
             }).catch((err) => {
                 let msg = JSON.parse(err.response.request.response);
@@ -33,13 +34,7 @@ const SummaryReport = () => {
     return(
         <div>
             <Form className="form" onFinish={onFinish} ref={formRef}>
-                <Form.Item
-                    label="Master Account"
-                    name="account"
-                    rules={[{required: true,message: 'Enter the master account',}]}
-                >
-                <Input type="number" />
-                </Form.Item>
+                <AccountInput />
                 <div className="submitContainer">
                     <Button className="submitButton" type="primary" shape="round" size="large" htmlType="submit">Submit</Button>
                 </div>

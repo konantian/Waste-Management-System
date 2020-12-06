@@ -5,6 +5,7 @@ import { Form, Input,Button, Divider,Table,Select, message } from 'antd';
 import {INFORMATION_API,CREATE_AGREEMENT_API} from '../../../constants/api';
 import {serviceColumns} from '../../../constants/columns';
 import {waste_types} from '../../../constants/wasteTypes';
+import AccountInput from './accountInput';
 
 const SerivceAgreement = () => {
 
@@ -44,26 +45,20 @@ const SerivceAgreement = () => {
     return (
         <div>
             <Form className="form" onFinish={onFinish} ref={formRef}>
-                <Form.Item
-                    label="Master Account"
-                    name="account_no"
-                    rules={[{required: true,message: 'Enter the master account',}]}
-                >
-                <Input type="number" />
-                </Form.Item>
+                <AccountInput />
                 <Form.Item
                     label="Location"
                     name="location"
                     rules={[{required: true,message: 'Enter the location',}]}
                 >
-                <Input />
+                    <Input allowClear />
                 </Form.Item>
                 <Form.Item
                     label="Local Contact"
                     name="local_contact"
                     rules={[{required: true,message: 'Enter the local contact',}]}
                 >
-                <Input />
+                    <Input allowClear />
                 </Form.Item>
                 <Form.Item 
                     label="Waste Type" 
@@ -81,21 +76,21 @@ const SerivceAgreement = () => {
                     name="pick_up_schedule"
                     rules={[{required: true,message: 'Enter the pick up schedule',}]}
                 >
-                    <Input />
+                    <Input allowClear />
                 </Form.Item>
                 <Form.Item
                     label="Internal Cost"
                     name="internal_cost"
                     rules={[{required: true,message: 'Enter the internal cost',}]}
                 >
-                    <Input type="number" />
+                    <Input prefix="$" type="number" suffix="USD" />
                 </Form.Item>
                 <Form.Item
                     label="Price"
                     name="price"
                     rules={[{required: true,message: 'Enter the price',}]}
                 >
-                    <Input type="number" />
+                    <Input prefix="$" type="number" suffix="USD" />
                 </Form.Item>
                 <div className="submitContainer">
                     <Button className="submitButton" type="primary" shape="round" size="large" htmlType="submit">Add</Button>

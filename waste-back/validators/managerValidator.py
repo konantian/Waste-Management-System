@@ -12,15 +12,21 @@ class ManagerValidator:
         self.cursor.execute("PRAGMA foreign_keys=ON; ")
         self.connection.commit()
 
-    # to check if the account is managed by this account manager
-    def check_account(self, account, pid):
+    #get account managed by account mgr
+    def get_accounts(self, pid):
 
         self.cursor.execute(
             "SELECT account_no from accounts where account_mgr=:pid", {"pid": pid}
         )
-
         result = self.cursor.fetchall()
         accounts = [act[0].lower() for act in result]
+
+        return accounts
+
+    # to check if the account is managed by this account manager
+    def check_account(self, account, pid):
+
+        accounts = self.get_accounts(pid)
 
         return account.lower() in accounts
 

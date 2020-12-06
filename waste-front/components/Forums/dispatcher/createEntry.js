@@ -80,7 +80,7 @@ const CreateEntryForm = () => {
                         () => ({validator(rule, value) {return agreementValidator(value);},}),
                     ]}
                 >
-                    <Input type="number" />
+                    <Input allowClear type="number" />
                 </Form.Item>
                 <Form.Item
                     label="Driver Id"
@@ -91,14 +91,14 @@ const CreateEntryForm = () => {
                         () => ({validator(rule, value) {return driverValidator(value);},}),
                     ]}
                 >
-                    <Input type="number" />
+                    <Input allowClear type="number" />
                 </Form.Item>
                 <Form.Item
                     label="Truck Id"
                     name="truck_id"
                     rules={[{required: true,message: 'Enter the truck id',}]}
                 >
-                    <Input  disabled={ownTruck !== null} />
+                    <Input allowClear disabled={ownTruck !== null} />
                 </Form.Item>
                 <Form.Item 
                     label="Drop Off CID" 

@@ -44,14 +44,14 @@ const AssignAccountForm = () => {
                     name="manager"
                     rules={[{required: true,message: 'Enter the manager id',}]}
                 >
-                    <Input type="number" />
+                    <Input allowClear type="number" />
                 </Form.Item>
                 <Form.Item
                     label="Master Account"
                     name="account_no"
                     rules={[{required: true,message: 'Enter the account no.',}]}
                 >
-                    <Input type="number" />
+                    <Input allowClear type="number" />
                 </Form.Item>
                 <Form.Item
                     label="Customer Name"
@@ -65,7 +65,7 @@ const AssignAccountForm = () => {
                     name="contact"
                     rules={[{required: true,message: 'Enter the contact info',}]}
                 >
-                    <Input />
+                    <Input allowClear />
                 </Form.Item>
                 <Form.Item 
                     label="Customer Type" 

@@ -132,3 +132,12 @@ def summary_report():
         )
     summary = validator.get_summary(account)
     return make_response(jsonify(summary), 200)
+
+
+
+@routes.route("/api/accountManager/accounts/<string:account_mgr>", methods=["GET"])
+def get_accounts_by_mgr(account_mgr):
+
+    validator = ManagerValidator()
+    accounts = validator.get_accounts(account_mgr)
+    return make_response(jsonify({"accounts": accounts}), 200)

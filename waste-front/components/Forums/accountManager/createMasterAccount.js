@@ -55,21 +55,21 @@ const MasterAccountForm = () => {
                     name="account_no"
                     rules={[{required: true,message: 'Enter the master account',}]}
                 >
-                <Input type="number" />
+                    <Input allowClear type="number" />
                 </Form.Item>
                 <Form.Item
                     label="Customr Name"
                     name="name"
                     rules={[{required: true,message: 'Enter the customer name',}]}
                 >
-                <Input />
+                    <Input allowClear />
                 </Form.Item>
                 <Form.Item
                     label="Contact Info"
                     name="contact"
                     rules={[{required: true,message: 'Enter the contact info',}]}
                 >
-                <Input />
+                    <Input allowClear />
                 </Form.Item>
                 <Form.Item 
                     label="Customer Type" 

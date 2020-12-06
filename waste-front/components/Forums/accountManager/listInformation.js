@@ -1,9 +1,10 @@
 import React,{useState, useRef} from 'react';
 import {useSelector} from 'react-redux'; 
 import axios from 'axios';
-import { Form, Input,Button,Table, Divider,message } from 'antd';
+import { Form,Button,Table, Divider, message } from 'antd';
 import {INFORMATION_API} from '../../../constants/api';
 import {accountColumns, serviceColumns} from '../../../constants/columns';
+import AccountInput from './accountInput';
 
 const ListInformationForm = () => {
 
@@ -18,7 +19,7 @@ const ListInformationForm = () => {
             {
             params : {
                 pid : userId,
-                account : values.account
+                account : values.account_no
             }}).then((res) => {
                 let temp = [];
                 temp.push(res.data);
@@ -36,13 +37,7 @@ const ListInformationForm = () => {
     return(
         <div>
             <Form className="form" onFinish={onFinish} ref={formRef}>
-                <Form.Item
-                    label="Master Account"
-                    name="account"
-                    rules={[{required: true,message: 'Enter the master account',}]}
-                >
-                <Input type="number" />
-                </Form.Item>
+                <AccountInput />
                 <div className="submitContainer">
                     <Button className="submitButton" type="primary" shape="round" size="large" htmlType="submit">List</Button>
                 </div>
@@ -50,7 +45,6 @@ const ListInformationForm = () => {
             <Divider />
             {accountData !== null? <Table className="informationTable" columns={accountColumns} dataSource={accountData} pagination={false} /> : null}
             {serviceData !== null ? <Table className="informationTable" columns={serviceColumns} dataSource={serviceData} pagination={false} /> : null}
-
         </div>
     )
 
