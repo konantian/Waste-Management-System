@@ -29,6 +29,7 @@ const SignUp = () =>{
                 "password" : values.password
             }).then((res) => {
                 message.success(res.data['success']);
+                localStorage.setItem('username', values.username);
                 router.push('/login');
             }).catch((err) => {
                 let msg = JSON.parse(err.response.request.response);

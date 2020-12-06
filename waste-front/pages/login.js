@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 import { Form, Input, Button,message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import axios from 'axios';
@@ -11,6 +11,7 @@ import {LOGIN_API} from '../constants/api';
 
 const Login = () => {
 
+    const formRef = useRef(null);
     const router = useRouter();
     const isLogged = useSelector(state => state.isLogged);
     const role = useSelector(state => state.role);
@@ -20,7 +21,13 @@ const Login = () => {
         if(isLogged) {
             message.success(`Welcome come back ${name}!`);
             router.push(`/${role}`);
-        }
+        }else{
+            const username = localStorage.getItem('username');
+            if(username){
+                formRef.current.setFieldsValue({username : username});
+                localStorage.removeItem('username');
+            }
+        }   
     },[])
 
     const dispatch = useDispatch();
@@ -58,7 +65,7 @@ const Login = () => {
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             {!isLogged ?
-            <Form className="form" onFinish={onFinish}>
+            <Form className="form" onFinish={onFinish} ref={formRef} >
                 <Form.Item
                     label="Username"
                     name="username"
