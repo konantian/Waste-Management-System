@@ -14,6 +14,23 @@ export const check_new_account = async (db, account) => {
     else return true;
 }
 
+export const get_service_no = async (db) => {
+
+    const number = await db.get(SQL`SELECT max(service_no) + 1 AS service_no FROM service_agreements`);
+    return number.service_no;
+}
+
+export const update_amount = async (db, account, price) => {
+
+    const currentAmount = await db.get(SQL`SELECT total_amount FROM accounts WHERE account_no=${account}`);
+    const newAmount = currentAmount.total_amount + price;
+    const statement = await db.prepare("UPDATE accounts set total_amount=:amount WHERE account_no=:master_account");
+    await statement.run(newAmount,account);
+    const result = await db.get(SQL`SELECT total_amount FROM accounts WHERE account_no=${account}`);
+    if(result.total_amount === currentAmount.total_amount + price) return true;
+    else return false;
+}
+
 export const customer_information = async (db, account) => {
 
     const accountData = await db.get(SQL`SELECT * FROM accounts WHERE account_no=${account}`); 
