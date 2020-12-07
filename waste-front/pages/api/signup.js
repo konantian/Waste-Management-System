@@ -1,10 +1,9 @@
 const sqlite = require('sqlite');
 const sqlite3 = require('sqlite3').verbose();
 const bcrypt = require('bcrypt');
-import {NextApiRequest, NextApiResponse} from 'next';
 import {check_pid,check_exist_pid,check_username,check_role} from '../../utils/authUtil';
 
-export default async function signup(req : NextApiRequest, res : NextApiResponse){
+export default async function signup(req , res ,){
 
     if(req.method !== 'POST'){
         return res.status(405).json({error : "Method not allowed, please use POST"});
