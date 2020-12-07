@@ -1,4 +1,4 @@
-let host = "http://localhost:5000";
+let host = "";
 
 export const LOGIN_API = `${host}/api/login/`;
 export const SIGNUP_API = `${host}/api/signup/`;
