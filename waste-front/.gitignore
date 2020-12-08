@@ -26,6 +26,7 @@ chrome-user-data
 
 # next.js build output
 .next
+.vercel
 # dotenv environment variables file (build for Zeit Now)
 .env
 .env.build
