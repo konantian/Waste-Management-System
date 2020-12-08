@@ -1,9 +1,8 @@
+const sqlite = require('sqlite');
+const sqlite3 = require('sqlite3').verbose();
 const bcrypt = require('bcrypt');
 import {NextApiRequest, NextApiResponse} from 'next';
-import {PrismaClient} from '@prisma/client';
 import {check_username, get_hash_password, get_user_info} from '../../utils/authUtil';
-
-const prisma = new PrismaClient();
 
 export default async function login(req : NextApiRequest, res : NextApiResponse){
 
@@ -11,24 +10,20 @@ export default async function login(req : NextApiRequest, res : NextApiResponse)
         return res.status(405).json({error : "Method not allowed, please use POST"});
     }
 
-    const {username, password} = req.body;
+    const db = await sqlite.open({filename: './waste.sqlite',driver: sqlite3.Database});
 
-    const result = await prisma.user.findFirst({
-        where : {
-            login : username,
-            password : password
-        }
-    })
+    const existUsername = await check_username(db, req.body.username)
+    if(!existUsername){
+        return res.status(400).json({error : "The username entered does not exist, please input again"});   
+    }
 
-    if(!result){
-        return res.status(400).json({error : "The username and password entered is not matched"});
+    const hash = await get_hash_password(db, req.body.username);
+
+    if(bcrypt.compareSync(req.body.password, hash)){
+        const info = await get_user_info(db, req.body.username);
+        info.success = "Welcome to the waste management system!";
+        return res.status(200).json(info);
     }else{
-        const info = {
-            success : "Welcome to the waste management system!",
-            role : "accountManager",
-            userId : "34725",
-            name : "Tony Wang"
-        }
-        return res.status(200).json(info)
+        return res.status(400).json({error : "The username and password entered is not matched"});
     }
 }
