@@ -41,6 +41,10 @@ export default async function signup(req : NextApiRequest, res : NextApiResponse
             
         }
     })
-    return res.status(201).json({success : "You are ready to log in"});
-
+    if(addUser){
+        return res.status(201).json({success : "You are ready to log in"});
+    }else{
+        return res.status(400).json({error : "User register failed, please check your data"});
+    }
+    
 }

@@ -11,6 +11,7 @@ export default async function login(req : NextApiRequest, res : NextApiResponse)
     }
     
     const {username, password} = req.body;
+    
     const existUsername = await check_username(prisma, username)
     if(!existUsername){
         return res.status(400).json({error : "The username entered does not exist, please input again"});   

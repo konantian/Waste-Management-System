@@ -12,6 +12,7 @@ const ListInformationForm = () => {
     const userId = useSelector(state => state.userId);
     const [accountData, setAccountData] = useState(null);
     const [serviceData, setServiceData] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const onFinish = values => {
 
@@ -21,12 +22,14 @@ const ListInformationForm = () => {
                 pid : userId,
                 account : values.account_no
             }}).then((res) => {
+                setLoading(false);
                 let temp = [];
                 temp.push(res.data);
                 setAccountData(temp);
                 setServiceData(res.data.service_agreements);
                 formRef.current.resetFields();
             }).catch((err) => {
+                setLoading(false);
                 let msg = JSON.parse(err.response.request.response);
                 setAccountData([]);
                 setServiceData([]);
@@ -39,7 +42,7 @@ const ListInformationForm = () => {
             <Form className="form" onFinish={onFinish} ref={formRef}>
                 <AccountInput />
                 <div className="submitContainer">
-                    <Button className="submitButton" type="primary" shape="round" size="large" htmlType="submit">List</Button>
+                    <Button className="submitButton" loading={loading} onClick={() => setLoading(true)} type="primary" shape="round" size="large" htmlType="submit">List</Button>
                 </div>
             </Form>
             <Divider />
