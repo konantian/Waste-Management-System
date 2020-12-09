@@ -121,10 +121,16 @@ CREATE TABLE "ServiceFulfillment" (
 );
 
 -- AddForeignKey
+ALTER TABLE "User" ADD FOREIGN KEY("user_id")REFERENCES "Personnel"("pid") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "MaintenanceRecord" ADD FOREIGN KEY("truck_id")REFERENCES "Truck"("truck_id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "ContainerWasteType" ADD FOREIGN KEY("container_id")REFERENCES "Container"("container_id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "ContainerWasteType" ADD FOREIGN KEY("waste_type")REFERENCES "WasteType"("waste_type") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "AccountManager" ADD FOREIGN KEY("pid")REFERENCES "Personnel"("pid") ON DELETE CASCADE ON UPDATE CASCADE;

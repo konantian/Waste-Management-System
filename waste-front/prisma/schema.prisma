@@ -23,6 +23,7 @@ model User{
   role String
   login String
   password String
+  personnel Personnel @relation(fields: [user_id], references: [pid])
 }
 
 model Truck{
@@ -54,6 +55,7 @@ model ContainerWasteType{
   container_id String
   waste_type String
   container Container @relation(fields: [container_id], references: [container_id])
+  wasteType WasteType @relation(fields: [waste_type] ,references: [waste_type])
 }
 
 model AccountManager{

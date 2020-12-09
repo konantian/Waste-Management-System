@@ -34,24 +34,32 @@ export const check_new_account = async (prisma, account) => {
     else return true;
 }
 
-export const get_service_no = async (db) => {
+export const get_service_no = async (prisma) => {
 
-    const number = await db.get(SQL`SELECT max(service_no) + 1 AS service_no FROM service_agreements`);
-    return number.service_no;
+    const number = await prisma.serviceAgreement.aggregate({
+        max : {service_no : true}
+    })
+
+    return number.max['service_no'] + 1;
 }
 
-export const update_amount = async (db, account, price) => {
+export const update_amount = async (prisma, account, price) => {
 
     price = parseFloat(price);
-    const current = await db.get(SQL`SELECT total_amount FROM accounts WHERE account_no=${account}`);
+    const current = await prisma.account.findFirst({
+        where : {account_no : account},
+        select : {total_amount : true}
+    })
+
     const currentAmount = parseFloat(current.total_amount);
     const newAmount = currentAmount + price;
 
-    const statement = await db.prepare("UPDATE accounts set total_amount=:amount WHERE account_no=:master_account");
-    await statement.run(newAmount,account);
-    
-    const result = await db.get(SQL`SELECT total_amount FROM accounts WHERE account_no=${account}`);
-    if(result.total_amount === currentAmount + price) return true;
+    const updateAmount = await prisma.account.update({
+        where : {account_no : account},
+        data : {total_amount : newAmount}
+    });
+
+    if(updateAmount) return true;
     else return false;
 }
 
@@ -64,6 +72,10 @@ export const customer_information = async (prisma, account) => {
         where : { master_account : account},
         orderBy : {service_no : 'asc'}
     })
+
+    for (let index = 0; index < serviceData.length; index++) { 
+        serviceData[index].key = index;
+    } 
 
     accountData.service_agreements = serviceData;
     accountData.total_amount = accountData.total_amount.toFixed(2);

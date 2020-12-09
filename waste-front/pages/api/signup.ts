@@ -34,17 +34,16 @@ export default async function signup(req : NextApiRequest, res : NextApiResponse
 
     const addUser = await prisma.user.create({
         data: {
-            user_id : userId,
             login : login,
             role : role,
             password : hash,
+            personnel : {
+                connect : {pid : userId}
+            }
             
         }
     })
-    if(addUser){
-        return res.status(201).json({success : "You are ready to log in"});
-    }else{
-        return res.status(400).json({error : "User register failed, please check your data"});
-    }
-    
+    if(addUser) return res.status(201).json({success : "You are ready to log in"});
+    else return res.status(400).json({error : "User register failed, please check your data"});
+
 }
