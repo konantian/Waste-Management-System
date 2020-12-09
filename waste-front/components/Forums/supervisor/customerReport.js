@@ -12,6 +12,7 @@ const CustomerReportForm = () => {
     const [customer, setCustomer] = useState([]);
     const [report, setReport] = useState(null);
     const [account, setAccount] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const fetcher = (url) => {
         axios.get(CUSTOMER_LIST_API, {
@@ -32,10 +33,12 @@ const CustomerReportForm = () => {
             params : {
                 account : values.account
             }}).then((res) => {
+                setLoading(false);
                 setReport(res.data);
                 setAccount(values.account);
                 formRef.current.resetFields();
             }).catch((err) => {
+                setLoading(false);
                 let msg = JSON.parse(err.response.request.response);
                 setReport(null);
                 setAccount(null);
@@ -60,7 +63,7 @@ const CustomerReportForm = () => {
                 </Form.Item> : null}
 
                 <div className="submitContainer">
-                    <Button className="submitButton" type="primary" shape="round" size="large" htmlType="submit">Submit</Button>
+                    <Button className="submitButton" loading={loading} onClick={() => setLoading(true)}  type="primary" shape="round" size="large" htmlType="submit">Submit</Button>
                 </div>
             </Form>
             <Divider />

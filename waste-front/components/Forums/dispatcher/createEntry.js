@@ -9,6 +9,7 @@ const CreateEntryForm = () => {
     const [ownTruck, setTruck] = useState(null);
     const [containers, setContainers] = useState([]);
     const [service, setService] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const onFinish = values => {
 
@@ -20,11 +21,13 @@ const CreateEntryForm = () => {
                 "cid_drop_off" : values.cid_drop_off,
                 "date_time" : values['date_time'].format('YYYY-MM-DD')
             }).then(res => {
+                setLoading(false);
                 message.success(res.data['success']);
                 formRef.current.resetFields();
                 setTruck(null);
                 setContainers([]);
             }).catch((err) => {
+                setLoading(false);
                 let msg = JSON.parse(err.response.request.response);
                 message.error(msg['error']);
             })
@@ -120,7 +123,7 @@ const CreateEntryForm = () => {
                     <DatePicker className="datePicker" />
                 </Form.Item> 
                 <div className="submitContainer">
-                    <Button className="submitButton" type="primary" shape="round" size="large" htmlType="submit">Create</Button>
+                    <Button className="submitButton" loading={loading} onClick={() => setLoading(true)}  type="primary" shape="round" size="large" htmlType="submit">Create</Button>
                 </div>
             </Form>
             <Divider />

@@ -1,4 +1,4 @@
-import React,{useRef} from 'react';
+import React,{useState, useRef} from 'react';
 import {useSelector} from 'react-redux'; 
 import axios from 'axios';
 import { Form, Input,Button,Select, DatePicker, message } from 'antd';
@@ -10,6 +10,8 @@ const AssignAccountForm = () => {
 
     const formRef = useRef(null);
     const userId = useSelector(state => state.userId);
+    const [loading, setLoading] = useState(false);
+
 
     const onFinish = values => {
 
@@ -28,9 +30,11 @@ const AssignAccountForm = () => {
                 "start_date" : startDate,
                 "end_date" : endDate
             }).then((res) => {
+                setLoading(false);
                 message.success(res.data['success']);
                 formRef.current.resetFields();
             }).catch((err) => {
+                setLoading(false);
                 let msg = JSON.parse(err.response.request.response);
                 message.error(msg['error']);
             })
@@ -86,7 +90,7 @@ const AssignAccountForm = () => {
                     <RangePicker className="rangePicker" />
                 </Form.Item>
                 <div className="submitContainer">
-                    <Button className="submitButton" type="primary" shape="round" size="large" htmlType="submit">Assign</Button>
+                    <Button className="submitButton" loading={loading} onClick={() => setLoading(true)}  type="primary" shape="round" size="large" htmlType="submit">Assign</Button>
                 </div>
             </Form>
         </div>

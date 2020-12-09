@@ -12,6 +12,7 @@ const ListTourForm = () => {
     const formRef = useRef(null);
     const userId = useSelector(state => state.userId);
     const [tour,setTour] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const rangeConfig = {
         rules: [
@@ -36,9 +37,11 @@ const ListTourForm = () => {
                 start_date : startDate,
                 end_date : endDate
             }}).then((res) => {
+                setLoading(false);
                 setTour(res.data);
                 formRef.current.resetFields();
             }).catch((err) => {
+                setLoading(false);
                 let msg = JSON.parse(err.response.request.response);
                 message.error(msg['error']);
             })
@@ -51,7 +54,7 @@ const ListTourForm = () => {
                     <RangePicker />
                 </Form.Item>
                 <div className="submitContainer">
-                    <Button className="submitButton" type="primary" shape="round" size="large" htmlType="submit">List</Button>
+                    <Button className="submitButton" loading={loading} onClick={() => setLoading(true)}  type="primary" shape="round" size="large" htmlType="submit">List</Button>
                 </div>
             </Form>
             <Divider />

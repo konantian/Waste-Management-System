@@ -12,6 +12,7 @@ const MasterAccountForm = () => {
     const formRef = useRef(null);
     const userId = useSelector(state => state.userId);
     const [dataSource, setDataSource] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const onFinish = values => {
         
@@ -36,12 +37,14 @@ const MasterAccountForm = () => {
                 pid : userId,
                 account : values.account_no
             }}).then((res) => {
+                setLoading(false);
                 let temp = [];
                 temp.push(res.data);
                 setDataSource(temp);
                 formRef.current.resetFields();
             })
         }).catch((err) => {
+            setLoading(false);
             let msg = JSON.parse(err.response.request.response);
             message.error(msg['error']);
         })
@@ -90,7 +93,7 @@ const MasterAccountForm = () => {
                     <RangePicker />
                 </Form.Item>
                 <div className="submitContainer">
-                    <Button className="submitButton" type="primary" shape="round" size="large" htmlType="submit">Create</Button>
+                    <Button className="submitButton" loading={loading} onClick={() => setLoading(true)} type="primary" shape="round" size="large" htmlType="submit">Create</Button>
                 </div>
             </Form>
             <Divider />

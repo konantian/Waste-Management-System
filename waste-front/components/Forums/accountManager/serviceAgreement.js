@@ -12,6 +12,7 @@ const SerivceAgreement = () => {
     const formRef = useRef(null);
     const userId = useSelector(state => state.userId);
     const [agreement, setAgreement] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const onFinish = values => {
 
@@ -34,9 +35,11 @@ const SerivceAgreement = () => {
                 pid : userId,
                 account : values.account_no
             }}).then((res) => {
+                setLoading(false);
                 setAgreement(res.data.service_agreements);
             })
         }).catch((err) => {
+            setLoading(false);
             let msg = JSON.parse(err.response.request.response);
             message.error(msg['error']);
         })
@@ -93,7 +96,7 @@ const SerivceAgreement = () => {
                     <Input prefix="$" type="number" suffix="USD" />
                 </Form.Item>
                 <div className="submitContainer">
-                    <Button className="submitButton" type="primary" shape="round" size="large" htmlType="submit">Add</Button>
+                    <Button className="submitButton" loading={loading} onClick={() => setLoading(true)} type="primary" shape="round" size="large" htmlType="submit">Add</Button>
                 </div>
             </Form>
             <Divider />
