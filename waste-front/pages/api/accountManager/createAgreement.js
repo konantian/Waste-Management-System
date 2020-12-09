@@ -1,9 +1,8 @@
-import {NextApiRequest, NextApiResponse} from 'next';
 import {check_account, check_new_account, get_service_no, update_amount} from '../../../utils/accountManagerUtil';
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
-export default async function createAgreement(req : NextApiRequest, res : NextApiResponse){
+export default async function createAgreement(req , res ){
 
     if(req.method !== 'POST'){
         return res.status(405).json({error : "Method not allowed, please use POST"});
