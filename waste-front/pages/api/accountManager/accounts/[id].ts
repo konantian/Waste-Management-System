@@ -1,7 +1,6 @@
 import {NextApiRequest, NextApiResponse} from 'next';
 import {get_accounts } from '../../../../utils/accountManagerUtil';
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient()
+import prisma from '../../../../lib/prisma';
 
 export default async function accounts(req : NextApiRequest, res : NextApiResponse){
 

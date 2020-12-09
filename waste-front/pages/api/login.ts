@@ -1,8 +1,7 @@
 const bcrypt = require('bcrypt');
 import {NextApiRequest, NextApiResponse} from 'next';
 import {check_username, get_hash_password, get_user_info} from '../../utils/authUtil';
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient()
+import prisma from '../../lib/prisma';
 
 export default async function login(req : NextApiRequest, res : NextApiResponse){
 

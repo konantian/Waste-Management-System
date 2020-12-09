@@ -1,6 +1,5 @@
 import {check_new_account} from '../../../utils/accountManagerUtil';
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient()
+import prisma from '../../../lib/prisma';
 
 export default async function createAccount(req , res ){
 

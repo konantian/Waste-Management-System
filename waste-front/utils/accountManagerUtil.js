@@ -1,5 +1,3 @@
-import SQL from 'sql-template-strings';
-
 export const get_accounts = async (prisma, pid) => {
 
     const result = await prisma.account.findMany({

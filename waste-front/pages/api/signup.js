@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt');
 import {check_pid,check_exist_pid,check_username,check_role} from '../../utils/authUtil';
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient()
+import prisma from '../../lib/prisma';
 
 export default async function signup(req ,res ){
 
