@@ -1,53 +1,87 @@
-import SQL from 'sql-template-strings';
+export const check_pid = async (prisma, userId) => {
 
-export const check_pid = async (db, userId) => {
-
-    const result = await db.get(SQL`SELECT pid FROM personnel WHERE pid=${userId}`);
+    const result = await prisma.personnel.findFirst({
+        where : {
+            pid : userId,
+        }
+    })
     if(!result) return false;
     else return true;
 }
 
-export const check_exist_pid = async (db, userId) => {
-    const result = await db.get(SQL`SELECT user_id FROM users WHERE user_id=${userId}`);
+export const check_exist_pid = async (prisma, userId) => {
+    const result = await prisma.user.findFirst({
+        where : {
+            user_id : userId
+        }
+    })
     if(result) return true;
     else return false;
 }
 
-export const check_username = async (db,username) => {
-    const result = await db.get(SQL`SELECT login FROM users WHERE login=${username}`);
+export const check_username = async (prisma, username) => {
+    const result = await prisma.user.findFirst({
+        where : {
+            login : username
+        }
+    })
     if(result) return true;
     else return false;
 }
 
-export const check_role = async (db, userId, role) => {
+export const check_role = async (prisma, userId, role) => {
     let result;
     if(role === 'account manager'){
-        result = await db.get(SQL`SELECT pid FROM account_managers WHERE pid = ${userId}`);
+        result = await prisma.accountManager.findFirst({
+            where : {
+                pid : userId
+            }
+        })
     }else if(role === 'driver'){
-        result = await db.get(SQL`SELECT pid FROM drivers WHERE pid = ${userId}`);
+        result = await prisma.driver.findFirst({
+            where : {
+                pid : userId
+            }
+        })
     }else if(role === 'supervisor'){
-        result = await db.get(SQL`SELECT supervisor_pid FROM personnel WHERE supervisor_pid = ${userId}`);
-    }
+        result = await prisma.personal.findFirst({
+            where : {
+                supervisor_id : userId
+            }
+        })    }
     if(!result) return false;
     else return true;
 
 }
 
-export const get_hash_password = async (db, username) => {
+export const get_hash_password = async (prisma, username) => {
 
-    const hash = await db.get(SQL`SELECT password FROM users WHERE login=${username}`);
+    const hash = await prisma.user.findFirst({
+        where : {
+            login : username,
+        }
+    })
 
     if(hash) return hash.password;
 
 }
 
-export const get_user_info = async (db, username ) => {
+export const get_user_info = async (prisma, username ) => {
 
-    const info = await db.get(SQL`SELECT user_id,role FROM users where login=${username}`);
-    const name = await db.get(SQL`SELECT name from personnel where pid=${info.user_id}`);
+    const info = await prisma.user.findFirst({
+        where : {
+            login : username
+        }
+    })
+    const name = await prisma.personnel.findFirst({
+        where : {
+            pid : info.user_id
+        }
+    })
 
     if(info.role === 'account manager'){
         info.role = 'accountManager';
     }
     return {"userId" : info.user_id, "role" : info.role, "name" : name.name};
+
 }
