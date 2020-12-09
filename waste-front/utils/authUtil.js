@@ -44,7 +44,7 @@ export const check_role = async (prisma, userId, role) => {
             }
         })
     }else if(role === 'supervisor'){
-        result = await prisma.personal.findFirst({
+        result = await prisma.personnel.findFirst({
             where : {
                 supervisor_id : userId
             }

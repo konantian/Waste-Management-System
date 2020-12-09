@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Form, Input, Button,message, Select } from 'antd';
 import axios from 'axios';
 import Head from 'next/head';
@@ -12,6 +12,7 @@ const SignUp = () =>{
     const router = useRouter();
     const isLogged = useSelector(state => state.isLogged);
     const role = useSelector(state => state.role);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         if(isLogged) {
@@ -28,10 +29,12 @@ const SignUp = () =>{
                 "login" : values.username,
                 "password" : values.password
             }).then((res) => {
+                setLoading(false);
                 message.success(res.data['success']);
                 localStorage.setItem('username', values.username);
                 router.push('/login');
             }).catch((err) => {
+                setLoading(false);
                 let msg = JSON.parse(err.response.request.response);
                 message.error(msg['error']);
             })
@@ -85,7 +88,7 @@ const SignUp = () =>{
                         </Link>
                     </Form.Item>
                     <Form.Item >
-                        <Button className="signButton" type="primary" shape="round" size="large" htmlType="submit">Sign Up</Button>
+                        <Button className="signButton" loading={loading} type="primary" onClick={() => setLoading(true)} shape="round" size="large" htmlType="submit">Sign Up</Button>
                     </Form.Item>
                 </div>
             </Form> : null}

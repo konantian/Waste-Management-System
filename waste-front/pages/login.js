@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import { Form, Input, Button,message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import axios from 'axios';
@@ -17,6 +17,7 @@ const Login = () => {
     const isLogged = useSelector(state => state.isLogged);
     const role = useSelector(state => state.role);
     const name = useSelector(state => state.name);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         if(isLogged) {
@@ -37,6 +38,7 @@ const Login = () => {
                 "username" : values.username,
                 "password" : values.password
             }).then((res) => {
+                setLoading(false);
                 message.success(res.data['success']);
                 let role = res.data['role'];
                 let userId = res.data['userId'];
@@ -44,6 +46,7 @@ const Login = () => {
                 dispatchAuth(userId, role, username, name);
                 router.push(`/${role}`);
             }).catch((err) => {
+                setLoading(false);
                 let msg = JSON.parse(err.response.request.response);
                 message.error(msg['error']);
             })
@@ -81,7 +84,7 @@ const Login = () => {
                 </Form.Item>
                 <div className="loginButtons">
                     <Form.Item >
-                        <Button className="loginButton" type="primary" shape="round" size="large" htmlType="submit">Log in</Button>
+                        <Button className="loginButton" loading={loading} onClick={() => setLoading(true)} type="primary" shape="round" size="large" htmlType="submit">Log in</Button>
                     </Form.Item>
                     <Form.Item >
                         <Link href="/signup">
