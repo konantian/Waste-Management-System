@@ -13,17 +13,7 @@ const ListTourForm = () => {
     const userId = useSelector(state => state.userId);
     const [tour,setTour] = useState(null);
     const [loading, setLoading] = useState(false);
-
-    const rangeConfig = {
-        rules: [
-          {
-            type: 'array',
-            required: true,
-            message: 'Please select time!',
-          },
-        ],
-      };
-
+    
     const onFinish = values => {
 
         let rangePicker = values['range-picker']; 
@@ -50,7 +40,11 @@ const ListTourForm = () => {
     return(
         <div>
             <Form className="form" onFinish={onFinish} ref={formRef}>
-                <Form.Item name="range-picker" label="Start Date - End Date" {...rangeConfig}>
+                <Form.Item 
+                    name="range-picker" 
+                    label="Start Date - End Date" 
+                    rules={[{type: 'array',required: true,message: 'Please select time!',},]}
+                >
                     <RangePicker />
                 </Form.Item>
                 <div className="submitContainer">

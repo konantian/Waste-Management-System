@@ -37,9 +37,7 @@ const MasterAccountForm = () => {
                 account : values.account_no
             }}).then((res) => {
                 setLoading(false);
-                let temp = [];
-                temp.push(res.data);
-                setDataSource(temp);
+                setDataSource([res.data]);
                 formRef.current.resetFields();
             })
         }).catch((err) => {

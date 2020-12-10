@@ -132,3 +132,32 @@ export const create_account = async(prisma, data, manager) => {
 
     return addAccount;
 }
+
+export const add_agreement = async(prisma, data) => {
+
+    const {account_no, price, location, waste_type, pick_up_schedule, local_contact, internal_cost} = data;
+
+    const newPrice = parseFloat(price);
+    const internalCost = parseFloat(internal_cost);
+    const serviceNo = await get_service_no(prisma);
+
+    const addAgreement = await prisma.serviceAgreement.create({
+        data : {
+            service_no : serviceNo,
+            location : location,
+            pick_up_schedule : pick_up_schedule,
+            local_contact : local_contact,
+            internal_cost : internalCost,
+            price : newPrice,
+            wasteType : {
+                connect : {waste_type : waste_type}
+            },
+            account : {
+                connect : {account_no : account_no}
+            }
+        }
+    })
+
+    return addAgreement;
+
+}

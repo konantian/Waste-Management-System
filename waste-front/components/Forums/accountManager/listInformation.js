@@ -23,9 +23,7 @@ const ListInformationForm = () => {
                 account : values.account_no
             }}).then((res) => {
                 setLoading(false);
-                let temp = [];
-                temp.push(res.data);
-                setAccountData(temp);
+                setAccountData([res.data]);
                 setServiceData(res.data.service_agreements);
                 formRef.current.resetFields();
             }).catch((err) => {

@@ -15,7 +15,7 @@ const CustomerReportForm = () => {
     const [loading, setLoading] = useState(false);
 
     const fetcher = (url) => {
-        axios.get(CUSTOMER_LIST_API, {
+        axios.get(url, {
             params : {
                 pid : userId
             }
