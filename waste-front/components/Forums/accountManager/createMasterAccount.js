@@ -1,11 +1,10 @@
 import React,{useState, useRef} from 'react';
 import axios from 'axios';
 import {useSelector} from 'react-redux'; 
-import { Form, Input, Select,DatePicker, Button, Table, Divider, message} from 'antd';
+import { Form, Button, Table, Divider, message} from 'antd';
 import {INFORMATION_API, CREATE_ACCOUNT_API} from '../../../constants/api';
-import {customer_types} from '../../../constants/types';
 import {accountColumns} from '../../../constants/columns';
-const { RangePicker } = DatePicker;
+import CreateAccountForm from './createAccountForm';
 
 const MasterAccountForm = () => {
 
@@ -24,9 +23,9 @@ const MasterAccountForm = () => {
         {
             "pid" : userId,
             "account_no" : values.account_no,
-            "customer_name" : values.name,
-            "contact_info" : values.contact,
-            "customer_type" : values.type,
+            "customer_name" : values.customer_name,
+            "contact_info" : values.contact_info,
+            "customer_type" : values.customer_type,
             "start_date" : startDate,
             "end_date" : endDate
         }).then((res) => {
@@ -53,45 +52,7 @@ const MasterAccountForm = () => {
     return(
         <div>
             <Form className="form" onFinish={onFinish} ref={formRef}>
-                <Form.Item
-                    label="Master Account"
-                    name="account_no"
-                    rules={[{required: true,message: 'Enter the master account',}]}
-                >
-                    <Input allowClear type="number" />
-                </Form.Item>
-                <Form.Item
-                    label="Customr Name"
-                    name="name"
-                    rules={[{required: true,message: 'Enter the customer name',}]}
-                >
-                    <Input allowClear />
-                </Form.Item>
-                <Form.Item
-                    label="Contact Info"
-                    name="contact"
-                    rules={[{required: true,message: 'Enter the contact info',}]}
-                >
-                    <Input allowClear />
-                </Form.Item>
-                <Form.Item 
-                    label="Customer Type" 
-                    name="type"
-                    rules={[{required: true,message: 'Select the customer type',},]}
-                    >
-                    <Select placeholder="Select customer type">
-                        {customer_types.map((type,index) => 
-                            <Select.Option key={index} value={type.toLowerCase()}>{type}</Select.Option>
-                        )}
-                    </Select>
-                </Form.Item>
-                <Form.Item 
-                    name="range-picker" 
-                    label="Start Date - End Date" 
-                    rules={[{type: 'array',required: true,message: 'Please select time!',},]}
-                >
-                    <RangePicker />
-                </Form.Item>
+                <CreateAccountForm />
                 <div className="submitContainer">
                     <Button className="submitButton" loading={loading} onClick={() => setLoading(true)} type="primary" shape="round" size="large" htmlType="submit">Create</Button>
                 </div>

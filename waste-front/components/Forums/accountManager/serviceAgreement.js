@@ -54,14 +54,14 @@ const SerivceAgreement = () => {
                     name="location"
                     rules={[{required: true,message: 'Enter the location',}]}
                 >
-                    <Input allowClear />
+                    <Input allowClear placeholder="Enter the location" />
                 </Form.Item>
                 <Form.Item
                     label="Local Contact"
                     name="local_contact"
                     rules={[{required: true,message: 'Enter the local contact',}]}
                 >
-                    <Input allowClear />
+                    <Input allowClear placeholder="Enter the local contact" />
                 </Form.Item>
                 <Form.Item 
                     label="Waste Type" 
@@ -79,21 +79,21 @@ const SerivceAgreement = () => {
                     name="pick_up_schedule"
                     rules={[{required: true,message: 'Enter the pick up schedule',}]}
                 >
-                    <Input allowClear />
+                    <Input allowClear placeholder="Enter the pick up schedule"/>
                 </Form.Item>
                 <Form.Item
                     label="Internal Cost"
                     name="internal_cost"
                     rules={[{required: true,message: 'Enter the internal cost',}]}
                 >
-                    <Input prefix="$" type="number" suffix="USD" />
+                    <Input prefix="$" type="number" suffix="USD" placeholder="Enter the internal cost of service" />
                 </Form.Item>
                 <Form.Item
                     label="Price"
                     name="price"
                     rules={[{required: true,message: 'Enter the price',}]}
                 >
-                    <Input prefix="$" type="number" suffix="USD" />
+                    <Input prefix="$" type="number" suffix="USD" placeholder="Enter the price of service"/>
                 </Form.Item>
                 <div className="submitContainer">
                     <Button className="submitButton" loading={loading} onClick={() => setLoading(true)} type="primary" shape="round" size="large" htmlType="submit">Add</Button>

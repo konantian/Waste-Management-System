@@ -110,3 +110,25 @@ export const get_summary_report = async (prisma, account) => {
     return report;
 
 }
+
+export const create_account = async(prisma, data, manager) => {
+
+    const {account_no, customer_name, contact_info, customer_type, start_date, end_date} = data;
+
+    const addAccount = await prisma.account.create({
+        data : {
+            account_no : account_no,
+            customer_name : customer_name,
+            contact_info : contact_info,
+            customer_type : customer_type,
+            start_date : start_date,
+            end_date : end_date,
+            total_amount : 0,
+            accountManager : {
+                connect : {pid : manager}
+            }
+        }
+    })
+
+    return addAccount;
+}
