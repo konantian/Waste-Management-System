@@ -84,7 +84,7 @@ const Login = () => {
                 </Form.Item>
                 <div className="loginButtons">
                     <Form.Item >
-                        <Button className="loginButton" loading={loading} onClick={() => setLoading(true)} type="primary" shape="round" size="large" htmlType="submit">Log in</Button>
+                        <Button className="loginButton" loading={loading} onClick={() => setLoading(true)} type="primary" shape="round" size="large" htmlType="submit">Log In</Button>
                     </Form.Item>
                     <Form.Item >
                         <Link href="/signup">

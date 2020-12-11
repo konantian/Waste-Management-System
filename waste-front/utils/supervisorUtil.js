@@ -23,7 +23,8 @@ export const customer_list = async (prisma, pid) => {
         where : {account_mgr : {
             in : managers
         }},
-        select : {account_no : true}
+        select : {account_no : true},
+        orderBy : {account_no : 'asc'}
     })
 
     return customers.map(item => item.account_no);

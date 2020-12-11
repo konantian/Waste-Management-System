@@ -44,10 +44,10 @@ const AccountManager = () => {
                             <TabPane tab="List Information" key="1">
                                 <ListInformationForm /> 
                             </TabPane>
-                            <TabPane tab="Create new Master Account" key="2">
+                            <TabPane tab="Create New Master Account" key="2">
                                 <MasterAccountForm />
                             </TabPane>
-                            <TabPane tab="Add new service agreement" key="3">
+                            <TabPane tab="Add New Service Agreement" key="3">
                                 <SerivceAgreement />
                             </TabPane>
                             <TabPane tab="Create Summary Report" key="4">

@@ -63,7 +63,7 @@ const CustomerReportForm = () => {
                     </Select>
                 </Form.Item> :
                 <div className="spinContainer" >
-                    <Spin className="customerSpin" size="middle" tip="Loading customers list..."/> 
+                    <Spin className="customerSpin" size="large" tip="Loading customers list..."/> 
                 </div>
                 }
 

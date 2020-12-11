@@ -12,13 +12,16 @@ export default async function createAccount(req : NextApiRequest, res : NextApiR
 
     const newAccount = await check_new_account(prisma, account_no);
     if(!newAccount){
+        await prisma.$disconnect();
         return res.status(400).json({error : "The account number you entered is existed, please enter another account number"});
     }
 
     const addAccount = await create_account(prisma, req.body, pid);
 
     if(!addAccount){
+        await prisma.$disconnect();
         return res.status(400).json({error : "Account cannot be added, please check you data"});
     }
+    await prisma.$disconnect();
     return res.status(201).json({success : "New master account has been created"});
 }

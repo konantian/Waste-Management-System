@@ -12,8 +12,10 @@ export default async function listInformation(req : NextApiRequest, res : NextAp
 
     const validAccount = await check_account(prisma, pid, account);
     if(!validAccount){
+        await prisma.$disconnect();
         return res.status(400).json({error : "The master account you inputed does not exist or you have no access right on that account"});
     }
     const accountData = await customer_information(prisma, account);
+    await prisma.$disconnect();
     return res.status(200).json(accountData);
 }
