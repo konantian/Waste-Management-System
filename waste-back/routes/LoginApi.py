@@ -3,7 +3,7 @@ from utils import AuthUtil
 from . import routes
 
 
-@routes.route("/api/login/", methods=["POST"])
+@routes.route("/api/login", methods=["POST"])
 def login():
 
     util = AuthUtil()

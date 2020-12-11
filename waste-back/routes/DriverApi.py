@@ -1,22 +1,21 @@
 from flask import request, jsonify, make_response
-from utils import DriverUtil, DispatcherUtil
+from utils import DriverUtil
 from . import routes
+
 
 @routes.route("/api/driver/trucks/<string:driver_id>", methods=["GET"])
 def get_truck_by_driver_id(driver_id):
-    util = DispatcherUtil()
+    util = DriverUtil()
     if not util.check_driver(driver_id):
         return make_response(
-            jsonify(
-                {"error": "This driver id does not exist!"}
-            ),
+            jsonify({"error": "This driver id does not exist!"}),
             400,
         )
     truck_id = util.check_own_truck(driver_id)
     return make_response(jsonify({"driver_id": driver_id, "truck_id": truck_id}), 200)
 
 
-@routes.route("/api/driver/listTour/", methods=["GET"])
+@routes.route("/api/driver/listTour", methods=["GET"])
 def list_tour():
 
     util = DriverUtil()

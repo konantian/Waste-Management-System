@@ -1,17 +1,8 @@
-import sqlite3
 import re
+from baseUtil import BaseUtil
 
 
-class DriverUtil:
-    def __init__(self):
-        self.connect_db()
-
-    def connect_db(self):
-        self.connection = sqlite3.connect("waste.db")
-        self.cursor = self.connection.cursor()
-        self.cursor.execute("PRAGMA foreign_keys=ON; ")
-        self.connection.commit()
-
+class DriverUtil(BaseUtil):
     # given a driver id, return the location
     def get_information(self, service_no):
 
@@ -58,7 +49,7 @@ class DriverUtil:
                 "local_contact": informations[2],
                 "cid_pick_up": cid_pick_up,
                 "cid_drop_off": cid_drop_off,
-                "key" : index
+                "key": index,
             }
             tour.append(data)
         return tour

@@ -1,18 +1,9 @@
-import sqlite3
 import re
+from baseUtil import BaseUtil
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
-class AuthUtil:
-    def __init__(self):
-        self.connect_db()
-
-    def connect_db(self):
-        self.connection = sqlite3.connect("waste.db")
-        self.cursor = self.connection.cursor()
-        self.cursor.execute("PRAGMA foreign_keys=ON; ")
-        self.connection.commit()
-
+class AuthUtil(BaseUtil):
     # check if the pid is in the database
     def check_pid(self, pid):
         self.cursor.execute("select pid from personnel")

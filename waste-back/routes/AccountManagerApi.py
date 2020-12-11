@@ -3,7 +3,7 @@ from utils import ManagerUtil
 from . import routes
 
 
-@routes.route("/api/accountManager/listInformation/", methods=["GET"])
+@routes.route("/api/accountManager/listInformation", methods=["GET"])
 def list_information():
 
     util = ManagerUtil()
@@ -22,7 +22,7 @@ def list_information():
     return make_response(jsonify(customer_data), 200)
 
 
-@routes.route("/api/accountManager/createAccount/", methods=["POST"])
+@routes.route("/api/accountManager/createAccount", methods=["POST"])
 def create_master_account():
 
     util = ManagerUtil()
@@ -60,7 +60,7 @@ def create_master_account():
     )
 
 
-@routes.route("/api/accountManager/createAgreement/", methods=["POST"])
+@routes.route("/api/accountManager/createAgreement", methods=["POST"])
 def create_service_agreement():
 
     util = ManagerUtil()
@@ -108,7 +108,7 @@ def create_service_agreement():
     )
 
 
-@routes.route("/api/accountManager/summaryReport/", methods=["GET"])
+@routes.route("/api/accountManager/summaryReport", methods=["GET"])
 def summary_report():
 
     util = ManagerUtil()
@@ -132,7 +132,6 @@ def summary_report():
         )
     summary = util.get_summary(account)
     return make_response(jsonify(summary), 200)
-
 
 
 @routes.route("/api/accountManager/accounts/<string:account_mgr>", methods=["GET"])

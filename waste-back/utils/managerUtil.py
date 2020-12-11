@@ -1,18 +1,9 @@
-import sqlite3
 import re
+from baseUtil import BaseUtil
 
 
-class ManagerUtil:
-    def __init__(self):
-        self.connect_db()
-
-    def connect_db(self):
-        self.connection = sqlite3.connect("waste.db")
-        self.cursor = self.connection.cursor()
-        self.cursor.execute("PRAGMA foreign_keys=ON; ")
-        self.connection.commit()
-
-    #get account managed by account mgr
+class ManagerUtil(BaseUtil):
+    # get account managed by account mgr
     def get_accounts(self, pid):
 
         self.cursor.execute(
@@ -29,15 +20,6 @@ class ManagerUtil:
         accounts = self.get_accounts(pid)
 
         return account.lower() in accounts
-
-    # to check if the account no is already existed
-    def check_new_account(self, account):
-
-        self.cursor.execute("SELECT account_no from accounts")
-        result = self.cursor.fetchall()
-        accounts = [act[0].lower() for act in result]
-
-        return account.lower() not in accounts
 
     # to check the waste types
     def check_waste(self, waste_type):
@@ -102,7 +84,7 @@ class ManagerUtil:
         service_data = [
             {
                 "service_no": service[0],
-                "key" : index,
+                "key": index,
                 "master_account": service[1],
                 "location": service[2],
                 "waste_type": service[3],
@@ -111,7 +93,7 @@ class ManagerUtil:
                 "internal_cost": service[6],
                 "price": round(service[7], 2),
             }
-            for index,service in enumerate(service_agreements)
+            for index, service in enumerate(service_agreements)
         ]
 
         return {
@@ -124,36 +106,8 @@ class ManagerUtil:
             "end_date": result[6],
             "total_amount": round(result[7], 2),
             "service_agreements": service_data,
-            "key" : "customer_imformation"
+            "key": "customer_imformation",
         }
-
-    def create_account(
-        self,
-        account_no,
-        pid,
-        customer_name,
-        contact_info,
-        customer_type,
-        start_date,
-        end_date,
-        total_amount,
-    ):
-
-        insert_account = "INSERT INTO accounts VALUES(:account_no,:account_mgr,:customer_name,:contact_info,:customer_type,:start_date,:end_date,:total_amount)"
-        self.cursor.execute(
-            insert_account,
-            {
-                "account_no": account_no,
-                "account_mgr": pid,
-                "customer_name": customer_name,
-                "contact_info": contact_info,
-                "customer_type": customer_type.lower(),
-                "start_date": start_date,
-                "end_date": end_date,
-                "total_amount": total_amount,
-            },
-        )
-        self.connection.commit()
 
     def get_summary(self, master_account):
 

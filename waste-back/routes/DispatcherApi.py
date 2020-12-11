@@ -10,23 +10,19 @@ def get_containers_by_agreement(service_no):
     account_no = util.get_master_account(service_no)
     if account_no is None:
         return make_response(
-            jsonify(
-                {"error": "This agreement does not exist!"}
-            ),
+            jsonify({"error": "This agreement does not exist!"}),
             400,
         )
     container_list = util.get_available_container(account_no)
     if not container_list:
         return make_response(
-            jsonify(
-                {"error": "There are no available containers for this agreement"}
-            ),
+            jsonify({"error": "There are no available containers for this agreement"}),
             400,
         )
     return make_response(jsonify({"containers": container_list}), 200)
 
 
-@routes.route("/api/dispatcher/createEntry/", methods=["POST"])
+@routes.route("/api/dispatcher/createEntry", methods=["POST"])
 def create_entry():
 
     util = DispatcherUtil()
@@ -37,9 +33,7 @@ def create_entry():
     owned_truck = util.check_own_truck(driver_id)
     if owned_truck is None and not util.check_truck(truck_id):
         return make_response(
-            jsonify(
-                {"error": "The truck entered is not available,please enter again"}
-            ),
+            jsonify({"error": "The truck entered is not available,please enter again"}),
             400,
         )
 

@@ -1,17 +1,8 @@
-import sqlite3
 import re
+from baseUtil import BaseUtil
 
 
-class DispatcherUtil:
-    def __init__(self):
-        self.connect_db()
-
-    def connect_db(self):
-        self.connection = sqlite3.connect("waste.db")
-        self.cursor = self.connection.cursor()
-        self.cursor.execute("PRAGMA foreign_keys=ON; ")
-        self.connection.commit()
-
+class DispatcherUtil(BaseUtil):
     # given a service number, check if it is in service_agreements table
     def check_service_no(self, agreement):
 
@@ -21,29 +12,6 @@ class DispatcherUtil:
         agreement_list = [agm[0] for agm in result]
 
         return agreement in agreement_list
-
-    # given a driver number, check if it is in drivers table
-    def check_driver(self, driver):
-
-        self.cursor.execute("select pid from drivers")
-        result = self.cursor.fetchall()
-
-        drivers_list = [dri[0] for dri in result]
-
-        return driver in drivers_list
-
-    # given a driver pid, check if he own a truck
-    def check_own_truck(self, driver_id):
-
-        if not self.check_driver(driver_id):
-            return None
-
-        self.cursor.execute(
-            "select owned_truck_id from drivers where pid=:driver", {"driver": driver_id}
-        )
-        truck_id = self.cursor.fetchone()[0]
-
-        return truck_id
 
     # given an truck id, check if it is in trucks table:
     def check_truck(self, truck):

@@ -1,12 +1,11 @@
 from flask import request, jsonify, make_response
-from utils import Supervisorutil, Managerutil
+from utils import Supervisorutil
 from . import routes
 
 
 @routes.route("/api/supervisor/assignAccount/", methods=["POST"])
 def assign_account():
     util = Supervisorutil()
-    accountVali = Managerutil()
     data = request.json
     pid = data.get("pid")
     manager = data.get("manager")
@@ -16,7 +15,7 @@ def assign_account():
             401,
         )
     account_no = data.get("account_no")
-    if not accountVali.check_new_account(account_no):
+    if not util.check_new_account(account_no):
         return make_response(
             jsonify(
                 {
@@ -31,7 +30,7 @@ def assign_account():
     start_date = data.get("start_date")
     end_date = data.get("end_date")
     total_amount = 0
-    util.assign_account(
+    util.create_account(
         account_no,
         manager,
         customer_name,
@@ -52,41 +51,45 @@ def customer_list():
     return make_response(jsonify({"customers": customers}), 200)
 
 
-@routes.route("/api/supervisor/customerReport/", methods=["GET"])
+@routes.route("/api/supervisor/customerReport", methods=["GET"])
 def customer_report():
     util = Supervisorutil()
     master_account = request.args.get("account")
     manager = util.get_manager(master_account)
-    service_count, price_sum, cost_sum, type_count = util.get_customer_report(master_account)
+    service_count, price_sum, cost_sum, type_count = util.get_customer_report(
+        master_account
+    )
     data = {
-        "manager_id" : manager['id'],
-        "manager_name": manager['name'],
+        "manager_id": manager["id"],
+        "manager_name": manager["name"],
         "service_count": service_count,
-        "price_sum": round(price_sum,2),
-        "cost_sum": round(cost_sum,2),
+        "price_sum": round(price_sum, 2),
+        "cost_sum": round(cost_sum, 2),
         "type_count": type_count,
     }
     return make_response(jsonify(data), 200)
-    
-@routes.route("/api/supervisor/managerReport/", methods=["GET"])
+
+
+@routes.route("/api/supervisor/managerReport", methods=["GET"])
 def manager_report():
     util = Supervisorutil()
-    pid = request.args.get('pid')
+    pid = request.args.get("pid")
     managers = util.get_managers(pid)
     sort_managers = util.sort_report(managers)
     data = []
     for index, mgr in enumerate(sort_managers):
         manager_name = util.get_manager_name_by_id(mgr)
         master_count, agreements_count = util.get_count(mgr)
-        price_sum  = util.get_price_sum(mgr)
+        price_sum = util.get_price_sum(mgr)
         cost_sum = util.get_cost_sum(mgr)
-        data.append({
-            "manager_name" : manager_name,
-            "master_count" : master_count,
-            "service_count" : agreements_count,
-            "price_sum" : round(price_sum,2),
-            "cost_sum" : round(cost_sum,2),
-            "key" : index
-        })
+        data.append(
+            {
+                "manager_name": manager_name,
+                "master_count": master_count,
+                "service_count": agreements_count,
+                "price_sum": round(price_sum, 2),
+                "cost_sum": round(cost_sum, 2),
+                "key": index,
+            }
+        )
     return make_response(jsonify(data), 200)
-
