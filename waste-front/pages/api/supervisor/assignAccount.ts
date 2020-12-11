@@ -23,9 +23,8 @@ export default async function assignAccount(req : NextApiRequest, res : NextApiR
 
     const addAccount = await create_account(prisma, req.body, manager);
 
-    if(addAccount){
-        return res.status(201).json({success : "New master account has been created"});
-    }else{
+    if(!addAccount){
         return res.status(400).json({error : "Account cannot be added, please check you data"});
     }
+    return res.status(201).json({success : "New master account has been created"});
 }

@@ -29,8 +29,8 @@ export default async function createAgreement(req : NextApiRequest, res : NextAp
     }
 
     const addAgreement = await add_agreement(prisma, req.body);
-
-    if(addAgreement) return res.status(201).json({success : "New serivce agreement has been created"});
-    else return res.status(400).json({error : "Create service agreement failed, please check you data"});
-
+    if(!addAgreement){
+        res.status(400).json({error : "Create service agreement failed, please check you data"});
+    }
+    return res.status(201).json({success : "New serivce agreement has been created"});
 }
