@@ -3,7 +3,7 @@ import re
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
-class AuthValidator:
+class AuthUtil:
     def __init__(self):
         self.connect_db()
 

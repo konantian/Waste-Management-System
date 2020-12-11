@@ -2,7 +2,7 @@ import sqlite3
 import re
 
 
-class SupervisorValidator:
+class SupervisorUtil:
     def __init__(self):
         self.connect_db()
 
@@ -49,7 +49,7 @@ class SupervisorValidator:
         return name
 
     # given a master account, get the account_manager name
-    def get_manager_name(self, master_account):
+    def get_manager(self, master_account):
 
         self.cursor.execute(
             "select account_mgr from accounts where account_no=:master_account",
@@ -57,8 +57,9 @@ class SupervisorValidator:
         )
         result = self.cursor.fetchone()
         account_mgr = result[0]
+        name = self.get_manager_name_by_id(account_mgr)
 
-        return self.get_manager_name_by_id(account_mgr)
+        return {'id' : account_mgr, 'name' : name}
 
     # given a supervisor_id, get the account managers
     def get_managers(self, pid):

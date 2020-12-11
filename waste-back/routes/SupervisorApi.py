@@ -1,16 +1,16 @@
 from flask import request, jsonify, make_response
-from validators import SupervisorValidator, ManagerValidator
+from utils import Supervisorutil, Managerutil
 from . import routes
 
 
 @routes.route("/api/supervisor/assignAccount/", methods=["POST"])
 def assign_account():
-    validator = SupervisorValidator()
-    accountVali = ManagerValidator()
+    util = Supervisorutil()
+    accountVali = Managerutil()
     data = request.json
     pid = data.get("pid")
     manager = data.get("manager")
-    if not validator.check_manager(pid, manager):
+    if not util.check_manager(pid, manager):
         return make_response(
             jsonify({"error": "This account does not managed by you!"}),
             401,
@@ -31,7 +31,7 @@ def assign_account():
     start_date = data.get("start_date")
     end_date = data.get("end_date")
     total_amount = 0
-    validator.assign_account(
+    util.assign_account(
         account_no,
         manager,
         customer_name,
@@ -46,20 +46,21 @@ def assign_account():
 
 @routes.route("/api/supervisor/customerList/", methods=["GET"])
 def customer_list():
-    validator = SupervisorValidator()
+    util = Supervisorutil()
     pid = request.args.get("pid")
-    customers = validator.list_customers(pid)
+    customers = util.list_customers(pid)
     return make_response(jsonify({"customers": customers}), 200)
 
 
 @routes.route("/api/supervisor/customerReport/", methods=["GET"])
 def customer_report():
-    validator = SupervisorValidator()
+    util = Supervisorutil()
     master_account = request.args.get("account")
-    manager_name = validator.get_manager_name(master_account)
-    service_count, price_sum, cost_sum, type_count = validator.get_customer_report(master_account)
+    manager = util.get_manager(master_account)
+    service_count, price_sum, cost_sum, type_count = util.get_customer_report(master_account)
     data = {
-        "manager_name": manager_name,
+        "manager_id" : manager['id'],
+        "manager_name": manager['name'],
         "service_count": service_count,
         "price_sum": round(price_sum,2),
         "cost_sum": round(cost_sum,2),
@@ -69,16 +70,16 @@ def customer_report():
     
 @routes.route("/api/supervisor/managerReport/", methods=["GET"])
 def manager_report():
-    validator = SupervisorValidator()
+    util = Supervisorutil()
     pid = request.args.get('pid')
-    managers = validator.get_managers(pid)
-    sort_managers = validator.sort_report(managers)
+    managers = util.get_managers(pid)
+    sort_managers = util.sort_report(managers)
     data = []
     for index, mgr in enumerate(sort_managers):
-        manager_name = validator.get_manager_name_by_id(mgr)
-        master_count, agreements_count = validator.get_count(mgr)
-        price_sum  = validator.get_price_sum(mgr)
-        cost_sum = validator.get_cost_sum(mgr)
+        manager_name = util.get_manager_name_by_id(mgr)
+        master_count, agreements_count = util.get_count(mgr)
+        price_sum  = util.get_price_sum(mgr)
+        cost_sum = util.get_cost_sum(mgr)
         data.append({
             "manager_name" : manager_name,
             "master_count" : master_count,

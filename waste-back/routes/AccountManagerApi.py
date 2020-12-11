@@ -1,15 +1,15 @@
 from flask import request, jsonify, make_response
-from validators import ManagerValidator
+from utils import ManagerUtil
 from . import routes
 
 
 @routes.route("/api/accountManager/listInformation/", methods=["GET"])
 def list_information():
 
-    validator = ManagerValidator()
+    util = ManagerUtil()
     pid = request.args.get("pid")
     account = request.args.get("account")
-    if not validator.check_account(account, pid):
+    if not util.check_account(account, pid):
         return make_response(
             jsonify(
                 {
@@ -18,18 +18,18 @@ def list_information():
             ),
             400,
         )
-    customer_data = validator.customer_information(account)
+    customer_data = util.customer_information(account)
     return make_response(jsonify(customer_data), 200)
 
 
 @routes.route("/api/accountManager/createAccount/", methods=["POST"])
 def create_master_account():
 
-    validator = ManagerValidator()
+    util = ManagerUtil()
     data = request.json
     pid = data.get("pid")
     account_no = data.get("account_no")
-    if not validator.check_new_account(account_no):
+    if not util.check_new_account(account_no):
         return make_response(
             jsonify(
                 {
@@ -44,7 +44,7 @@ def create_master_account():
     start_date = data.get("start_date")
     end_date = data.get("end_date")
     total_amount = 0
-    validator.create_account(
+    util.create_account(
         account_no,
         pid,
         customer_name,
@@ -63,19 +63,19 @@ def create_master_account():
 @routes.route("/api/accountManager/createAgreement/", methods=["POST"])
 def create_service_agreement():
 
-    validator = ManagerValidator()
+    util = ManagerUtil()
     data = request.json
-    service_no = validator.calculate_service_no()
+    service_no = util.calculate_service_no()
     pid = data.get("pid")
     account_no = data.get("account_no")
-    if validator.check_new_account(account_no):
+    if util.check_new_account(account_no):
         return make_response(
             jsonify(
                 {"error": "This master account does not exist, please enter again"}
             ),
             400,
         )
-    if not validator.check_account(account_no, pid):
+    if not util.check_account(account_no, pid):
         return make_response(
             jsonify(
                 {
@@ -91,8 +91,8 @@ def create_service_agreement():
     internal_cost = data.get("internal_cost")
     price = data.get("price")
 
-    validator.update_amount(account_no, price)
-    validator.create_agreement(
+    util.update_amount(account_no, price)
+    util.create_agreement(
         service_no,
         account_no,
         location,
@@ -111,17 +111,17 @@ def create_service_agreement():
 @routes.route("/api/accountManager/summaryReport/", methods=["GET"])
 def summary_report():
 
-    validator = ManagerValidator()
+    util = ManagerUtil()
     pid = request.args.get("pid")
     account = request.args.get("account")
-    if validator.check_new_account(account):
+    if util.check_new_account(account):
         return make_response(
             jsonify(
                 {"error": "This master account does not exist, please enter again"}
             ),
             400,
         )
-    if not validator.check_account(account, pid):
+    if not util.check_account(account, pid):
         return make_response(
             jsonify(
                 {
@@ -130,7 +130,7 @@ def summary_report():
             ),
             401,
         )
-    summary = validator.get_summary(account)
+    summary = util.get_summary(account)
     return make_response(jsonify(summary), 200)
 
 
@@ -138,6 +138,6 @@ def summary_report():
 @routes.route("/api/accountManager/accounts/<string:account_mgr>", methods=["GET"])
 def get_accounts_by_mgr(account_mgr):
 
-    validator = ManagerValidator()
-    accounts = validator.get_accounts(account_mgr)
+    util = ManagerUtil()
+    accounts = util.get_accounts(account_mgr)
     return make_response(jsonify({"accounts": accounts}), 200)

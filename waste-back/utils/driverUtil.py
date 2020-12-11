@@ -2,7 +2,7 @@ import sqlite3
 import re
 
 
-class DriverValidator:
+class DriverUtil:
     def __init__(self):
         self.connect_db()
 

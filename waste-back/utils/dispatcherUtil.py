@@ -2,7 +2,7 @@ import sqlite3
 import re
 
 
-class DispatcherValidator:
+class DispatcherUtil:
     def __init__(self):
         self.connect_db()
 

@@ -1,15 +1,15 @@
 from flask import request, jsonify, make_response
-from validators import AuthValidator
+from utils import AuthUtil
 from . import routes
 
 
 @routes.route("/api/login/", methods=["POST"])
 def login():
 
-    validator = AuthValidator()
+    util = AuthUtil()
     data = request.json
     username = data.get("username")
-    if not validator.check_username(username):
+    if not util.check_username(username):
         return make_response(
             jsonify(
                 {"error": "The username inputed does not exist, please input again "}
@@ -17,7 +17,7 @@ def login():
             401,
         )
     password = data.get("password")
-    if not validator.check_password(username, password):
+    if not util.check_password(username, password):
         return make_response(
             jsonify(
                 {
@@ -26,10 +26,10 @@ def login():
             ),
             401,
         )
-    role = validator.getRole(username)
+    role = util.getRole(username)
     role = "accountManager" if role == "account manager" else role
-    userId = validator.getUserId(username)
-    name = validator.getName(userId)
+    userId = util.getUserId(username)
+    name = util.getName(userId)
     return make_response(
         jsonify(
             {
