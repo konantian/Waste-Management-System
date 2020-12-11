@@ -1,9 +1,10 @@
 import React,{useState,useRef} from 'react';
 import {useSelector} from 'react-redux'; 
 import axios from 'axios';
-import { Form,Button,Card, Divider,message } from 'antd';
+import { Form,Button, Divider,message } from 'antd';
 import {SUMMARY_REPORT_API} from '../../../constants/api';
 import AccountInput from './accountInput';
+import ReportCard from './reportCard';
 
 const SummaryReport = () => {
 
@@ -43,15 +44,7 @@ const SummaryReport = () => {
                 </div>
             </Form>
             <Divider />
-            {report !== null ? 
-                <Card title={`Summary Report for ${account}`} className="report" >
-                    <p><strong>Number of Service Agreements  </strong><span>{report.count}</span></p>
-                    <p><strong>Sum of the prices  </strong><span>{report.cost_sum}</span></p>
-                    <p><strong>Sum of the internal cost  </strong><span>{report.price_sum}</span></p>
-                    <p><strong>Number of waste type  </strong><span>{report.type_count}</span></p>
-                </Card> : null
-            }
-
+            {report !== null ? <ReportCard account={account} report={report} /> : null}
         </div>
     )
 

@@ -85,3 +85,15 @@ a {
 .informationTable{
   margin-top: 40px;
 }
+
+.spinContainer{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+}
+
+.customerSpin{
+  width : 200px;
+  margin-bottom : 20px;
+}

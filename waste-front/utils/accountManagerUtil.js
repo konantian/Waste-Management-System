@@ -81,6 +81,21 @@ export const customer_information = async (prisma, account) => {
     return accountData;
 }
 
+export const get_manager = async (prisma, master_account) => {
+
+    const result = await prisma.account.findFirst({
+        where : {account_no : master_account},
+        select : {account_mgr : true}
+    });
+
+    const manager = await prisma.personnel.findFirst({
+        where : {pid : result.account_mgr},
+        select : {name : true,pid : true}
+    });
+
+    return manager;
+}
+
 export const get_summary_report = async (prisma, account) => {
 
     const result = await prisma.serviceAgreement.aggregate({
@@ -97,14 +112,19 @@ export const get_summary_report = async (prisma, account) => {
         distinct: ["waste_type"],
         select : {waste_type : true}
     })
+
+    const manager = await get_manager(prisma, account);
+
     let report = new Object();
 
-    report.count = serviceCount;
+    report.service_count = serviceCount;
     report.type_count = wasteTypes.length;
     report.price_sum = result.sum['price'];
     report.cost_sum =  result.sum['internal_cost'];
+    report.manager_name = manager.name;
+    report.manager_id = manager.pid;
 
-    if(report.count === 0){
+    if(report.service_count === 0){
         return false;
     }
     return report;

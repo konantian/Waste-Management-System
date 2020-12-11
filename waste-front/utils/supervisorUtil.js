@@ -19,14 +19,14 @@ export const customer_list = async (prisma, pid) => {
     });
     const managers = result.map(item => item.pid);
 
-    const customers = await prisma.accounts.findMany({
+    const customers = await prisma.account.findMany({
         where : {account_mgr : {
             in : managers
         }},
         select : {account_no : true}
     })
 
-    return customers;
+    return customers.map(item => item.account_no);
 }
 
 export const get_managers = async (prisma, pid) => {
@@ -37,19 +37,4 @@ export const get_managers = async (prisma, pid) => {
     })
 
     return managers;
-}
-
-export const get_manager_name = async (prisma, master_account) => {
-
-    const result = await prisma.account.findFirst({
-        where : {account_no : master_account},
-        select : {account_mgr : true}
-    });
-
-    const name = await prisma.personnel.findFirst({
-        where : {pid : result.account_mgr},
-        select : {name : true}
-    });
-
-    return name;
 }
