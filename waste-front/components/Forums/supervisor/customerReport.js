@@ -4,7 +4,7 @@ import axios from 'axios';
 import useSWR from 'swr';
 import { Form, Select, Button, Divider,Spin, message } from 'antd';
 import {CUSTOMER_REPORT_API,CUSTOMER_LIST_API} from '../../../constants/api';
-import ReportCard from '../accountManager/reportCard';
+import {ReportCard} from '../shared';
 
 const CustomerReportForm = () => {
 

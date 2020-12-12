@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux';
 import axios from 'axios';
 import { Form, Input,Button,message } from 'antd';
 import {ASSIGN_ACCOUNT_API} from '../../../constants/api';
-import CreateAccountForm from '../accountManager/createAccountForm';
+import {CreateAccountForm} from '../shared';
 
 const AssignAccountForm = () => {
 

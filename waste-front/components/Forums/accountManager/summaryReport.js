@@ -3,8 +3,7 @@ import {useSelector} from 'react-redux';
 import axios from 'axios';
 import { Form,Button, Divider,message } from 'antd';
 import {SUMMARY_REPORT_API} from '../../../constants/api';
-import AccountInput from './accountInput';
-import ReportCard from './reportCard';
+import {AccountInput, ReportCard} from '../shared/';
 
 const SummaryReport = () => {
 

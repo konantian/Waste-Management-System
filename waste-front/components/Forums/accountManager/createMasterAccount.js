@@ -4,7 +4,7 @@ import {useSelector} from 'react-redux';
 import { Form, Button, Table, Divider, message} from 'antd';
 import {INFORMATION_API, CREATE_ACCOUNT_API} from '../../../constants/api';
 import {accountColumns} from '../../../constants/columns';
-import CreateAccountForm from './createAccountForm';
+import {CreateAccountForm} from '../shared/';
 
 const MasterAccountForm = () => {
 

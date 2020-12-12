@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Form,Button,Table, Divider, message } from 'antd';
 import {INFORMATION_API} from '../../../constants/api';
 import {accountColumns, serviceColumns} from '../../../constants/columns';
-import AccountInput from './accountInput';
+import {AccountInput} from '../shared/';
 
 const ListInformationForm = () => {
 
