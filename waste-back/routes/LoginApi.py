@@ -12,7 +12,7 @@ def login():
     if not util.check_username(username):
         return make_response(
             jsonify(
-                {"error": "The username inputed does not exist, please input again "}
+                {"error": "The username entered does not exist, please input again "}
             ),
             401,
         )

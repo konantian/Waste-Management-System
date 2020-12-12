@@ -37,5 +37,5 @@ export default async function createAgreement(req : NextApiRequest, res : NextAp
         res.status(400).json({error : "Create service agreement failed, please check you data"});
     }
     await prisma.$disconnect();
-    return res.status(201).json({success : "New serivce agreement has been created"});
+    return res.status(201).json({success : "New service agreement has been created"});
 }

@@ -1,5 +1,5 @@
 import re
-from baseUtil import BaseUtil
+from .baseUtil import BaseUtil
 
 
 class ManagerUtil(BaseUtil):
@@ -106,7 +106,7 @@ class ManagerUtil(BaseUtil):
             "end_date": result[6],
             "total_amount": round(result[7], 2),
             "service_agreements": service_data,
-            "key": "customer_imformation",
+            "key": "customer_information",
         }
 
     def get_summary(self, master_account):

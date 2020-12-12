@@ -1,5 +1,5 @@
 import re
-from baseUtil import BaseUtil
+from .baseUtil import BaseUtil
 
 
 class SupervisorUtil(BaseUtil):

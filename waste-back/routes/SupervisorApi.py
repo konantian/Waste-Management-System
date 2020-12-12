@@ -1,11 +1,11 @@
 from flask import request, jsonify, make_response
-from utils import Supervisorutil
+from utils import SupervisorUtil
 from . import routes
 
 
 @routes.route("/api/supervisor/assignAccount/", methods=["POST"])
 def assign_account():
-    util = Supervisorutil()
+    util = SupervisorUtil()
     data = request.json
     pid = data.get("pid")
     manager = data.get("manager")
@@ -45,7 +45,7 @@ def assign_account():
 
 @routes.route("/api/supervisor/customerList/", methods=["GET"])
 def customer_list():
-    util = Supervisorutil()
+    util = SupervisorUtil()
     pid = request.args.get("pid")
     customers = util.list_customers(pid)
     return make_response(jsonify({"customers": customers}), 200)
@@ -53,7 +53,7 @@ def customer_list():
 
 @routes.route("/api/supervisor/customerReport", methods=["GET"])
 def customer_report():
-    util = Supervisorutil()
+    util = SupervisorUtil()
     master_account = request.args.get("account")
     manager = util.get_manager(master_account)
     service_count, price_sum, cost_sum, type_count = util.get_customer_report(
@@ -72,7 +72,7 @@ def customer_report():
 
 @routes.route("/api/supervisor/managerReport", methods=["GET"])
 def manager_report():
-    util = Supervisorutil()
+    util = SupervisorUtil()
     pid = request.args.get("pid")
     managers = util.get_managers(pid)
     sort_managers = util.sort_report(managers)

@@ -7,7 +7,7 @@ import {serviceColumns} from '../../../constants/columns';
 import {waste_types} from '../../../constants/types';
 import AccountInput from './accountInput';
 
-const SerivceAgreement = () => {
+const ServiceAgreement = () => {
 
     const formRef = useRef(null);
     const userId = useSelector(state => state.userId);
@@ -106,4 +106,4 @@ const SerivceAgreement = () => {
 
 }
 
-export default SerivceAgreement;
+export default ServiceAgreement;

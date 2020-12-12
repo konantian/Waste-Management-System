@@ -7,7 +7,7 @@ import Logout from '../components/logout';
 import {
     ListInformationForm,
     SummaryReport,
-    SerivceAgreement,
+    ServiceAgreement,
     MasterAccountForm
  } from '../components/Forums/accountManager/';
 
@@ -48,7 +48,7 @@ const AccountManager = () => {
                                 <MasterAccountForm />
                             </TabPane>
                             <TabPane tab="Add New Service Agreement" key="3">
-                                <SerivceAgreement />
+                                <ServiceAgreement />
                             </TabPane>
                             <TabPane tab="Create Summary Report" key="4">
                                 <SummaryReport />

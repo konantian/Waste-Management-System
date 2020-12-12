@@ -77,7 +77,7 @@ export const customer_information = async (prisma, account) => {
 
     accountData.service_agreements = serviceData;
     accountData.total_amount = accountData.total_amount.toFixed(2);
-    accountData.key = "customer_imformation";
+    accountData.key = "customer_information";
     return accountData;
 }
 

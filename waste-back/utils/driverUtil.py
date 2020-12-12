@@ -1,5 +1,5 @@
 import re
-from baseUtil import BaseUtil
+from .baseUtil import BaseUtil
 
 
 class DriverUtil(BaseUtil):
@@ -42,11 +42,11 @@ class DriverUtil(BaseUtil):
         service_no = self.get_service_no(start_date, end_date, driver_id)
         for index, service in enumerate(service_no):
             cid_pick_up, cid_drop_off = self.get_container_id(service, driver_id)
-            informations = self.get_information(service)
+            information = self.get_information(service)
             data = {
-                "location": informations[0],
-                "waste_type": informations[1],
-                "local_contact": informations[2],
+                "location": information[0],
+                "waste_type": information[1],
+                "local_contact": information[2],
                 "cid_pick_up": cid_pick_up,
                 "cid_drop_off": cid_drop_off,
                 "key": index,

@@ -1,5 +1,5 @@
 import re
-from baseUtil import BaseUtil
+from .baseUtil import BaseUtil
 from werkzeug.security import generate_password_hash, check_password_hash
 
 

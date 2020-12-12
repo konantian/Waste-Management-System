@@ -38,7 +38,7 @@ const AccountInput = () => {
                     option.value.indexOf(inputValue) !== -1
                 }
             >
-                <Input.Search size="large" placeholder="Selete the master account" enterButton />
+                <Input.Search size="large" placeholder="Select the master account" enterButton />
             </AutoComplete>
 
         </Form.Item>

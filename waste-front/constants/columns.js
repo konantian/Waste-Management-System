@@ -1,7 +1,7 @@
 export const accountColumns = [
     {title: 'Account No.','dataIndex': 'account_no'},
     {title: 'Account Mgr','dataIndex': 'account_mgr'},
-    {title: 'Customr Name','dataIndex': 'customer_name'},
+    {title: 'Customer Name','dataIndex': 'customer_name'},
     {title: 'Contact Info','dataIndex': 'contact_info'},
     {title: 'Customer Type','dataIndex': 'customer_type'},
     {title: 'Start Date','dataIndex': 'start_date'},
@@ -10,7 +10,7 @@ export const accountColumns = [
 ];
 
 export const serviceColumns = [
-    {title: 'Serivce No.','dataIndex': 'service_no'},
+    {title: 'Service No.','dataIndex': 'service_no'},
     {title: 'Master Account','dataIndex': 'master_account'},
     {title: 'Location','dataIndex': 'location'},
     {title: 'Waste Type','dataIndex': 'waste_type'},

@@ -15,7 +15,7 @@ const CreateAccountForm = () => {
                 <Input allowClear type="number" placeholder="Enter a new master account" />
             </Form.Item>
             <Form.Item
-                label="Customr Name"
+                label="Customer Name"
                 name="customer_name"
                 rules={[{required: true,message: 'Enter the customer name',}]}
             >
@@ -26,7 +26,7 @@ const CreateAccountForm = () => {
                 name="contact_info"
                 rules={[{required: true,message: 'Enter the contact info',}]}
             >
-                <Input allowClear placeholder="Enter the contact infomation" />
+                <Input allowClear placeholder="Enter the contact information" />
             </Form.Item>
             <Form.Item 
                 label="Customer Type" 

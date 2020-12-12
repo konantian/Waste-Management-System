@@ -13,7 +13,7 @@ def list_information():
         return make_response(
             jsonify(
                 {
-                    "error": "The master account you inputed does not exist or you have no access right on that account "
+                    "error": "The master account you entered does not exist or you have no access right on that account "
                 }
             ),
             400,
@@ -104,7 +104,7 @@ def create_service_agreement():
     )
 
     return make_response(
-        jsonify({"success": "New serivce agreement has been created"}), 201
+        jsonify({"success": "New service agreement has been created"}), 201
     )
 
 
