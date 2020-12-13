@@ -1,32 +1,31 @@
-import React,{useState, useRef} from 'react';
-import {useSelector} from 'react-redux'; 
+import React, { useState, useRef } from 'react';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
-import { Form, Button,Divider,DatePicker,Table, message } from 'antd';
-import {LIST_TOUR_API} from '../../../constants/api';
-import {tourColumns} from '../../../constants/columns';
+import { Form, Divider, DatePicker, Table, message } from 'antd';
+import { LIST_TOUR_API } from '../../../constants/api';
+import { tourColumns } from '../../../constants/columns';
+import { SubmitButton } from '../shared/';
 
 const { RangePicker } = DatePicker;
 
 const ListTourForm = () => {
-
     const formRef = useRef(null);
-    const userId = useSelector(state => state.userId);
-    const [tour,setTour] = useState(null);
+    const userId = useSelector((state) => state.userId);
+    const [tour, setTour] = useState(null);
     const [loading, setLoading] = useState(false);
-    
-    const onFinish = values => {
 
-        let rangePicker = values['range-picker']; 
+    const onFinish = (values) => {
+        let rangePicker = values['range-picker'];
         let startDate = rangePicker[0].format('YYYY-MM-DD');
         let endDate = rangePicker[1].format('YYYY-MM-DD');
 
-        axios.get(LIST_TOUR_API,
-            {
-            params : {
-                pid : userId,
-                start_date : startDate,
-                end_date : endDate
-            }}).then((res) => {
+        axios.get(LIST_TOUR_API, {
+                params: {
+                    pid: userId,
+                    start_date: startDate,
+                    end_date: endDate,
+                },
+            }).then((res) => {
                 setLoading(false);
                 setTour(res.data);
                 formRef.current.resetFields();
@@ -34,28 +33,42 @@ const ListTourForm = () => {
                 setLoading(false);
                 let msg = JSON.parse(err.response.request.response);
                 message.error(msg['error']);
-            })
-    }
+            });
+    };
 
-    return(
+    return (
         <div>
             <Form className="form" onFinish={onFinish} ref={formRef}>
-                <Form.Item 
-                    name="range-picker" 
-                    label="Start Date - End Date" 
-                    rules={[{type: 'array',required: true,message: 'Please select time!',},]}
+                <Form.Item
+                    name="range-picker"
+                    label="Start Date - End Date"
+                    rules={[
+                        {
+                            type: 'array',
+                            required: true,
+                            message: 'Please select time!',
+                        },
+                    ]}
                 >
                     <RangePicker />
                 </Form.Item>
-                <div className="submitContainer">
-                    <Button className="submitButton" loading={loading} onClick={() => setLoading(true)}  type="primary" shape="round" size="large" htmlType="submit">List</Button>
-                </div>
+                <SubmitButton
+                    text="List"
+                    loading={loading}
+                    setLoading={setLoading}
+                />
             </Form>
             <Divider />
-            {tour !== null ? <Table className="tourTable" columns={tourColumns} dataSource={tour} pagination={false} /> : null}
+            {tour !== null ? (
+                <Table
+                    className="tourTable"
+                    columns={tourColumns}
+                    dataSource={tour}
+                    pagination={false}
+                />
+            ) : null}
         </div>
-    )
-
-}
+    );
+};
 
 export default ListTourForm;

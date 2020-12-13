@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
-import axios from 'axios'
-import useSWR from 'swr'
-import { Table, Spin, message } from 'antd'
-import { MANAGER_REPORT_API } from '../../../constants/api'
-import { managerColumns } from '../../../constants/columns'
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+import useSWR from 'swr';
+import { Table, Spin, message } from 'antd';
+import { MANAGER_REPORT_API } from '../../../constants/api';
+import { managerColumns } from '../../../constants/columns';
 
 const ManagerReportForm = () => {
-    const userId = useSelector((state) => state.userId)
-    const [report, setReport] = useState(null)
-    const [loading, setLoading] = useState(true)
+    const userId = useSelector((state) => state.userId);
+    const [report, setReport] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     const fetcher = (url) => {
         axios
@@ -19,18 +19,18 @@ const ManagerReportForm = () => {
                 },
             })
             .then((res) => {
-                setReport(res.data)
-                setLoading(false)
+                setReport(res.data);
+                setLoading(false);
             })
             .catch((err) => {
-                setLoading(false)
-                let msg = JSON.parse(err.response.request.response)
-                setReport(null)
-                message.error(msg['error'])
-            })
-    }
+                setLoading(false);
+                let msg = JSON.parse(err.response.request.response);
+                setReport(null);
+                message.error(msg['error']);
+            });
+    };
 
-    const { data, error } = useSWR(MANAGER_REPORT_API, fetcher)
+    const { data, error } = useSWR(MANAGER_REPORT_API, fetcher);
 
     return (
         <div>
@@ -44,7 +44,7 @@ const ManagerReportForm = () => {
                 />
             )}
         </div>
-    )
-}
+    );
+};
 
-export default ManagerReportForm
+export default ManagerReportForm;

@@ -4,8 +4,8 @@ import axios from 'axios';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import {useSelector} from 'react-redux'; 
-import {SIGNUP_API} from '../constants/api';
+import { useSelector } from 'react-redux'; 
+import { SIGNUP_API } from '../constants/api';
 
 const SignUp = () =>{
 

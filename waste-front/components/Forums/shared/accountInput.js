@@ -1,33 +1,29 @@
-import React, { useEffect, useState } from 'react'
-import { Form, Input, AutoComplete } from 'antd'
-import { useSelector } from 'react-redux'
-import axios from 'axios'
-import { ACCOUNT_API } from '../../../constants/api'
+import React, { useEffect, useState } from 'react';
+import { Form, Input, AutoComplete } from 'antd';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+import { ACCOUNT_API } from '../../../constants/api';
 
 const AccountInput = () => {
-    const userId = useSelector((state) => state.userId)
-    const [accounts, setAccounts] = useState([])
-    const [options, setOptions] = useState([])
+    const userId = useSelector((state) => state.userId);
+    const [accounts, setAccounts] = useState([]);
+    const [options, setOptions] = useState([]);
 
     useEffect(() => {
-        axios
-            .get(ACCOUNT_API(userId))
-            .then((res) => {
-                let master_accounts = []
+        axios.get(ACCOUNT_API(userId)).then((res) => {
+                let master_accounts = [];
                 res.data.accounts.forEach((account) => {
-                    master_accounts.push({ value: account })
-                })
-
-                setAccounts(master_accounts)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }, [])
+                    master_accounts.push({ value: account });
+                });
+                setAccounts(master_accounts);
+            }).catch((err) => {
+                console.log(err);
+            });
+    }, []);
 
     const handleSearch = (value) => {
-        setOptions(value ? accounts : [])
-    }
+        setOptions(value ? accounts : []);
+    };
 
     return (
         <Form.Item
@@ -49,7 +45,7 @@ const AccountInput = () => {
                 />
             </AutoComplete>
         </Form.Item>
-    )
-}
+    );
+};
 
-export default AccountInput
+export default AccountInput;

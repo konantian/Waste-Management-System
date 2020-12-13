@@ -1,15 +1,14 @@
-import React,{useState,useRef} from 'react';
-import {useSelector} from 'react-redux'; 
+import React, { useState, useRef } from 'react';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 import useSWR from 'swr';
-import { Form, Select, Button, Divider,Spin, message } from 'antd';
-import {CUSTOMER_REPORT_API,CUSTOMER_LIST_API} from '../../../constants/api';
-import {ReportCard} from '../shared';
+import { Form, Select, Divider, Spin, message } from 'antd';
+import { CUSTOMER_REPORT_API, CUSTOMER_LIST_API } from '../../../constants/api';
+import { ReportCard, SubmitButton } from '../shared';
 
 const CustomerReportForm = () => {
-
     const formRef = useRef(null);
-    const userId = useSelector(state => state.userId);
+    const userId = useSelector((state) => state.userId);
     const [customer, setCustomer] = useState([]);
     const [report, setReport] = useState(null);
     const [account, setAccount] = useState(null);
@@ -17,23 +16,22 @@ const CustomerReportForm = () => {
 
     const fetcher = (url) => {
         axios.get(url, {
-            params : {
-                pid : userId
-            }
-        }).then(res => {
-            setCustomer(res.data.customers);
-        })
-    }
+                params: {
+                    pid: userId,
+                },
+            }).then((res) => {
+                setCustomer(res.data.customers);
+            });
+    };
 
-    const {data, error} = useSWR(CUSTOMER_LIST_API, fetcher);
+    const { data, error } = useSWR(CUSTOMER_LIST_API, fetcher);
 
-    const onFinish = values => {
-
-        axios.get(CUSTOMER_REPORT_API,
-            {
-            params : {
-                account : values.account
-            }}).then((res) => {
+    const onFinish = (values) => {
+        axios.get(CUSTOMER_REPORT_API, {
+                params: {
+                    account: values.account,
+                },
+            }).then((res) => {
                 setLoading(false);
                 setReport(res.data);
                 setAccount(values.account);
@@ -44,37 +42,52 @@ const CustomerReportForm = () => {
                 setReport(null);
                 setAccount(null);
                 message.error(msg['error']);
-            })
-    }
+            });
+    };
 
     return (
         <div>
             <Form className="form" onFinish={onFinish} ref={formRef}>
-                {customer.length > 0 ?
-                <Form.Item 
-                    label="Master Account" 
-                    name="account"
-                    rules={[{required: true,message: 'Select the master account',},]}
+                {customer.length > 0 ? (
+                    <Form.Item
+                        label="Master Account"
+                        name="account"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Select the master account',
+                            },
+                        ]}
                     >
-                    <Select placeholder="Select master account">
-                        {customer.map((cst,index) => 
-                            <Select.Option key={index} value={cst}>{cst}</Select.Option>
-                        )}
-                    </Select>
-                </Form.Item> :
-                <div className="spinContainer" >
-                    <Spin className="customerSpin" size="large" tip="Loading customers list..."/> 
-                </div>
-                }
-
-                <div className="submitContainer">
-                    <Button className="submitButton" loading={loading} onClick={() => setLoading(true)}  type="primary" shape="round" size="large" htmlType="submit">Submit</Button>
-                </div>
+                        <Select placeholder="Select master account">
+                            {customer.map((cst, index) => (
+                                <Select.Option key={index} value={cst}>
+                                    {cst}
+                                </Select.Option>
+                            ))}
+                        </Select>
+                    </Form.Item>
+                ) : (
+                    <div className="spinContainer">
+                        <Spin
+                            className="customerSpin"
+                            size="large"
+                            tip="Loading customers list..."
+                        />
+                    </div>
+                )}
+                <SubmitButton
+                    text="Create"
+                    loading={loading}
+                    setLoading={setLoading}
+                />
             </Form>
             <Divider />
-            {report !== null ? <ReportCard account={account} report={report} /> : null}
+            {report !== null ? (
+                <ReportCard account={account} report={report} />
+            ) : null}
         </div>
-    )
-}
+    );
+};
 
 export default CustomerReportForm;

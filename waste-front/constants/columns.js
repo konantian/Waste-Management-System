@@ -7,7 +7,7 @@ export const accountColumns = [
     { title: 'Start Date', dataIndex: 'start_date' },
     { title: 'End Date', dataIndex: 'end_date' },
     { title: 'Total Amount', dataIndex: 'total_amount' },
-]
+];
 
 export const serviceColumns = [
     { title: 'Service No.', dataIndex: 'service_no' },
@@ -18,7 +18,7 @@ export const serviceColumns = [
     { title: 'Local Contact', dataIndex: 'local_contact' },
     { title: 'Internal Cost', dataIndex: 'internal_cost' },
     { title: 'Price', dataIndex: 'price' },
-]
+];
 
 export const tourColumns = [
     { title: 'Location', dataIndex: 'location' },
@@ -26,7 +26,7 @@ export const tourColumns = [
     { title: 'Local Contact', dataIndex: 'local_contact' },
     { title: 'Container Pick Up', dataIndex: 'cid_pick_up' },
     { title: 'Container Drop Off', dataIndex: 'cid_drop_off' },
-]
+];
 
 export const managerColumns = [
     { title: 'Manager name', dataIndex: 'manager_name' },
@@ -34,4 +34,4 @@ export const managerColumns = [
     { title: 'Number of service agreement', dataIndex: 'service_count' },
     { title: 'Total internal cost', dataIndex: 'cost_sum' },
     { title: 'Sum of price', dataIndex: 'price_sum' },
-]
+];

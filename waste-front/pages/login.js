@@ -1,13 +1,13 @@
-import React, {useEffect, useState, useRef} from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Form, Input, Button,message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import {useSelector, useDispatch} from 'react-redux'; 
-import {login, setUserId, setRole, setUsername, setName} from '../redux/actions';
-import {LOGIN_API} from '../constants/api';
+import { useSelector, useDispatch } from 'react-redux'; 
+import { login, setUserId, setRole, setUsername, setName } from '../redux/actions';
+import { LOGIN_API } from '../constants/api';
 
 const Login = () => {
 

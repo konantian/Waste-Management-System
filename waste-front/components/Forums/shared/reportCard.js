@@ -1,5 +1,6 @@
-import React from 'react'
-import { Card } from 'antd'
+import React from 'react';
+import { Card } from 'antd';
+import PropTypes from 'prop-types';
 
 const ReportCard = ({ account, report }) => {
     return (
@@ -29,7 +30,12 @@ const ReportCard = ({ account, report }) => {
                 <span>{report.type_count}</span>
             </p>
         </Card>
-    )
-}
+    );
+};
 
-export default ReportCard
+ReportCard.propTypes = {
+    account: PropTypes.string.isRequired,
+    report: PropTypes.object.isRequired,
+};
+
+export default ReportCard;

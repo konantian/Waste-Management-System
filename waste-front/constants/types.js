@@ -6,11 +6,11 @@ export const waste_types = [
     'Compost',
     'Construction Waste',
     'Mixed Waste',
-]
+];
 
 export const customer_types = [
     'Municipal',
     'Commercial',
     'Industrial',
     'Residential',
-]
+];
