@@ -10,9 +10,9 @@ class DriverUtil(BaseUtil):
             "select location,waste_type,local_contact from service_agreements where service_no=:service_no",
             {"service_no": service_no},
         )
-        location = self.cursor.fetchall()[0]
+        information = self.cursor.fetchone()
 
-        return location
+        return information
 
     # given a date range, return all the service_no in this range
     def get_service_no(self, start_date, end_date, driver_id):

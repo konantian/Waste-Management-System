@@ -11,9 +11,8 @@ const AccountInput = () => {
 
     useEffect(() => {
         axios.get(ACCOUNT_API(userId)).then((res) => {
-                let master_accounts = [];
-                res.data.accounts.forEach((account) => {
-                    master_accounts.push({ value: account });
+                const master_accounts = res.data.accounts.map((account) => {
+                    return { value: account };
                 });
                 setAccounts(master_accounts);
             }).catch((err) => {
