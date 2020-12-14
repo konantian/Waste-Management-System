@@ -12,17 +12,14 @@ const ManagerReportForm = () => {
     const [loading, setLoading] = useState(true);
 
     const fetcher = (url) => {
-        axios
-            .get(url, {
+        axios.get(url, {
                 params: {
                     pid: userId,
                 },
-            })
-            .then((res) => {
+            }).then((res) => {
                 setReport(res.data);
                 setLoading(false);
-            })
-            .catch((err) => {
+            }).catch((err) => {
                 setLoading(false);
                 let msg = JSON.parse(err.response.request.response);
                 setReport(null);
@@ -35,7 +32,10 @@ const ManagerReportForm = () => {
     return (
         <div>
             {loading ? (
-                <Spin tip="Loading..." size="large" />
+                <div className="spinContainer">
+                    <Spin tip="Loading..." size="large" />
+                </div>
+                
             ) : (
                 <Table
                     columns={managerColumns}
