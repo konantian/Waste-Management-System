@@ -1,5 +1,6 @@
 import {NextApiRequest, NextApiResponse} from 'next';
 import prisma from '../../../lib/prisma';
+import { get_tour } from '../../../utils/driverUtil';
 
 export default async function listTour(req : NextApiRequest, res : NextApiResponse ){
 
@@ -7,5 +8,8 @@ export default async function listTour(req : NextApiRequest, res : NextApiRespon
         return res.status(405).json({error : "Method not allowed, please use GET"});
     }
 
-    return res.status(200).json({success : req.method});
+    const tour = await get_tour(prisma, req.query);
+
+    await prisma.$disconnect();
+    return res.status(200).json(tour);
 }

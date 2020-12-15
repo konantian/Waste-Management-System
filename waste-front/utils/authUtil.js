@@ -48,7 +48,10 @@ export const check_role = async (prisma, userId, role) => {
             where : {
                 supervisor_id : userId
             }
-        })    }
+        })
+    }else if(role === 'dispatcher'){
+        return true;
+    }
     if(!result) return false;
     else return true;
 
