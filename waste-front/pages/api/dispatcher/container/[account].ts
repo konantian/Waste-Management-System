@@ -1,0 +1,18 @@
+import {NextApiRequest, NextApiResponse} from 'next';
+import { get_master_account } from '../../../../utils/dispatcherUtil';
+import prisma from '../../../../lib/prisma';
+
+export default async function containers(req : NextApiRequest, res : NextApiResponse){
+
+    if(req.method !== 'GET'){
+        return res.status(405).json({error : "Method not allowed, please use GET"});
+    }
+
+    const account = await get_master_account(prisma, req.query.account);
+    if(!account){
+        await prisma.$disconnect();
+        return res.status(400).json({error : "This agreement does not exist!"});
+    }
+
+    return res.status(200).json({success : req.method});
+}
