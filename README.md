@@ -1,5 +1,3 @@
-[![MIT License][license-shield]][license-url]
-
 # Waste-Management-System
 ### This repo used for refactoring the mini project 1 from CMPUT291 
 
