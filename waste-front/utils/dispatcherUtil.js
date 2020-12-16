@@ -20,3 +20,13 @@ export const get_pick_up = async (prisma, master_account) => {
     return result.cid_drop_off;
 }
 
+export const get_waste_types = async (prisma, master_account) => {
+
+    const result = await prisma.serviceAgreement.findMany({
+        where : {master_account : master_account},
+        select : {waste_type}
+    });
+
+    return result.map(item => item.waste_type);
+}
+
