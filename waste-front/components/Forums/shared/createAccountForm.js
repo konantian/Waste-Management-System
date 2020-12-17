@@ -1,9 +1,16 @@
 import React from 'react';
+import dayjs from 'dayjs';
 import { Form, DatePicker, Select, Input } from 'antd';
 import { customer_types } from '../../../constants/types';
 const { RangePicker } = DatePicker;
 
 const CreateAccountForm = () => {
+
+    const disabledDate = (current) => {
+        // Can not select days before today and today
+        return current && current < dayjs().endOf('day');
+    }
+
     return (
         <div>
             <Form.Item
@@ -59,7 +66,7 @@ const CreateAccountForm = () => {
                     },
                 ]}
             >
-                <RangePicker />
+                <RangePicker disabledDate={disabledDate} />
             </Form.Item>
         </div>
     );

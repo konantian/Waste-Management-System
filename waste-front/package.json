@@ -1,6 +1,6 @@
 {
   "name": "waste-front",
-  "version": "1.12.0",
+  "version": "1.16.0",
   "private": true,
   "homepage": "https://waste-management-system.vercel.app/",
   "repository": "https://github.com/konantian/Waste-Management-System",
@@ -18,6 +18,7 @@
     "antd": "^4.8.4",
     "axios": "^0.21.0",
     "bcrypt": "^5.0.0",
+    "dayjs": "^1.9.7",
     "flatted": "^3.1.0",
     "next": "^10.0.1",
     "next-redux-wrapper": "^6.0.2",

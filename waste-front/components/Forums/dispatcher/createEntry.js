@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
+import dayjs from 'dayjs';
 import { Form, Divider, Input, DatePicker, Select, message } from 'antd';
 import {
     CREATE_ENTRY_API,
@@ -34,6 +35,11 @@ const CreateEntryForm = () => {
                 message.error(msg['error']);
             });
     };
+
+    const disabledDate = (current) => {
+        // Can not select days before today and today
+        return current && current < dayjs().endOf('day');
+    }
 
     const agreementValidator = async (agreement) => {
         if (!agreement) return Promise.reject();
@@ -157,7 +163,7 @@ const CreateEntryForm = () => {
                         },
                     ]}
                 >
-                    <DatePicker className="datePicker" />
+                    <DatePicker className="datePicker" disabledDate={disabledDate} />
                 </Form.Item>
                 <SubmitButton
                     text="Create"
