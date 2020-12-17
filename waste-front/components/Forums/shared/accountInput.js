@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Form, Input, AutoComplete } from 'antd';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import useSWR from 'swr';
 import { ACCOUNT_API } from '../../../constants/api';
 
 const AccountInput = () => {
@@ -9,16 +10,18 @@ const AccountInput = () => {
     const [accounts, setAccounts] = useState([]);
     const [options, setOptions] = useState([]);
 
-    useEffect(() => {
+    const fetcher = () => {
         axios.get(ACCOUNT_API(userId)).then((res) => {
-                const master_accounts = res.data.accounts.map((account) => {
-                    return { value: account };
-                });
-                setAccounts(master_accounts);
-            }).catch((err) => {
-                console.log(err);
+            const master_accounts = res.data.accounts.map((account) => {
+                return { value: account };
             });
-    }, []);
+            setAccounts(master_accounts);
+        }).catch((err) => {
+            console.log(err);
+        });
+    };
+
+    const { data, error } = useSWR(ACCOUNT_API, fetcher);
 
     const handleSearch = (value) => {
         setOptions(value ? accounts : []);
