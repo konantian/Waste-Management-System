@@ -40,7 +40,7 @@ export const get_service_no = async (prisma) => {
         max : {service_no : true}
     })
 
-    return parseInt(number.max['service_no']) + 1;
+    return (parseInt(number.max['service_no']) + 1).toString();
 }
 
 export const update_amount = async (prisma, account, price) => {
@@ -167,7 +167,7 @@ export const add_agreement = async(prisma, data) => {
 
     const addAgreement = await prisma.serviceAgreement.create({
         data : {
-            service_no : serviceNo,
+            service_no : serviceNo.toString(),
             location : location,
             pick_up_schedule : pick_up_schedule,
             local_contact : local_contact,

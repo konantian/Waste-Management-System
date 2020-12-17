@@ -25,17 +25,15 @@ const ServiceAgreement = () => {
                 price: values.price,
             }).then((res) => {
                 message.success(res.data['success']);
-                formRef.current.resetFields();
-                axios
-                    .get(INFORMATION_API, {
+                axios.get(INFORMATION_API, {
                         params: {
                             pid: userId,
                             account: values.account_no,
                         },
-                    })
-                    .then((res) => {
+                    }).then((res) => {
                         setLoading(false);
                         setAgreement(res.data.service_agreements);
+                        formRef.current.resetFields();
                     });
             }).catch((err) => {
                 setLoading(false);

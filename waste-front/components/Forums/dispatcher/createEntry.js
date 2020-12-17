@@ -142,7 +142,7 @@ const CreateEntryForm = () => {
                 >
                     <Select 
                         placeholder={drivers.length > 0 ? 
-                            "Select an agreement" : 
+                            "Select a driver" : 
                             "Loading drivers..."}
                         loading={drivers.length === 0}
                         disabled={drivers.length === 0}

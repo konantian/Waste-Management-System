@@ -27,14 +27,12 @@ const MasterAccountForm = () => {
                 end_date: endDate,
             }).then((res) => {
                 message.success(res.data['success']);
-                axios
-                    .get(INFORMATION_API, {
+                axios.get(INFORMATION_API, {
                         params: {
                             pid: userId,
                             account: values.account_no,
                         },
-                    })
-                    .then((res) => {
+                    }).then((res) => {
                         setLoading(false);
                         setDataSource([res.data]);
                         formRef.current.resetFields();
