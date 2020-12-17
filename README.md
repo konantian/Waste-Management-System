@@ -33,7 +33,7 @@
 The original version of this project is from Ualberta CMPUT 291's mini project 1, the specificaiton of the original project is here [CMPUT 291 Mini Project 1](https://github.com/konantian/Waste-Management-System/wiki). In this project, we were asked to implement a waste management system with Python3 and sqlite3 to have a better understanding about how database works. Then I got inspired by [291 Project](https://github.com/PoopBear1/291Project) written by @PoopBear1, in his version, he developed a front end written with Vue and the backend written with flask. Also, I want to learn some new frameworks such as nextjs, prisma, and I decided to adopt my old code by applying these new techniques to it. In this refactoring project, I added the front end web page to provide better user experience to users. Compared to the original version, which is just a terminal UI, a web page UI is much easier to use and as well as more convenient. Also, there are two backends to choose  in this new project. One is written with flask and sqlite3 another is written with nextjs's builtin API with prisma and postgreSQL. There's a UI comparison between the old version and this refactoring version: [UI Comparison](https://github.com/konantian/Waste-Management-System/wiki/UI-Comparison)
 
 ## Getting Started
-The following instructions will get you a copy of this project and you can run the project on your local machine.
+The following instructions will get you a copy of this project and you can run the project on your local machine or you can try the demo without any setup
 
 ### Prerequisites
 You need to install the following software:
@@ -58,6 +58,15 @@ $ pip install -r requirements.txt
 ```
 
 ## Usage
+### Username and password combination for testing
+**These accounts works both locally and remotelly**
+ Username| Password|Role|
+|:----: | :-: | :-----: |
+| user1 | 34725 | Account Manager |
+| user3 | 57135 | Supervisor |
+| user5 | 83193 | Dispatcher |
+| user9 | 17253 | Driver |
+
 ### Local
 > Run frontend 
 
@@ -116,3 +125,4 @@ Project Link: [https://github.com/konantian/Waste-Management-System](https://git
 * [axios](https://github.com/axios/axios)
 * [prisma](https://www.prisma.io/nextjs)
 * [bcrypt](https://github.com/kelektiv/node.bcrypt.js)
+* [dayjs](https://github.com/iamkun/dayjs)
