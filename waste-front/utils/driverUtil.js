@@ -41,6 +41,8 @@ export const get_container_id = async (prisma, service_no) => {
     return containers;
 }
 
+import {capitalize_Words} from './capitalize';
+
 export const get_service_no  = async (prisma, data) => {
 
     const {pid, start_date, end_date} = data;
@@ -67,7 +69,7 @@ export const get_tour = async (prisma, data) =>{
             key : service_no,
             location : information.location,
             local_contact : information.local_contact,
-            waste_type : information.waste_type,
+            waste_type : capitalize_Words(information.waste_type),
             cid_pick_up : containers.cid_pick_up,
             cid_drop_off : containers.cid_drop_off
         }

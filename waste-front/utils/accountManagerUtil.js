@@ -1,3 +1,5 @@
+import {capitalize_Words} from './capitalize';
+
 export const get_accounts = async (prisma, pid) => {
 
     const result = await prisma.account.findMany({
@@ -73,8 +75,10 @@ export const customer_information = async (prisma, account) => {
 
     for (let index = 0; index < serviceData.length; index++) { 
         serviceData[index].key = index;
+        serviceData[index].waste_type = capitalize_Words(serviceData[index].waste_type);
     } 
 
+    accountData.customer_type = capitalize_Words(accountData.customer_type);
     accountData.service_agreements = serviceData;
     accountData.total_amount = accountData.total_amount.toFixed(2);
     accountData.key = "customer_information";
