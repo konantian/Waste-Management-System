@@ -20,6 +20,7 @@ const CreateEntryForm = () => {
     const [loading, setLoading] = useState(false);
     const [drivers, setDrivers] = useState([]);
     const [services, setServices] = useState([]);
+    const [loadingContainer, setLoadingContainer] = useState(false);
 
     const driverFetcher = (url) => {
         axios.get(url).then((res) => {setDrivers(res.data.drivers);});
@@ -45,8 +46,10 @@ const CreateEntryForm = () => {
                 formRef.current.resetFields();
                 setTruck(null);
                 setContainers([]);
+                setLoadingContainer(false);
             }).catch((err) => {
                 setLoading(false);
+                setLoadingContainer(false);
                 let msg = JSON.parse(err.response.request.response);
                 message.error(msg['error']);
             });
@@ -58,6 +61,7 @@ const CreateEntryForm = () => {
     }
 
     const agreementValidator = async (agreement) => {
+        setLoadingContainer(true);
         if (!agreement) return Promise.reject();
         try {
             let response = await axios.get(CONTAINER_API(agreement));
@@ -66,6 +70,7 @@ const CreateEntryForm = () => {
                 setService(agreement);
             }
             setContainers(response.data.containers);
+            setLoadingContainer(false);
             return Promise.resolve();
         } catch (err) {
             setContainers([]);
@@ -80,11 +85,9 @@ const CreateEntryForm = () => {
         try {
             let response = await axios.get(TRUCK_API(driver_id));
             setTruck(response.data.truck_id);
-            if (response.data.truck_id) {
-                formRef.current.setFieldsValue({
-                    truck_id: response.data.truck_id,
-                });
-            }
+            formRef.current.setFieldsValue({
+                truck_id: response.data.truck_id,
+            });
             return Promise.resolve();
         } catch (err) {
             setTruck(null);
@@ -175,7 +178,13 @@ const CreateEntryForm = () => {
                         },
                     ]}
                 >
-                    <Select placeholder="Select container to drop off">
+                    <Select 
+                        placeholder={services.length > 0 && !loadingContainer ?
+                            "Select container to drop off" : 
+                             "Loading containers"}
+                        loading={loadingContainer}
+                        disabled={containers.length === 0}
+                    >
                         {containers.map((cid, index) => (
                             <Select.Option key={index} value={cid}>
                                 {cid}

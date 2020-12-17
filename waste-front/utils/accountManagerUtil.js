@@ -36,11 +36,14 @@ export const check_new_account = async (prisma, account) => {
 
 export const get_service_no = async (prisma) => {
 
-    const number = await prisma.serviceAgreement.aggregate({
-        max : {service_no : true}
+    const number = await prisma.serviceAgreement.findMany({
+        select : {service_no : true}
     })
 
-    return (parseInt(number.max['service_no']) + 1).toString();
+    const numbers = number.map(item => parseInt(item.service_no));
+
+    return Math.max(...numbers) + 1;
+
 }
 
 export const update_amount = async (prisma, account, price) => {
