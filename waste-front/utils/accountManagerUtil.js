@@ -40,7 +40,7 @@ export const get_service_no = async (prisma) => {
         max : {service_no : true}
     })
 
-    return number.max['service_no'] + 1;
+    return parseInt(number.max['service_no']) + 1;
 }
 
 export const update_amount = async (prisma, account, price) => {

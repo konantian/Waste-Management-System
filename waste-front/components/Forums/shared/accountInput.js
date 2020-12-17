@@ -33,14 +33,17 @@ const AccountInput = () => {
             <AutoComplete
                 options={options}
                 onSearch={handleSearch}
+                disabled={accounts.length === 0}
                 filterOption={(inputValue, option) =>
                     option.value.indexOf(inputValue) !== -1
                 }
             >
                 <Input.Search
                     size="large"
-                    placeholder="Select the master account"
+                    placeholder={accounts.length > 0 ? 
+                        "Select the master account" : "Loading available accounts..."}
                     enterButton
+                    loading={accounts.length === 0}
                 />
             </AutoComplete>
         </Form.Item>

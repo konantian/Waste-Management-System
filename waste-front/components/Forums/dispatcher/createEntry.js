@@ -1,11 +1,14 @@
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
+import useSWR from 'swr';
 import dayjs from 'dayjs';
 import { Form, Divider, Input, DatePicker, Select, message } from 'antd';
 import {
     CREATE_ENTRY_API,
     TRUCK_API,
+    DRIVERS_API,
     CONTAINER_API,
+    AGREEMENTS_API
 } from '../../../constants/api';
 import { SubmitButton } from '../shared/';
 
@@ -15,6 +18,19 @@ const CreateEntryForm = () => {
     const [containers, setContainers] = useState([]);
     const [service, setService] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [drivers, setDrivers] = useState([]);
+    const [services, setServices] = useState([]);
+
+    const driverFetcher = (url) => {
+        axios.get(url).then((res) => {setDrivers(res.data.drivers);});
+    };
+
+    const serviceNoFetcher = (url) => {
+        axios.get(url).then((res) => {setServices(res.data.service_no);});
+    }
+
+    const { driverData, error } = useSWR(DRIVERS_API, driverFetcher);
+    const { serviceNo, err } = useSWR(AGREEMENTS_API, serviceNoFetcher);
 
     const onFinish = (values) => {
         axios.post(CREATE_ENTRY_API, {
@@ -82,13 +98,13 @@ const CreateEntryForm = () => {
         <div>
             <Form className="form" onFinish={onFinish} ref={formRef}>
                 <Form.Item
-                    label="Agreement Number"
+                    label="Agreement"
                     name="agreement"
                     hasFeedback
                     rules={[
                         {
                             required: true,
-                            message: 'Enter the agreement number',
+                            message: 'Enter the agreement',
                         },
                         () => ({
                             validator(rule, value) {
@@ -97,11 +113,19 @@ const CreateEntryForm = () => {
                         }),
                     ]}
                 >
-                    <Input
-                        allowClear
-                        type="number"
-                        placeholder="Enter the agreement number"
-                    />
+                    <Select 
+                        placeholder={services.length > 0 ? 
+                            "Select an agreement" : 
+                            "Loading agreements..."}
+                        loading={services.length === 0}
+                        disabled={services.length === 0}
+                    >
+                        {services.map((agreement, index) => (
+                            <Select.Option key={index} value={agreement}>
+                                {agreement}
+                            </Select.Option>
+                        ))}
+                    </Select>
                 </Form.Item>
                 <Form.Item
                     label="Driver Id"
@@ -116,11 +140,19 @@ const CreateEntryForm = () => {
                         }),
                     ]}
                 >
-                    <Input
-                        allowClear
-                        type="number"
-                        placeholder="Enter the driver id"
-                    />
+                    <Select 
+                        placeholder={drivers.length > 0 ? 
+                            "Select an agreement" : 
+                            "Loading drivers..."}
+                        loading={drivers.length === 0}
+                        disabled={drivers.length === 0}
+                    >
+                        {drivers.map((driver, index) => (
+                            <Select.Option key={index} value={driver}>
+                                {driver}
+                            </Select.Option>
+                        ))}
+                    </Select>
                 </Form.Item>
                 <Form.Item
                     label="Truck Id"
