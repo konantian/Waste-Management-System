@@ -8,7 +8,7 @@ export default async function containers(req : NextApiRequest, res : NextApiResp
         return res.status(405).json({error : "Method not allowed, please use GET"});
     }
 
-    const containers = await get_available_containers(prisma, req.query.account);
+    const containers = await get_available_containers(prisma, req.query.agreement);
     if(!containers){
         await prisma.$disconnect();
         return res.status(400).json({error : "This agreement does not exist!"});

@@ -16,7 +16,7 @@ export const SUMMARY_REPORT_API = `${host}/api/accountManager/summaryReport`;
 export const CREATE_AGREEMENT_API = `${host}/api/accountManager/createAgreement`;
 export const TRUCK_API = (driver_id) =>
     `${host}/api/driver/trucks/${driver_id}`;
-export const CONTAINER_API = (account_no) =>
-    `${host}/api/dispatcher/container/${account_no}`;
+export const CONTAINER_API = (agreement) =>
+    `${host}/api/dispatcher/container/${agreement}`;
 export const ACCOUNT_API = (account_mgr) =>
     `${host}/api/accountManager/accounts/${account_mgr}`;
