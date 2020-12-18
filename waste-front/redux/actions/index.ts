@@ -4,28 +4,28 @@ export const login = () => {
     }
 }
 
-export const setUserId = (userId) => {
+export const setUserId = (userId : string) => {
     return {
         type : "USER",
         payload: userId
     }
 }
 
-export const setRole = (role) => {
+export const setRole = (role : string) => {
     return {
         type : "ROLE",
         payload: role
     }
 }
 
-export const setUsername = (username) => {
+export const setUsername = (username : string) => {
     return {
         type : "USERNAME",
         payload: username
     }
 }
 
-export const setName = (name) => {
+export const setName = (name : string) => {
     return {
         type : "NAME",
         payload: name
