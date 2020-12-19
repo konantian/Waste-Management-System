@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { message, Tabs } from 'antd';
-import Logout from '../components/logout';
+import Header from '../components/header';
 import {
     ListInformationForm,
     SummaryReport,
@@ -39,7 +39,7 @@ const AccountManager = () => {
             </Head>
             {isLogged && role === 'accountManager' ? (
                 <div>
-                    <Logout />
+                    <Header role="Account Manager"/>
                     <div className="formContainer">
                         <Tabs defaultActiveKey="1" type="card" size="default">
                             <TabPane tab="List Information" key="1">

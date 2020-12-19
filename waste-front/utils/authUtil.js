@@ -88,3 +88,12 @@ export const get_user_info = async (prisma, username ) => {
     return {"userId" : info.user_id, "role" : info.role, "name" : name.name};
 
 }
+
+export const get_personnel = async (prisma, userId) => {
+ 
+    const info = await prisma.personnel.findFirst({
+        where : {pid : userId}
+    });
+
+    return info;
+}

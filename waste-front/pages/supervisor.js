@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import { message, Tabs } from 'antd';
 import Head from 'next/head';
-import Logout from '../components/logout';
+import Header from '../components/header';
 import {
     AssignAccountForm,
     CustomerReportForm,
@@ -38,7 +38,7 @@ const Supervisor = () => {
             </Head>
             {isLogged && role === 'supervisor' ? (
                 <div>
-                    <Logout />
+                    <Header role="Supervisor"/>
                     <div className="formContainer">
                         <Tabs defaultActiveKey="1" type="card" size="default">
                             <TabPane tab="Assign Account" key="1">

@@ -3,7 +3,7 @@ import { message, Tabs } from 'antd';
 import { useSelector } from 'react-redux';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Logout from '../components/logout';
+import Header from '../components/header';
 import CreateEntryForm from '../components/Forums/dispatcher/createEntry';
 
 const { TabPane } = Tabs;
@@ -34,7 +34,7 @@ const Dispatcher = () => {
             </Head>
             {isLogged && role === 'dispatcher' ? (
                 <div>
-                    <Logout />
+                    <Header role="Dispatcher"/>
                     <div className="formContainer">
                         <Tabs defaultActiveKey="1" type="card" size="default">
                             <TabPane tab="Create Entry" key="1">

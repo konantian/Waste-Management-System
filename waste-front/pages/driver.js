@@ -3,7 +3,7 @@ import { message, Tabs } from 'antd';
 import { useSelector } from 'react-redux';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Logout from '../components/logout';
+import Header from '../components/header';
 import ListTourForm from '../components/Forums/driver/listTour';
 
 const { TabPane } = Tabs;
@@ -34,7 +34,7 @@ const Driver = () => {
             </Head>
             {isLogged && role === 'driver' ? (
                 <div>
-                    <Logout />
+                    <Header role="Driver"/>
                     <div className="formContainer">
                         <Tabs defaultActiveKey="1" type="card" size="default">
                             <TabPane tab="List Tour Information" key="1">

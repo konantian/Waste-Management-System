@@ -43,7 +43,7 @@ const Login = () => {
                 let role = res.data['role'];
                 let userId = res.data['userId'];
                 let name = res.data['name'];
-                dispatchAuth(userId, role, username, name);
+                dispatchAuth(userId, role, values.username, name);
                 router.push(`/${role}`);
             }).catch((err) => {
                 setLoading(false);
