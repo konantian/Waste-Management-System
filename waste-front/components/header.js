@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Logout from './logout';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import { PageHeader, Descriptions} from 'antd';
+import { PageHeader, Descriptions, Divider} from 'antd';
 import { PERSONNEL_API } from '../constants/api';
 
 const Header = ({role}) => {
@@ -22,7 +22,7 @@ const Header = ({role}) => {
     },[]);
 
     return (
-        <div className="pageHeader">
+        <div>
             {isLogged ? 
             <PageHeader
                 ghost={false}
@@ -40,6 +40,7 @@ const Header = ({role}) => {
                     <Descriptions.Item label="Supervisor" labelStyle={{"fontWeight" : "bold"}}>{info.supervisor_id || "None"}</Descriptions.Item>
                 </Descriptions>
             </PageHeader> : null}
+            <Divider />
         </div>
     )
 }
