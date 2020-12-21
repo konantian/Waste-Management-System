@@ -2,7 +2,7 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import {createWrapper} from 'next-redux-wrapper';
 import thunk from 'redux-thunk';
 import { persistStore, persistReducer, createTransform } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+import storage from './storage';
 import {parse, stringify} from 'flatted';
 
 export const transformCircular = createTransform(
