@@ -22,7 +22,7 @@ const Header = ({role}) => {
     },[]);
 
     return (
-        <div>
+        <div className="pageHeader">
             {isLogged ? 
             <PageHeader
                 ghost={false}
@@ -31,7 +31,7 @@ const Header = ({role}) => {
                 extra={[<Logout key="logout"/>]}
                 avatar={{ src: 'https://avatars1.githubusercontent.com/u/8186664?s=460&v=4' }}
             >
-                <Descriptions size="middle" column={3}>
+                <Descriptions size="middle" column={3} className="descriptions">
                     <Descriptions.Item label="Name" labelStyle={{"fontWeight" : "bold"}}>{name}</Descriptions.Item>
                     <Descriptions.Item label="User ID" labelStyle={{"fontWeight" : "bold"}} >{userId}</Descriptions.Item>
                     <Descriptions.Item label="Email" labelStyle={{"fontWeight" : "bold"}}>{info.email}</Descriptions.Item>

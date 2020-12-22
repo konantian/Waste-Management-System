@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import { message, Tabs } from 'antd';
+import { message, Tabs, Layout } from 'antd';
 import Header from '../components/header';
 import {
     ListInformationForm,
@@ -10,7 +10,7 @@ import {
     ServiceAgreement,
     MasterAccountForm,
 } from '../components/Forums/accountManager/';
-
+const { Footer } = Layout;
 const { TabPane } = Tabs;
 
 const AccountManager = () => {
@@ -56,8 +56,10 @@ const AccountManager = () => {
                             </TabPane>
                         </Tabs>
                     </div>
+                    <Footer className="pageFooter">Waste Management System ©2020 Created by Yuan Wang</Footer>
                 </div>
             ) : null}
+            
         </div>
     );
 };

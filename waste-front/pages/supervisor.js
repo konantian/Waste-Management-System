@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
-import { message, Tabs } from 'antd';
+import { message, Tabs, Layout } from 'antd';
 import Head from 'next/head';
 import Header from '../components/header';
 import {
@@ -9,7 +9,7 @@ import {
     CustomerReportForm,
     ManagerReportForm,
 } from '../components/Forums/supervisor/';
-
+const { Footer } = Layout;
 const { TabPane } = Tabs;
 
 const Supervisor = () => {
@@ -37,7 +37,7 @@ const Supervisor = () => {
                 />
             </Head>
             {isLogged && role === 'supervisor' ? (
-                <div>
+                <div className="container">
                     <Header role="Supervisor"/>
                     <div className="formContainer">
                         <Tabs defaultActiveKey="1" type="card" size="default">
@@ -52,6 +52,7 @@ const Supervisor = () => {
                             </TabPane>
                         </Tabs>
                     </div>
+                    <Footer className="pageFooter">Waste Management System ©2020 Created by Yuan Wang</Footer>
                 </div>
             ) : null}
         </div>

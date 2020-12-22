@@ -36,8 +36,14 @@ a {
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: center;
-  margin-top: 2%;
+}
+
+.pageFooter{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
 }
 
 .loginContainer{
@@ -97,4 +103,8 @@ a {
 .customerSpin{
   width : 200px;
   margin-bottom : 20px;
+}
+
+.descriptions{
+  margin-bottom: -30px;
 }

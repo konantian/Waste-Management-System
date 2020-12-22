@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { message, Tabs } from 'antd';
+import { message, Tabs, Layout } from 'antd';
 import { useSelector } from 'react-redux';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -7,6 +7,7 @@ import Header from '../components/header';
 import ListTourForm from '../components/Forums/driver/listTour';
 
 const { TabPane } = Tabs;
+const { Footer } = Layout;
 
 const Driver = () => {
     const router = useRouter();
@@ -42,6 +43,7 @@ const Driver = () => {
                             </TabPane>
                         </Tabs>
                     </div>
+                    <Footer className="pageFooter">Waste Management System ©2020 Created by Yuan Wang</Footer>
                 </div>
             ) : null}
         </div>
