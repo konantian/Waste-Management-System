@@ -1,16 +1,13 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
-import { message, Tabs, Layout } from 'antd';
+import { message } from 'antd';
 import Head from 'next/head';
-import Header from '../components/header';
-import {
-    AssignAccountForm,
-    CustomerReportForm,
-    ManagerReportForm,
-} from '../components/Forums/supervisor/';
-const { Footer } = Layout;
-const { TabPane } = Tabs;
+import dynamic from 'next/dynamic';
+
+const DynamicHeader = dynamic(() => import('../components/header'))
+const DynamicFooter = dynamic(() => import('../components/footer'))
+const SupervisorForms = dynamic(() => import('../components/Forums/supervisor/'))
 
 const Supervisor = () => {
     const router = useRouter();
@@ -38,21 +35,9 @@ const Supervisor = () => {
             </Head>
             {isLogged && role === 'supervisor' ? (
                 <div className="container">
-                    <Header role="Supervisor"/>
-                    <div className="formContainer">
-                        <Tabs defaultActiveKey="1" type="card" size="default">
-                            <TabPane tab="Assign Account" key="1">
-                                <AssignAccountForm />
-                            </TabPane>
-                            <TabPane tab="Customer Report" key="2">
-                                <CustomerReportForm />
-                            </TabPane>
-                            <TabPane tab="Manager Report" key="3">
-                                <ManagerReportForm />
-                            </TabPane>
-                        </Tabs>
-                    </div>
-                    <Footer className="pageFooter">Waste Management System ©2020 Created by Yuan Wang</Footer>
+                    <DynamicHeader role="Supervisor"/>
+                    <SupervisorForms />
+                    <DynamicFooter />
                 </div>
             ) : null}
         </div>

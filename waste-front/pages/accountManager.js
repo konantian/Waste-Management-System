@@ -2,16 +2,12 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import { message, Tabs, Layout } from 'antd';
-import Header from '../components/header';
-import {
-    ListInformationForm,
-    SummaryReport,
-    ServiceAgreement,
-    MasterAccountForm,
-} from '../components/Forums/accountManager/';
-const { Footer } = Layout;
-const { TabPane } = Tabs;
+import dynamic from 'next/dynamic';
+import { message  } from 'antd';
+
+const DynamicHeader = dynamic(() => import('../components/header'))
+const DynamicFooter = dynamic(() => import('../components/footer'))
+const AccountManagerForms = dynamic(() => import('../components/Forums/accountManager/'))
 
 const AccountManager = () => {
     const router = useRouter();
@@ -39,24 +35,9 @@ const AccountManager = () => {
             </Head>
             {isLogged && role === 'accountManager' ? (
                 <div>
-                    <Header role="Account Manager"/>
-                    <div className="formContainer">
-                        <Tabs defaultActiveKey="1" type="card" size="default">
-                            <TabPane tab="List Information" key="1">
-                                <ListInformationForm />
-                            </TabPane>
-                            <TabPane tab="Create New Master Account" key="2">
-                                <MasterAccountForm />
-                            </TabPane>
-                            <TabPane tab="Add New Service Agreement" key="3">
-                                <ServiceAgreement />
-                            </TabPane>
-                            <TabPane tab="Create Summary Report" key="4">
-                                <SummaryReport />
-                            </TabPane>
-                        </Tabs>
-                    </div>
-                    <Footer className="pageFooter">Waste Management System ©2020 Created by Yuan Wang</Footer>
+                    <DynamicHeader role="Account Manager"/>
+                    <AccountManagerForms />
+                    <DynamicFooter />
                 </div>
             ) : null}
             

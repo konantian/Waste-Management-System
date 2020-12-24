@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Form, Input, Button,message } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { message } from 'antd';
 import axios from 'axios';
 import Head from 'next/head';
-import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux'; 
 import { login, setUserId, setRole, setUsername, setName } from '../redux/actions';
 import { LOGIN_API } from '../constants/api';
+
+const DynamicLoginForm= dynamic(() => import('../components/Forums/loginForm'))
 
 const Login = () => {
 
@@ -67,32 +68,12 @@ const Login = () => {
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             {!isLogged ?
-            <Form className="form" onFinish={onFinish} ref={formRef} >
-                <Form.Item
-                    label="Username"
-                    name="username"
-                    rules={[{required: true,message: 'Please input your username!',}]}
-                >
-                    <Input prefix={<UserOutlined className="site-form-item-icon" />} />
-                </Form.Item>
-                <Form.Item
-                    label="Password"
-                    name="password"
-                    rules={[{required: true,message: 'Please input your password!',}]}
-                >
-                    <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} />
-                </Form.Item>
-                <div className="loginButtons">
-                    <Form.Item >
-                        <Button className="loginButton" loading={loading} onClick={() => setLoading(true)} type="primary" shape="round" size="large" htmlType="submit">Log In</Button>
-                    </Form.Item>
-                    <Form.Item >
-                        <Link href="/signup">
-                            <Button className="loginButton" type="primary" shape="round" size="large" >Sign Up</Button>
-                        </Link>
-                    </Form.Item>
-                </div>
-            </Form> : null}
+                <DynamicLoginForm 
+                    loading={loading} 
+                    setLoading={setLoading} 
+                    formRef={formRef} 
+                    onFinish={onFinish}
+                /> : null}
         </div>
         
     )

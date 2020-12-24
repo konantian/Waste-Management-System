@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
-import { message, Tabs, Layout } from 'antd';
+import { message } from 'antd';
 import { useSelector } from 'react-redux';
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import Header from '../components/header';
-import ListTourForm from '../components/Forums/driver/listTour';
 
-const { TabPane } = Tabs;
-const { Footer } = Layout;
+const DynamicHeader = dynamic(() => import('../components/header'))
+const DynamicFooter = dynamic(() => import('../components/footer'))
+const DriverForms = dynamic(() => import('../components/Forums/driver/'))
 
 const Driver = () => {
     const router = useRouter();
@@ -35,15 +35,9 @@ const Driver = () => {
             </Head>
             {isLogged && role === 'driver' ? (
                 <div>
-                    <Header role="Driver"/>
-                    <div className="formContainer">
-                        <Tabs defaultActiveKey="1" type="card" size="default">
-                            <TabPane tab="List Tour Information" key="1">
-                                <ListTourForm />
-                            </TabPane>
-                        </Tabs>
-                    </div>
-                    <Footer className="pageFooter">Waste Management System ©2020 Created by Yuan Wang</Footer>
+                    <DynamicHeader role="Driver"/>
+                    <DriverForms />
+                    <DynamicFooter />
                 </div>
             ) : null}
         </div>

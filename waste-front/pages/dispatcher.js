@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
-import { message, Tabs, Layout} from 'antd';
+import { message } from 'antd';
 import { useSelector } from 'react-redux';
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import Header from '../components/header';
-import CreateEntryForm from '../components/Forums/dispatcher/createEntry';
 
-const { TabPane } = Tabs;
-const { Footer } = Layout;
+const DynamicHeader = dynamic(() => import('../components/header'))
+const DynamicFooter = dynamic(() => import('../components/footer'))
+const DispatcherForms = dynamic(() => import('../components/Forums/dispatcher/'))
 
 const Dispatcher = () => {
     const router = useRouter();
@@ -35,15 +35,9 @@ const Dispatcher = () => {
             </Head>
             {isLogged && role === 'dispatcher' ? (
                 <div>
-                    <Header role="Dispatcher"/>
-                    <div className="formContainer">
-                        <Tabs defaultActiveKey="1" type="card" size="default">
-                            <TabPane tab="Create Entry" key="1">
-                                <CreateEntryForm />
-                            </TabPane>
-                        </Tabs>
-                    </div>
-                    <Footer className="pageFooter">Waste Management System ©2020 Created by Yuan Wang</Footer>
+                    <DynamicHeader role="Dispatcher"/>
+                    <DispatcherForms />
+                    <DynamicFooter />
                 </div>
             ) : null}
         </div>
