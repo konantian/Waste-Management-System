@@ -9,6 +9,7 @@ import { login, setUserId, setRole, setUsername, setName } from '../redux/action
 import { LOGIN_API } from '../constants/api';
 
 const DynamicLoginForm= dynamic(() => import('../components/Forums/loginForm'))
+const DynamicFooter = dynamic(() => import('../components/footer'))
 
 const Login = () => {
 
@@ -74,6 +75,7 @@ const Login = () => {
                     formRef={formRef} 
                     onFinish={onFinish}
                 /> : null}
+            <DynamicFooter />
         </div>
         
     )
