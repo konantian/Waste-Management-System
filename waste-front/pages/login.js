@@ -63,7 +63,7 @@ const Login = () => {
     }
 
     return (
-        <div className="loginContainer">
+            <div className="loginContainer">
             <Head>
                 <title>Login</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -77,7 +77,6 @@ const Login = () => {
                 /> : null}
             <DynamicFooter />
         </div>
-        
     )
 }
 

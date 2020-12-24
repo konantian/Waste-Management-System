@@ -47,10 +47,9 @@ a {
 }
 
 .loginContainer{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top : 15%;
+  position: absolute;
+  left : 40%;
+  top : 25%;
 }
 
 .tourTable{
@@ -107,4 +106,10 @@ a {
 
 .descriptions{
   margin-bottom: -30px;
+}
+
+.loader {
+  margin-top: 15px;
+  display : flex;
+  justify-content: center;
 }
