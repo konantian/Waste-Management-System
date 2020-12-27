@@ -45,14 +45,14 @@ const SignUp = () =>{
 
     return (
         <div className="main" >
+            <Head>
+                <title>Sign Up</title>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </Head>
             <div className="authContainer">
-                <Head>
-                    <title>Sign Up</title>
-                    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-                </Head>
                 {!isLogged ? <DynamicSignUpForm loading={loading} setLoading={setLoading} onFinish={onFinish} /> : null}
-                <DynamicFooter />
             </div>
+            <DynamicFooter />
         </div>        
     )
 }
