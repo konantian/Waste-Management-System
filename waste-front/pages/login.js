@@ -63,20 +63,23 @@ const Login = () => {
     }
 
     return (
-            <div className="loginContainer">
+        <div className="main" >
             <Head>
                 <title>Login</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            {!isLogged ?
-                <DynamicLoginForm 
-                    loading={loading} 
-                    setLoading={setLoading} 
-                    formRef={formRef} 
-                    onFinish={onFinish}
-                /> : null}
-            <DynamicFooter />
+            <div className="loginContainer">
+                {!isLogged ?
+                    <DynamicLoginForm 
+                        loading={loading} 
+                        setLoading={setLoading} 
+                        formRef={formRef} 
+                        onFinish={onFinish}
+                    /> : null}
+                <DynamicFooter />
+            </div>
         </div>
+            
     )
 }
 
