@@ -25,7 +25,7 @@ const AccountManager = () => {
     }, []);
 
     return (
-        <div>
+        <div className="main" >
             <Head>
                 <title>Account Manager</title>
                 <meta
@@ -33,14 +33,13 @@ const AccountManager = () => {
                     content="initial-scale=1.0, width=device-width"
                 />
             </Head>
+            <DynamicHeader role="Account Manager"/>
             {isLogged && role === 'accountManager' ? (
-                <div>
-                    <DynamicHeader role="Account Manager"/>
+                <div className="pageContainer" >
                     <AccountManagerForms />
-                    <DynamicFooter />
                 </div>
             ) : null}
-            
+            <DynamicFooter />
         </div>
     );
 };

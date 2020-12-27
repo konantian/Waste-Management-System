@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { message } from 'antd';
+import { message, BackTop } from 'antd';
 import { useSelector } from 'react-redux';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
@@ -25,7 +25,7 @@ const Driver = () => {
     }, []);
 
     return (
-        <div>
+        <div className="main" >
             <Head>
                 <title>Driver</title>
                 <meta
@@ -33,13 +33,14 @@ const Driver = () => {
                     content="initial-scale=1.0, width=device-width"
                 />
             </Head>
+            <BackTop />
+            <DynamicHeader role="Driver"/>
             {isLogged && role === 'driver' ? (
-                <div>
-                    <DynamicHeader role="Driver"/>
+                <div className="pageContainer" >
                     <DriverForms />
-                    <DynamicFooter />
                 </div>
             ) : null}
+            <DynamicFooter />
         </div>
     );
 };

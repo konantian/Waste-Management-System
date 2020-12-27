@@ -45,7 +45,7 @@ const SignUp = () =>{
 
     return (
         <div className="main" >
-            <div className="loginContainer">
+            <div className="authContainer">
                 <Head>
                     <title>Sign Up</title>
                     <meta name="viewport" content="initial-scale=1.0, width=device-width" />

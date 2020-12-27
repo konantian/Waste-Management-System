@@ -16,10 +16,9 @@ a {
 }
 
 .main {
-  min-height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  min-height: 100vh;
 }
 
 .submitContainer{
@@ -46,18 +45,22 @@ a {
 }
 
 .pageFooter{
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  text-align: center;
+  text-align : center;
+  flex-shrink: 0;
 }
 
-.loginContainer{
+.pageContainer{
+  margin-top : 10px;
+  margin-left: 25%;
+  margin-right: 25%;
+  flex: 1 0 auto;
+}
+
+.authContainer{
   display: flex;
-  align-items: center;
   justify-content: center;
-  margin-top : 15%;
+  flex: 1 0 auto;
+  margin-top: 15%;
 }
 
 .tourTable{
@@ -65,14 +68,9 @@ a {
   width : 800px;
 }
 
-.loginButton{
+.authButton{
   width: 120px;
 }
-
-.signButton{
-  width: 120px;
-}
-
 
 .report{
   width : 400px;

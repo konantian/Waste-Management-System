@@ -25,7 +25,7 @@ const Supervisor = () => {
     }, []);
 
     return (
-        <div>
+        <div className="main" >
             <Head>
                 <title>Supervisor</title>
                 <meta
@@ -33,13 +33,13 @@ const Supervisor = () => {
                     content="initial-scale=1.0, width=device-width"
                 />
             </Head>
+            <DynamicHeader role="Supervisor"/>
             {isLogged && role === 'supervisor' ? (
-                <div className="container">
-                    <DynamicHeader role="Supervisor"/>
+                <div className="pageContainer">
                     <SupervisorForms />
-                    <DynamicFooter />
                 </div>
             ) : null}
+            <DynamicFooter />
         </div>
     );
 };

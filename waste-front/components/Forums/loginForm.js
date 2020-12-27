@@ -23,11 +23,11 @@ const LoginForm = ({ onFinish, formRef, loading, setLoading}) => {
             </Form.Item>
             <div className="loginButtons">
                 <Form.Item >
-                    <Button className="loginButton" loading={loading} onClick={() => setLoading(true)} type="primary" shape="round" size="large" htmlType="submit">Log In</Button>
+                    <Button className="authButton" loading={loading} onClick={() => setLoading(true)} type="primary" shape="round" size="large" htmlType="submit">Log In</Button>
                 </Form.Item>
                 <Form.Item >
                     <Link href="/signup">
-                        <Button className="loginButton" type="primary" shape="round" size="large" >Sign Up</Button>
+                        <Button className="authButton" type="primary" shape="round" size="large" >Sign Up</Button>
                     </Link>
                 </Form.Item>
             </div>

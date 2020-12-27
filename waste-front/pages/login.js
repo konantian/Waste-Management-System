@@ -68,7 +68,7 @@ const Login = () => {
                 <title>Login</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            <div className="loginContainer">
+            <div className="authContainer">
                 {!isLogged ?
                     <DynamicLoginForm 
                         loading={loading} 
@@ -76,8 +76,8 @@ const Login = () => {
                         formRef={formRef} 
                         onFinish={onFinish}
                     /> : null}
-                <DynamicFooter />
             </div>
+            <DynamicFooter />
         </div>
             
     )

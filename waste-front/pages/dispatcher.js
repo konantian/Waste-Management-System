@@ -25,7 +25,7 @@ const Dispatcher = () => {
     }, []);
 
     return (
-        <div>
+        <div className="main" >
             <Head>
                 <title>Dispatcher</title>
                 <meta
@@ -33,13 +33,13 @@ const Dispatcher = () => {
                     content="initial-scale=1.0, width=device-width"
                 />
             </Head>
+            <DynamicHeader role="Dispatcher"/>
             {isLogged && role === 'dispatcher' ? (
-                <div>
-                    <DynamicHeader role="Dispatcher"/>
+                <div className="pageContainer" >
                     <DispatcherForms />
-                    <DynamicFooter />
                 </div>
             ) : null}
+            <DynamicFooter />
         </div>
     );
 };
