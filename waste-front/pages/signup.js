@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { SIGNUP_API } from '../constants/api';
 
 const DynamicSignUpForm= dynamic(() => import('../components/Forums/signupForm'))
+const DynamicFooter = dynamic(() => import('../components/footer'))
 
 const SignUp = () =>{
 
@@ -50,6 +51,7 @@ const SignUp = () =>{
                     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                 </Head>
                 {!isLogged ? <DynamicSignUpForm loading={loading} setLoading={setLoading} onFinish={onFinish} /> : null}
+                <DynamicFooter />
             </div>
         </div>        
     )
