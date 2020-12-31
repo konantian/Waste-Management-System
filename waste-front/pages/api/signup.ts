@@ -13,22 +13,18 @@ export default async function signup(req : NextApiRequest, res : NextApiResponse
 
     const validUserId = await check_pid(prisma, userId);
     if(!validUserId){
-        await prisma.$disconnect();
         return res.status(400).json({error : "This userId is not valid"});
     }
     const existUserId = await check_exist_pid(prisma, userId);
     if(existUserId){
-        await prisma.$disconnect();
         return res.status(400).json({error : "This userId is already exist, please login directly"});
     }
     const existUsername = await check_username(prisma, userId)
     if(existUsername){
-        await prisma.$disconnect();
         return res.status(400).json({error : "This username has been occupied, please select another username"});
     }
     const validRole = await check_role(prisma,userId,role);
     if(!validRole){
-        await prisma.$disconnect();
         return res.status(400).json({error : "This role is not matched with the record"});
     }
 
@@ -46,9 +42,7 @@ export default async function signup(req : NextApiRequest, res : NextApiResponse
         }
     })
     if(!addUser){
-        await prisma.$disconnect();
         return res.status(400).json({error : "User register failed, please check your data"});
     }
-    await prisma.$disconnect();
     return res.status(201).json({success : "You are ready to log in"});
 }

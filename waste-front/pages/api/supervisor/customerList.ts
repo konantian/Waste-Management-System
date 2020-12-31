@@ -9,6 +9,5 @@ export default async function customerList(req : NextApiRequest, res : NextApiRe
     }
 
     const customers = await customer_list(prisma, req.query.pid);
-    await prisma.$disconnect();
     return res.status(200).json({customers : customers});
 }

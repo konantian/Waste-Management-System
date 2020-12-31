@@ -10,10 +10,8 @@ export default async function managerReport(req : NextApiRequest, res : NextApiR
 
     const report = await manager_report(prisma, req.query.pid);
     if(!report){
-        await prisma.$disconnect();
         return res.status(400).json({error : "This supervisor has no data to generate the report"});
     }
 
-    await prisma.$disconnect();
     return res.status(200).json(report);
 }

@@ -13,7 +13,6 @@ export default async function login(req : NextApiRequest, res : NextApiResponse)
     
     const existUsername = await check_username(prisma, username)
     if(!existUsername){
-        await prisma.$disconnect();
         return res.status(400).json({error : "The username entered does not exist, please input again"});   
     }
 
@@ -22,10 +21,8 @@ export default async function login(req : NextApiRequest, res : NextApiResponse)
     if(bcrypt.compareSync(password, hash)){
         const info = await get_user_info(prisma, username);
         info.success = "Welcome to the waste management system!";
-        await prisma.$disconnect();
         return res.status(200).json(info);
     }else{
-        await prisma.$disconnect();
         return res.status(400).json({error : "The username and password entered is not matched"});
     }
 }

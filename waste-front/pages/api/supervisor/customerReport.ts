@@ -10,16 +10,13 @@ export default async function customerReport(req : NextApiRequest, res : NextApi
 
     const newAccount = await check_new_account(prisma, req.query.account);
     if(newAccount){
-        await prisma.$disconnect();
         return res.status(400).json({error : "The master account you entered does not exist!"});
     }
 
     const report = await get_summary_report(prisma, req.query.account);
     if(!report){
-        await prisma.$disconnect();
         return res.status(400).json({error : "This account has no data to generate the report"});
     }
 
-    await prisma.$disconnect();
     return res.status(200).json(report);
 }
