@@ -10,10 +10,8 @@ export default async function containers(req : NextApiRequest, res : NextApiResp
 
     const containers = await get_available_containers(prisma, req.query.agreement);
     if(!containers){
-        await prisma.$disconnect();
         return res.status(400).json({error : "This agreement does not exist!"});
     }
 
-    await prisma.$disconnect();
     return res.status(200).json({containers : containers});
 }

@@ -13,6 +13,5 @@ export default async function getAllDrivers(req : NextApiRequest, res : NextApiR
 
     const drivers = result.map(item => item.pid).sort();
 
-    await prisma.$disconnect();
     return res.status(200).json({drivers : drivers});
 }

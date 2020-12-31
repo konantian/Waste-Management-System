@@ -10,6 +10,5 @@ export default async function listTour(req : NextApiRequest, res : NextApiRespon
 
     const tour = await get_tour(prisma, req.query);
 
-    await prisma.$disconnect();
     return res.status(200).json(tour);
 }

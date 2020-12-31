@@ -15,27 +15,22 @@ export default async function createAgreement(req : NextApiRequest, res : NextAp
 
     const newAccount = await check_new_account(prisma, account_no);
     if(newAccount){
-        await prisma.$disconnect();
         return res.status(400).json({error : "This master account does not exist, please enter again"});
     }
 
     const validAccount = await check_account(prisma, pid, account_no);
     if(!validAccount){
-        await prisma.$disconnect();
         return res.status(400).json({error : "This account does not managed by you, please select another account"});
     }
 
     const isUpdate = await update_amount(prisma, account_no, price);
     if(!isUpdate){
-        await prisma.$disconnect();
         return res.status(400).json({error : "Update total amount failed, please check your data"});
     }
 
     const addAgreement = await add_agreement(prisma, req.body);
     if(!addAgreement){
-        await prisma.$disconnect();
         res.status(400).json({error : "Create service agreement failed, please check you data"});
     }
-    await prisma.$disconnect();
     return res.status(201).json({success : "New service agreement has been created"});
 }

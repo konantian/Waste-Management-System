@@ -9,6 +9,5 @@ export default async function accounts(req : NextApiRequest, res : NextApiRespon
     }
 
     const accounts = await get_accounts(prisma, req.query.id);
-    await prisma.$disconnect();
     return res.status(200).json({accounts : accounts});
 }

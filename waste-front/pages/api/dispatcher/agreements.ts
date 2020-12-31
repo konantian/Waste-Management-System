@@ -13,6 +13,5 @@ export default async function getAllAgreements(req : NextApiRequest, res : NextA
 
     const services = result.map(item => item.service_no);
 
-    await prisma.$disconnect();
     return res.status(200).json({service_no : services});
 }
