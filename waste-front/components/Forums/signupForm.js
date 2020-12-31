@@ -5,7 +5,7 @@ import { Form, Input, Button, Select } from 'antd';
 const SignUpForm = ({ onFinish, loading, setLoading }) => {
 
     return (
-        <Form className="form" onFinish={onFinish}>
+        <Form onFinish={onFinish}>
             <Form.Item
                 label="User Id"
                 name="userId"

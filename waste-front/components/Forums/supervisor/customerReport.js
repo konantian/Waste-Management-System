@@ -47,7 +47,7 @@ const CustomerReportForm = () => {
 
     return (
         <div>
-            <Form className="form" onFinish={onFinish} ref={formRef}>
+            <Form onFinish={onFinish} ref={formRef}>
                 {customer.length > 0 ? (
                     <Form.Item
                         label="Master Account"

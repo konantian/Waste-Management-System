@@ -99,7 +99,7 @@ const CreateEntryForm = () => {
 
     return (
         <div>
-            <Form className="form" onFinish={onFinish} ref={formRef}>
+            <Form onFinish={onFinish} ref={formRef}>
                 <Form.Item
                     label="Agreement"
                     name="agreement"

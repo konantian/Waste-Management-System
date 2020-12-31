@@ -38,7 +38,7 @@ const ListTourForm = () => {
 
     return (
         <div>
-            <Form className="form" onFinish={onFinish} ref={formRef}>
+            <Form  onFinish={onFinish} ref={formRef}>
                 <Form.Item
                     name="range-picker"
                     label="Start Date - End Date"

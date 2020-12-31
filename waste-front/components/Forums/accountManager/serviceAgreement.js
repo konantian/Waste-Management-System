@@ -44,7 +44,7 @@ const ServiceAgreement = () => {
 
     return (
         <div>
-            <Form className="form" onFinish={onFinish} ref={formRef}>
+            <Form  onFinish={onFinish} ref={formRef}>
                 <AccountInput />
                 <Form.Item
                     label="Location"

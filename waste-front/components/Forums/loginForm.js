@@ -6,7 +6,7 @@ import { Form, Input, Button } from 'antd';
 const LoginForm = ({ onFinish, formRef, loading, setLoading}) => {
 
     return (
-        <Form className="form" onFinish={onFinish} ref={formRef} >
+        <Form onFinish={onFinish} ref={formRef} >
             <Form.Item
                 label="Username"
                 name="username"

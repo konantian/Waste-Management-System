@@ -46,7 +46,7 @@ const MasterAccountForm = () => {
 
     return (
         <div>
-            <Form className="form" onFinish={onFinish} ref={formRef}>
+            <Form  onFinish={onFinish} ref={formRef}>
                 <CreateAccountForm />
                 <SubmitButton
                     text="Create"

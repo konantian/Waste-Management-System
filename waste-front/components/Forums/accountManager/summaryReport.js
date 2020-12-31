@@ -34,7 +34,7 @@ const SummaryReport = () => {
 
     return (
         <div>
-            <Form className="form" onFinish={onFinish} ref={formRef}>
+            <Form onFinish={onFinish} ref={formRef}>
                 <AccountInput />
                 <SubmitButton
                     text="Create"
