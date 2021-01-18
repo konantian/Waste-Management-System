@@ -29,7 +29,7 @@ const Header = ({role}) => {
                 title={role}
                 subTitle={name}
                 extra={[<Logout key="logout"/>]}
-                avatar={{ src: '/boy.png' }}
+                avatar={{ src: '/boy.png', size : 60}}
             >
                 <Descriptions size="middle" column={3} className="descriptions">
                     <Descriptions.Item label="Name" labelStyle={{"fontWeight" : "bold"}}>{name}</Descriptions.Item>
