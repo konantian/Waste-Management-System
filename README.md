@@ -68,6 +68,18 @@ $ pip install -r requirements.txt
 | user9 | 17253 | Driver |
 
 ### Local
+> Install the python virtual environment
+```shell
+$ pip3 install virtualenv
+```
+
+> Run python virtual environment and activate it
+```shell
+$ cd Waste-Management-System
+$ virtualenv venv
+$ source venv/bin/activate
+```
+
 > Run frontend 
 
 ```shell
