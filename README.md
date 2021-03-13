@@ -127,7 +127,7 @@ Project Link: [https://github.com/konantian/Waste-Management-System](https://git
 
 ## Acknowledgements
 * [React](https://reactjs.org/)
-* [nextjs](https://nextjs.org/)
+* [NextJs](https://nextjs.org/)
 * [antd](https://ant.design/)
 * [redux](https://react-redux.js.org/introduction/quick-start)
 * [react-redux](https://react-redux.js.org/)
@@ -135,6 +135,6 @@ Project Link: [https://github.com/konantian/Waste-Management-System](https://git
 * [redux-devtools-extensio](https://github.com/reduxjs/redux-devtools)
 * [swr](https://github.com/vercel/swr)
 * [axios](https://github.com/axios/axios)
-* [prisma](https://www.prisma.io/nextjs)
+* [Prisma](https://www.prisma.io/nextjs)
 * [bcrypt](https://github.com/kelektiv/node.bcrypt.js)
 * [dayjs](https://github.com/iamkun/dayjs)
