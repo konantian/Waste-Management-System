@@ -119,11 +119,9 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## Contact
 Yuan Wang - wang17@ualberta.ca
 
-Project Link: [https://github.com/konantian/Waste-Management-System](https://github.com/konantian/Waste-Management-System)
-
 ## Documentation
 
-* Backend APIs: the documentation of our backend APIs are located at the [Wiki page](https://github.com/konantian/Waste-Management-System/wiki)
+* Backend APIs: the documentation for backend APIs are located at [Wiki page](https://github.com/konantian/Waste-Management-System/wiki)
 
 ## Acknowledgements
 * [React](https://reactjs.org/)
